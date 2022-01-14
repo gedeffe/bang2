@@ -19,7 +19,7 @@ class CompressZipFileTests {
         // Then
         Assertions.assertNotNull(compressedFile);
         Assertions.assertTrue(compressedFile.isPresent());
-        Assertions.assertEquals("src/main/java/com/supinfo/java/day1/ArraySorter.zip", compressedFile.get());
+        Assertions.assertEquals("build/ArraySorter.zip", compressedFile.get());
     }
 
     @Test
@@ -33,6 +33,6 @@ class CompressZipFileTests {
         // Then
         Assertions.assertNotNull(compressedFile);
         Assertions.assertTrue(compressedFile.isPresent());
-        Assertions.assertEquals("src/main/java/com/supinfo/java/day1.zip", compressedFile.get());
+        Assertions.assertEquals("build/day1.zip", compressedFile.get());
     }
 }

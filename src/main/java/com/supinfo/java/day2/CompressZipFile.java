@@ -38,10 +38,9 @@ public class CompressZipFile {
 
     private String compressOneFolder(File folder) throws IOException {
         // build information about target location
-        final File parentFolder = folder.getParentFile();
         // extract original file name without its extension
         final String fileName = folder.getName();
-        final File compressedFile = new File(parentFolder, fileName + ".zip");
+        final File compressedFile = new File("build", fileName + ".zip");
 
         try (final OutputStream outputStream = new FileOutputStream(compressedFile);
              final ZipOutputStream zipOutputStream = new ZipOutputStream(outputStream)) {
@@ -69,16 +68,15 @@ public class CompressZipFile {
 
     private String compressOneFile(File file) throws IOException {
         // build information about target location
-        final File parentFolder = file.getParentFile();
         // extract original file name without its extension
         final String fileName = file.getName();
         final int extensionIndex = fileName.lastIndexOf(".");
         final File compressedFile;
         if (extensionIndex != -1) {
-            compressedFile = new File(parentFolder, fileName.substring(0, extensionIndex) + ".zip");
+            compressedFile = new File("build", fileName.substring(0, extensionIndex) + ".zip");
         } else {
             // no current extension
-            compressedFile = new File(parentFolder, fileName + ".zip");
+            compressedFile = new File("build", fileName + ".zip");
         }
 
         try (
