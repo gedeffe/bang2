@@ -34,18 +34,5 @@ public class TextServicesImpl implements TextServices {
             this.textModel.updateTextData(currentText + "\n" + text);
         }
     }
-    public void save() throws IOException {
-        BufferedWriter writer = new BufferedWriter(new FileWriter("save.txt"));
-        writer.write(textModel.getTextData());
-        writer.close();
-        clearText();}
-    public void load() throws IOException {
-        File file = new File("C:\\Users\\olivi\\IdeaProjects\\bang2\\save.txt");
-        BufferedReader br = new BufferedReader(new FileReader(file));
-        String st;
-        while ((st = br.readLine()) != null)
-            addText(st);
-
-    }
 }
 

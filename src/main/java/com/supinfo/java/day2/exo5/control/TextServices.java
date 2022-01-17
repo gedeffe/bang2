@@ -11,8 +11,6 @@ public interface TextServices {
      * Reset content of displayed text. Current text will be erased.
      */
     void clearText();
-    void save() throws IOException;
-    void load() throws IOException;
 
     /**
      * Complete current displayed text with provided content on next line.

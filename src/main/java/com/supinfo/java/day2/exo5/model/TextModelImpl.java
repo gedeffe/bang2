@@ -38,7 +38,7 @@ public class TextModelImpl implements TextModel {
 
     @Override
     public String getTextData() {
-        String text = null;
+        String text = "";
         try {
             text = Files.readString(this.dummyDatabase);
         } catch (IOException e) {
