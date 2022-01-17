@@ -1,9 +1,5 @@
 package com.supinfo.java.day2.exo5.model;
 
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +44,7 @@ public class TextModelImpl implements TextModel {
 
     private void writeTextToDatabase(String text) {
         try (Statement statement = this.connection.createStatement()) {
-            statement.executeUpdate("UPDATE supinfo SET text='" + text +"';");
+            statement.executeUpdate("UPDATE supinfo SET text='" + text + "';");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -58,9 +54,9 @@ public class TextModelImpl implements TextModel {
     @Override
     public String getTextData() {
         String text = "";
-        try (Statement statement = this.connection.createStatement()){
+        try (Statement statement = this.connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery("SELECT text FROM supinfo;");
-            while(resultSet.next()) {
+            while (resultSet.next()) {
                 text = resultSet.getString("text");
             }
         } catch (SQLException e) {
