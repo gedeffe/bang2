@@ -33,7 +33,6 @@ public class TextServicesImpl implements TextServices {
             // add a line feed then the new text
             this.textModel.updateTextData(currentText + "\n" + text);
         }
-
     }
     public void save() throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter("save.txt"));

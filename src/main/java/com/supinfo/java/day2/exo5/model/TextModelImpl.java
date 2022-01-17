@@ -1,5 +1,9 @@
 package com.supinfo.java.day2.exo5.model;
 
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,20 +13,38 @@ import java.util.List;
 public class TextModelImpl implements TextModel {
 
     private final List<TextEvents> listeners = new ArrayList<>();
-    private String textData = "";
+
+    /*
+    Use a file located in build folder to persist information.
+     */
+    private final Path dummyDatabase = Path.of("build", "dummyDatabase.txt");
 
     @Override
     public void updateTextData(final String text) {
-        // here we might store our data to a persistence layer
-        // won't do it for this tiny example
-        this.textData = text;
+        // update our persistence layer
+        this.writeTextToFile(text);
         // send a events to update listeners
         this.listeners.forEach((listener) -> listener.notifyTextModified(text));
     }
 
+    private void writeTextToFile(String text) {
+        try {
+            // replace current text
+            Files.writeString(this.dummyDatabase, text);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public String getTextData() {
-        return this.textData;
+        String text = null;
+        try {
+            text = Files.readString(this.dummyDatabase);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return text;
     }
 
     @Override

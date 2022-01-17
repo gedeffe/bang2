@@ -5,8 +5,7 @@ import com.supinfo.java.day2.exo5.control.TextServices;
 import com.supinfo.java.day2.exo5.control.TextServicesImpl;
 import com.supinfo.java.day2.exo5.model.TextModel;
 import com.supinfo.java.day2.exo5.model.TextModelImpl;
-import com.supinfo.java.day2.exo5.view.CommandsAreaWindow;
-import com.supinfo.java.day2.exo5.view.DisplayAreaWindow;
+import com.supinfo.java.day2.exo5.view.Exo5ViewsManager;
 
 import javax.swing.*;
 
@@ -27,19 +26,8 @@ public class WindowsTextExo5 {
         // Schedule a job for the event-dispatching thread:
         // creating and showing this application's GUI.
         SwingUtilities.invokeLater(() -> {
-            final WindowsTextExo5 windowsTextExo5 = new WindowsTextExo5();
-            windowsTextExo5.showFrame(textModel, textServices);
+            final Exo5ViewsManager viewsManager = new Exo5ViewsManager();
+            viewsManager.showFrames(textModel, textServices);
         });
-
-    }
-
-    public void showFrame(final TextModel textModel, final TextServices textServices) {
-        //Create and set up windows.
-        final JFrame frame = new CommandsAreaWindow(textServices);
-        final JWindow window = new DisplayAreaWindow(textModel);
-
-        //Display both windows.
-        frame.setVisible(true);
-        window.setVisible(true);
     }
 }
