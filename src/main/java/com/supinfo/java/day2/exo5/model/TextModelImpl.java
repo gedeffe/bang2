@@ -1,9 +1,5 @@
 package com.supinfo.java.day2.exo5.model;
 
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +33,52 @@ public class TextModelImpl implements TextModel {
             }
         }
     }
+
+    public static void createNewTableStudents() {
+
+        String sql = "CREATE TABLE IF NOT EXISTS students (\n"
+                + "	id_booster integer PRIMARY KEY,\n"
+                + "	name text NOT NULL,\n"
+                + "	level text NOT NULL\n"
+                + ");";
+
+        try (Connection conn = DriverManager.getConnection(url, "sa", "");
+             Statement stmt = conn.createStatement()) {
+            stmt.execute(sql);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void createNewTableCredentials() {
+
+        String sql = "CREATE TABLE IF NOT EXISTS credentials (\n"
+                + "	id_credential integer PRIMARY KEY,\n"
+                + ");";
+
+        try (Connection conn = DriverManager.getConnection(url, "sa", "");
+             Statement stmt = conn.createStatement()) {
+            stmt.execute(sql);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void createNewTableStudentCredentials() {
+
+        String sql = "CREATE TABLE IF NOT EXISTS student_credentials (\n"
+                + "	id_booster integer ,\n"
+                + "	id_credential integer,\n"
+                + ");";
+
+        try (Connection conn = DriverManager.getConnection(url, "sa", "");
+             Statement stmt = conn.createStatement()) {
+            stmt.execute(sql);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 
     @Override
     public void updateTextData(final String text) {
