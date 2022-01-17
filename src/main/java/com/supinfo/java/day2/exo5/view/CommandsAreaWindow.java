@@ -5,6 +5,8 @@ import com.supinfo.java.day2.exo5.control.TextServices;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /**
  * To let the user enter custom text to add, and buttons to manage text content (send new text or clear existing text).
@@ -52,6 +54,26 @@ public class CommandsAreaWindow extends JFrame {
         final JButton clearButton = new JButton("Clear");
         clearButton.addActionListener((event) -> this.textServices.clearText());
         commandsPanel.add(clearButton);
+        final JButton write = new JButton("write");
+        write.addActionListener((event) -> {
+            try {
+                this.textServices.save();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        commandsPanel.add(write);
+        final JButton loadButton = new JButton("Load");
+        loadButton.addActionListener((event) -> {
+            try {
+                this.textServices.load();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        commandsPanel.add(loadButton);
 
         panel.add(commandsPanel);
     }
