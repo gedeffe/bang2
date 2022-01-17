@@ -2,6 +2,7 @@ package com.supinfo.java.day2.exo5.view;
 
 import com.supinfo.java.day2.exo5.model.TextEvents;
 import com.supinfo.java.day2.exo5.model.TextEventsSubscriber;
+import com.supinfo.java.day2.exo5.model.TextModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,7 +10,8 @@ import java.awt.*;
 public class DisplayAreaWindow extends JWindow implements TextEvents {
     private JTextArea textContent;
 
-    public DisplayAreaWindow(final TextEventsSubscriber textEventsSubscriber) {
+    public DisplayAreaWindow(final TextModel
+                                     textModel) {
         // move location to be under main frame
         this.setLocation(0, 115);
 
@@ -23,7 +25,10 @@ public class DisplayAreaWindow extends JWindow implements TextEvents {
         this.setSize(targetWidth, height);
 
         // register to application events
-        textEventsSubscriber.register(this);
+        textModel.register(this);
+
+        // initialize text content with existing data
+        this.textContent.setText(textModel.getTextData());
     }
 
     private void initComponents() {
