@@ -8,6 +8,7 @@ import com.supinfo.java.day2.exo5.model.TextModelImpl;
 import com.supinfo.java.day2.exo5.view.Exo5ViewsManager;
 
 import javax.swing.*;
+import java.sql.SQLException;
 
 /**
  * Exercise 5 :
@@ -19,7 +20,7 @@ import javax.swing.*;
  */
 public class WindowsTextExo5 {
 
-    public static void main(final String[] args) {
+    public static void main(final String[] args) throws SQLException, ClassNotFoundException {
         final TextModel textModel = new TextModelImpl();
         final TextServices textServices = new TextServicesImpl(textModel);
 
