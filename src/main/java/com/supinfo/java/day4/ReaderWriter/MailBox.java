@@ -7,21 +7,24 @@ import java.util.concurrent.Semaphore;
 public class MailBox {
     private final List<String> inbox = new ArrayList<>();
     Semaphore readLock = new Semaphore(0);
-    Semaphore writeLock = new Semaphore(1);
+
+    Semaphore concurrentLock = new Semaphore(1);
 
     public void deposit(String message) throws InterruptedException {
-        this.writeLock.acquire();
-        System.out.println("Fonction deposit");
+        this.concurrentLock.acquire();
+        System.out.println("Fonction deposit" + this.inbox.size());
         this.inbox.add(message);
         this.readLock.release();
+        this.concurrentLock.release();
     }
 
-    public String remove() throws InterruptedException {
+    public String pop() throws InterruptedException {
         this.readLock.acquire();
-        System.out.println("Fonction remove");
+        this.concurrentLock.acquire();
+        System.out.println("Fonction remove" + this.inbox.size());
         String message = this.inbox.get(0);
         this.inbox.remove(0);
-        this.writeLock.release();
+        this.concurrentLock.release();
 
         return message;
     }

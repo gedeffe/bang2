@@ -13,7 +13,7 @@ public class Reader implements Runnable {
     public void run() {
         String message = null;
         try {
-            message = this.mailBox.remove();
+            message = this.mailBox.pop();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
