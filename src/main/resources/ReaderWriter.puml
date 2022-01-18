@@ -1,0 +1,15 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+Writer -> MailBox: deposit
+MailBox --> Reader: send event
+Reader -> MailBox: remove
+Writer -> MailBox: deposit
+MailBox --> Reader: send event
+Writer -> MailBox: deposit (bloquant)
+Reader -> MailBox: remove
+Reader --> MailBox: remove (non bloquant)
+
+@enduml
