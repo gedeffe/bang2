@@ -19,7 +19,10 @@ public class ListTabs {
 
     public void displayTabs(List<List<String>> tabs) {
         for (List<String> rowTab : tabs) {
-            System.out.println(rowTab);
+            for (String value : rowTab) {
+                System.out.print(value);
+            }
+            System.out.println();
         }
     }
 }
