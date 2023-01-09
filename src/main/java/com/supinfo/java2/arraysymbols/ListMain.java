@@ -7,8 +7,8 @@ public class ListMain {
     public static void main(String[] args) {
         ListTabs tabs = new ListTabs();
         ListSymbols symbols = new ListSymbols();
-
-        List<List<String>> init = tabs.init(10, 20);
+        
+        List<List<String>> init = tabs.retrieveUserTabs();
 
         List<List<String>> pairLineTable = symbols.createPairLineTable(init);
         tabs.displayTabs(pairLineTable);
