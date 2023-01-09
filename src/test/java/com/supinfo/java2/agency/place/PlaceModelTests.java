@@ -49,4 +49,20 @@ public class PlaceModelTests {
         // Then
         Assertions.assertTrue(saved);
     }
+
+    @Test
+    void testRemove() throws SQLException {
+        // Given
+        PlaceModel placeModel = new PlaceModel("jdbc:h2:mem:existingId");
+        Place place = new Place();
+        place.setId(5L);
+        place.setName("truc");
+        placeModel.save(place);
+
+        // When
+        boolean removed = placeModel.remove(5L);
+
+        // Then
+        Assertions.assertTrue(removed);
+    }
 }

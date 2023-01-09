@@ -11,9 +11,25 @@ public class PlaceController {
         switch (choice) {
             case 1 -> this.addPlace();
             case 2 -> this.listPlaces();
+            case 3 -> this.editPlace();
+            case 4 -> this.removePlace();
             default -> {
             }
         }
+    }
+
+    private void removePlace() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter identifier of place to remove:");
+        int identifier = scanner.nextInt();
+        try {
+            this.placeModel.remove(identifier);
+        } catch (SQLException e) {
+            System.err.println("Unable to remove place !!!");
+        }
+    }
+
+    private void editPlace() {
     }
 
     private void listPlaces() {
@@ -37,7 +53,6 @@ public class PlaceController {
             place.setId(placeModel.getNextIdentifier());
             this.placeModel.save(place);
         } catch (SQLException e) {
-            e.printStackTrace();
             System.err.println("Unable to save place !!!");
         }
     }

@@ -30,7 +30,7 @@ public class PlaceModel {
     }
 
     public boolean save(Place place) throws SQLException {
-        boolean saved = false;
+        boolean saved;
         try (PreparedStatement preparedStatement = this.connection.prepareStatement("INSERT INTO place (id, name) VALUES (?,?)")) {
             preparedStatement.setLong(1, place.getId());
             preparedStatement.setString(2, place.getName());
@@ -38,21 +38,13 @@ public class PlaceModel {
             this.connection.commit();
         } catch (SQLException e) {
             this.connection.rollback();
-            e.printStackTrace();
             throw e;
         }
         return saved;
     }
 
-    public Place findById(Long id) {
-        return null;
-    }
 
     public boolean update(Place place) {
-        return false;
-    }
-
-    public boolean delete(Long id) {
         return false;
     }
 
@@ -80,5 +72,18 @@ public class PlaceModel {
             }
         }
         return places;
+    }
+
+    public boolean remove(long placeId) throws SQLException {
+        boolean removed;
+        try (PreparedStatement preparedStatement = this.connection.prepareStatement("DELETE FROM place WHERE id=?")) {
+            preparedStatement.setLong(1, placeId);
+            removed = preparedStatement.executeUpdate() > 0;
+            this.connection.commit();
+        } catch (SQLException e) {
+            this.connection.rollback();
+            throw e;
+        }
+        return removed;
     }
 }

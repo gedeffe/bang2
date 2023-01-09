@@ -1,6 +1,7 @@
 package com.supinfo.java2.agency;
 
 import com.supinfo.java2.agency.place.PlaceController;
+import com.supinfo.java2.agency.trip.TripController;
 
 import java.util.Scanner;
 
@@ -37,6 +38,8 @@ public class AgencyMain {
     }
 
     private void manageTrip(int choice) {
+        TripController tripController = new TripController();
+        tripController.handleAction(choice);
     }
 
     private void managePlace(int choice) {
@@ -56,7 +59,7 @@ public class AgencyMain {
         System.out.println("3 - Edit a place");
         System.out.println("4 - Remove a place");
         System.out.println("5 - Add a trip");
-        System.out.println("6 - Edit a trip");
+        System.out.println("6 - List every trips");
         System.out.println("7 - Remove a trip");
         System.out.println("8 - Quit");
     }
