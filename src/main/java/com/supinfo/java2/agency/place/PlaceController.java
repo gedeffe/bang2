@@ -47,6 +47,13 @@ public class PlaceController {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter name:");
         String name = scanner.nextLine();
+        this.addPlace(name);
+    }
+
+    public void addPlace(String name) throws IllegalArgumentException {
+        if (name == null || name.isBlank()) {
+            throw new IllegalArgumentException("Name should not be empty !");
+        }
         try {
             Place place = new Place();
             place.setName(name);
