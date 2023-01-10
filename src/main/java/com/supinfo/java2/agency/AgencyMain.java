@@ -1,6 +1,7 @@
 package com.supinfo.java2.agency;
 
 import com.supinfo.java2.agency.place.PlaceController;
+import com.supinfo.java2.agency.place.PlaceModel;
 import com.supinfo.java2.agency.trip.TripController;
 
 import java.util.Scanner;
@@ -43,7 +44,8 @@ public class AgencyMain {
     }
 
     private void managePlace(int choice) {
-        PlaceController placeController = new PlaceController();
+        PlaceModel placeModel = new PlaceModel();
+        PlaceController placeController = new PlaceController(placeModel);
         placeController.handleAction(choice);
     }
 

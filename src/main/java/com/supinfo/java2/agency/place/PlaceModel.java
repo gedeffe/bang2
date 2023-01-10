@@ -4,9 +4,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlaceModel {
+public class PlaceModel implements PlaceEventsSubscriber {
 
     private final Connection connection;
+    private final List<PlaceEvents> listeners = new ArrayList<>();
 
     public PlaceModel() {
         this("jdbc:h2:./build/places;AUTO_SERVER=TRUE");
@@ -36,6 +37,7 @@ public class PlaceModel {
             preparedStatement.setString(2, place.getName());
             saved = preparedStatement.executeUpdate() > 0;
             this.connection.commit();
+            this.listeners.forEach(listener -> listener.notifyPlaceAdded(place));
         } catch (SQLException e) {
             this.connection.rollback();
             throw e;
@@ -80,10 +82,23 @@ public class PlaceModel {
             preparedStatement.setLong(1, placeId);
             removed = preparedStatement.executeUpdate() > 0;
             this.connection.commit();
+            Place fakeRemovedPlace = new Place();
+            fakeRemovedPlace.setId(placeId);
+            this.listeners.forEach(listener -> listener.notifyPlaceRemoved(fakeRemovedPlace));
         } catch (SQLException e) {
             this.connection.rollback();
             throw e;
         }
         return removed;
+    }
+
+    @Override
+    public void subscribe(PlaceEvents listener) {
+        this.listeners.add(listener);
+    }
+
+    @Override
+    public void unsubscribe(PlaceEvents listener) {
+        this.listeners.remove(listener);
     }
 }

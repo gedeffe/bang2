@@ -5,7 +5,11 @@ import java.util.List;
 import java.util.Scanner;
 
 public class PlaceController {
-    private final PlaceModel placeModel = new PlaceModel();
+    private final PlaceModel placeModel;
+
+    public PlaceController(PlaceModel placeModelParam) {
+        this.placeModel = placeModelParam;
+    }
 
     public void handleAction(int choice) {
         switch (choice) {
