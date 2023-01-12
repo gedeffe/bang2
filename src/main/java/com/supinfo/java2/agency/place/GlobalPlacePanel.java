@@ -1,7 +1,4 @@
-package com.supinfo.java2.swing;
-
-import com.supinfo.java2.agency.place.PlaceController;
-import com.supinfo.java2.agency.place.PlaceModel;
+package com.supinfo.java2.agency.place;
 
 import javax.swing.*;
 import java.awt.*;

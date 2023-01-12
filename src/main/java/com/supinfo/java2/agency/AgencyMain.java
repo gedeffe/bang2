@@ -3,6 +3,7 @@ package com.supinfo.java2.agency;
 import com.supinfo.java2.agency.place.PlaceController;
 import com.supinfo.java2.agency.place.PlaceModel;
 import com.supinfo.java2.agency.trip.TripController;
+import com.supinfo.java2.agency.trip.TripModel;
 
 import java.util.Scanner;
 
@@ -39,7 +40,8 @@ public class AgencyMain {
     }
 
     private void manageTrip(int choice) {
-        TripController tripController = new TripController();
+        TripModel tripModel = new TripModel();
+        TripController tripController = new TripController(tripModel);
         tripController.handleAction(choice);
     }
 

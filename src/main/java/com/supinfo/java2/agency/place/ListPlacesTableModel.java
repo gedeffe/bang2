@@ -1,8 +1,4 @@
-package com.supinfo.java2.swing;
-
-import com.supinfo.java2.agency.place.Place;
-import com.supinfo.java2.agency.place.PlaceEvents;
-import com.supinfo.java2.agency.place.PlaceEventsSubscriber;
+package com.supinfo.java2.agency.place;
 
 import javax.swing.table.DefaultTableModel;
 import java.util.List;

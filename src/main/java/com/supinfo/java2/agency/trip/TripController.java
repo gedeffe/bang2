@@ -6,7 +6,11 @@ import java.util.Scanner;
 
 public class TripController {
 
-    private final TripModel tripModel = new TripModel();
+    private final TripModel tripModel;
+
+    public TripController(TripModel tripModelParam) {
+        this.tripModel = tripModelParam;
+    }
 
     public void handleAction(int choice) {
         switch (choice) {
@@ -48,6 +52,10 @@ public class TripController {
         int destinationId = scanner.nextInt();
         System.out.println("Enter price:");
         double price = scanner.nextDouble();
+        this.addTrip(departureId, destinationId, price);
+    }
+
+    public void addTrip(long departureId, long destinationId, double price) {
         try {
             Trip trip = new Trip();
             trip.setId(tripModel.getNextIdentifier());

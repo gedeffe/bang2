@@ -4,9 +4,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TripModel {
+public class TripModel implements TripEventsSubscriber {
 
     private final Connection connection;
+    private final List<TripEvents> listeners = new ArrayList<>();
 
     public TripModel() {
         this("jdbc:h2:./build/trips;AUTO_SERVER=TRUE");
@@ -49,6 +50,7 @@ public class TripModel {
             preparedStatement.setDouble(4, trip.getPrice());
             saved = preparedStatement.executeUpdate() > 0;
             this.connection.commit();
+            this.listeners.forEach(listener -> listener.notifyTripAdded(trip));
         } catch (SQLException e) {
             this.connection.rollback();
             throw e;
@@ -62,6 +64,9 @@ public class TripModel {
             preparedStatement.setLong(1, tripId);
             removed = preparedStatement.executeUpdate() > 0;
             this.connection.commit();
+            Trip fakeRemovedTrip = new Trip();
+            fakeRemovedTrip.setId(tripId);
+            this.listeners.forEach(listener -> listener.notifyTripRemoved(fakeRemovedTrip));
         } catch (SQLException e) {
             this.connection.rollback();
             throw e;
@@ -84,5 +89,10 @@ public class TripModel {
             }
         }
         return trips;
+    }
+
+    @Override
+    public void subscribe(TripEvents listener) {
+        this.listeners.add(listener);
     }
 }

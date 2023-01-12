@@ -1,4 +1,4 @@
-package com.supinfo.java2.swing;
+package com.supinfo.java2.agency.place;
 
 import lombok.Getter;
 

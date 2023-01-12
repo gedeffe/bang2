@@ -1,6 +1,5 @@
-package com.supinfo.java2.swing;
+package com.supinfo.java2.agency.place;
 
-import com.supinfo.java2.agency.place.PlaceController;
 import lombok.Getter;
 
 import javax.swing.*;
@@ -63,7 +62,7 @@ public class CreatePlaceView {
                 CreatePlaceView.this.createPlace();
             }
         });
-        this.placeNameTextField.setColumns(50);
+        this.placeNameTextField.setColumns(20);
         this.placeNamePanel.add(this.placeNameTextField);
 
         return this.placeNamePanel;
