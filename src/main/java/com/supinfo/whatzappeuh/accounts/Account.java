@@ -1,16 +1,15 @@
 package com.supinfo.whatzappeuh.accounts;
 
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.net.InetAddress;
 
 @Getter
-@Setter
 @EqualsAndHashCode
+@AllArgsConstructor
 public class Account {
-
-    private String pseudo;
-    private InetAddress address;
+    private final String pseudo;
+    private final InetAddress address;
 }
