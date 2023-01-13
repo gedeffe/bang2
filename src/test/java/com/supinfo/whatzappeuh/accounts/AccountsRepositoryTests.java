@@ -1,16 +1,34 @@
 package com.supinfo.whatzappeuh.accounts;
 
+import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.List;
 import java.util.Optional;
 
 public class AccountsRepositoryTests {
+
+    @BeforeEach
+    void setup() {
+        // Clean up temporary file which store accounts information
+        // We reuse same path than location in file src/test/resources/configuration.properties
+        File file = new File("./build/accounts.xml");
+        if (file.exists()) {
+            Assertions.assertTrue(file.delete());
+        }
+        Assertions.assertFalse(file.exists());
+    }
+
     @Test
-    void testCreateAccount() throws UnknownHostException {
+    void testCreateAccount() throws IOException {
         // Given
         AccountsRepository accountsRepository = new AccountsRepositoryImpl();
         Account account = new Account("yolo", InetAddress.getLocalHost());
@@ -20,6 +38,10 @@ public class AccountsRepositoryTests {
 
         // Then
         Assertions.assertTrue(created);
+        File file = new File("./build/accounts.xml");
+        InputStream inputStream = new FileInputStream(file);
+        InputStream inputStreamExpectations = this.getClass().getResourceAsStream("/accounts/accounts.xml");
+        Assertions.assertTrue(IOUtils.contentEquals(inputStream, inputStreamExpectations));
     }
 
     @Test
