@@ -1,4 +1,4 @@
-package com.supinfo.whatzappeuh;
+package com.supinfo.whatzappeuh.sendGraphique;
 
 import javax.swing.*;
 import java.awt.*;

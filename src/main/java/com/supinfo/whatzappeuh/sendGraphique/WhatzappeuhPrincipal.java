@@ -1,5 +1,5 @@
-package com.supinfo.whatzappeuh;
-//package com.supinfo.whatzappeuh.UserSendingMessageInterface;
+package com.supinfo.whatzappeuh.sendGraphique;
+//package com.supinfo.whatzappeuh.sendGraphique.UserSendingMessageInterface;
 
 import javax.swing.*;
 
