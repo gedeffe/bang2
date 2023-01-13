@@ -10,10 +10,10 @@ import java.util.Optional;
 
 public class AccountsRepositoryTests {
     @Test
-    void testCreateAccount() {
+    void testCreateAccount() throws UnknownHostException {
         // Given
         AccountsRepository accountsRepository = new AccountsRepositoryImpl();
-        Account account = new Account();
+        Account account = new Account("yolo", InetAddress.getLocalHost());
 
         // When
         boolean created = accountsRepository.create(account);
@@ -23,10 +23,11 @@ public class AccountsRepositoryTests {
     }
 
     @Test
-    void testDeleteAccount() {
+    void testDeleteAccount() throws UnknownHostException {
         // Given
         AccountsRepository accountsRepository = new AccountsRepositoryImpl();
-        Account account = new Account();
+        Account account = new Account("yolo", InetAddress.getLocalHost());
+        accountsRepository.create(account);
 
         // When
         boolean deleted = accountsRepository.delete(account);
@@ -39,13 +40,29 @@ public class AccountsRepositoryTests {
     void testRetrieveAccount() throws UnknownHostException {
         // Given
         AccountsRepository accountsRepository = new AccountsRepositoryImpl();
+        String pseudo = "yolo";
         InetAddress address = InetAddress.getLocalHost();
+        Account account = new Account(pseudo, address);
 
         // When
         Optional<Account> accountOptional = accountsRepository.retrieve(address);
 
         // Then
         Assertions.assertTrue(accountOptional.isPresent());
+        Assertions.assertEquals(account, accountOptional.get());
+    }
+
+    @Test
+    void testRetrieveAccountWhenUnknown() throws UnknownHostException {
+        // Given
+        AccountsRepository accountsRepository = new AccountsRepositoryImpl();
+        InetAddress address = InetAddress.getLocalHost();
+
+        // When
+        Optional<Account> accountOptional = accountsRepository.retrieve(address);
+
+        // Then
+        Assertions.assertTrue(accountOptional.isEmpty());
     }
 
     @Test
@@ -62,10 +79,10 @@ public class AccountsRepositoryTests {
     }
 
     @Test
-    void testRetrieveAll() {
+    void testRetrieveAll() throws UnknownHostException {
         // Given
         AccountsRepository accountsRepository = new AccountsRepositoryImpl();
-        Account account = new Account();
+        Account account = new Account("yolo", InetAddress.getLocalHost());
         accountsRepository.create(account);
 
         // When
