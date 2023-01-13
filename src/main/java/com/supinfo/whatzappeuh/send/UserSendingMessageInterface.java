@@ -23,7 +23,7 @@ public class UserSendingMessageInterface {
             this.messageField = (new JTextField(""));
             this.messageField.setColumns(20);
             this.panelMessageInterface.add(this.messageField, BorderLayout.CENTER);
-
+            
             this.sendButton = (new JButton(("send")));
             this.panelMessageInterface.add(this.sendButton, BorderLayout.EAST);
 
