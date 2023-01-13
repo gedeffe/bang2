@@ -1,31 +1,25 @@
 plugins {
     id 'java'
     id 'application'
-    id 'org.openjfx.javafxplugin' version '0.0.10'
     id "io.freefair.lombok" version "6.3.0"
 }
 
-group 'com.supinfo'
+group 'com.supinfo.whatzappeuh'
 version '1.0-SNAPSHOT'
-mainClassName = 'com.supinfo.java.day5.MainExo3'
+mainClassName = 'com.supinfo.whatzappeuh.WhatzappeuhPrincipal'
 
 java {
     sourceCompatibility = JavaVersion.VERSION_15
     targetCompatibility = JavaVersion.VERSION_15
 }
-javafx {
-    version = "17"
-    modules = ['javafx.controls', 'javafx.fxml']
-}
+
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation group: 'com.h2database', name: 'h2', version: '2.0.206'
-    implementation group: 'org.jsoup', name: 'jsoup', version: '1.14.3'
-    implementation group: 'com.opencsv', name: 'opencsv', version: '5.5.2'
+
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
