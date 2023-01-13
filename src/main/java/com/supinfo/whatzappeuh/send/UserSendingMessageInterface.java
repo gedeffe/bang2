@@ -1,4 +1,4 @@
-package com.supinfo.whatzappeuh.sendGraphique;
+package com.supinfo.whatzappeuh.send;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,9 +13,9 @@ public class UserSendingMessageInterface {
     private JPanel panelMessageInterface;
 
 
-    public  JPanel sendingMessageInterface(){
-        if (this.panelMessageInterface == null){
-            this.panelMessageInterface =  new JPanel();
+    public JPanel sendingMessageInterface() {
+        if (this.panelMessageInterface == null) {
+            this.panelMessageInterface = new JPanel();
             //this.panelMessageInterface.setLayout(new FlowLayout());
 
             UserSendingMessageInterface placeView = new UserSendingMessageInterface();
@@ -27,12 +27,12 @@ public class UserSendingMessageInterface {
             this.panelMessageInterface.add(this.messageField, BorderLayout.CENTER);
 
             this.sendButton = (new JButton(("send")));
+            //this.sendButton.addActionListener();
             this.panelMessageInterface.add(this.sendButton, BorderLayout.EAST);
 
             //this.panelMessageInterface.setSize();
 
             this.panelMessageInterface.setVisible(true);
-
 
 
         }
@@ -42,7 +42,6 @@ public class UserSendingMessageInterface {
 
 
     }
-
 
 
 }

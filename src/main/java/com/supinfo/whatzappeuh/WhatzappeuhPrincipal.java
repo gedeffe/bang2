@@ -1,5 +1,6 @@
-package com.supinfo.whatzappeuh.sendGraphique;
-//package com.supinfo.whatzappeuh.sendGraphique.UserSendingMessageInterface;
+package com.supinfo.whatzappeuh;
+
+import com.supinfo.whatzappeuh.send.UserSendingMessageInterface;
 
 import javax.swing.*;
 
@@ -15,7 +16,7 @@ public class WhatzappeuhPrincipal {
             frame.add(placeView.sendingMessageInterface());
             //frame.pack();
 
-            frame.setSize(300,100);
+            frame.setSize(300, 100);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             //frame.setLayout(null);
             frame.setVisible(true);
