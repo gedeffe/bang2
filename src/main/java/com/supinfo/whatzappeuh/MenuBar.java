@@ -4,7 +4,7 @@ import javax.swing.*;
 
 public class MenuBar {
     
-    public static void display(JFrame frame) {
+    public void display(JFrame frame) {
         // MenuBar
         JMenuBar menuBar = new JMenuBar();
         frame.setJMenuBar(menuBar);
@@ -17,7 +17,8 @@ public class MenuBar {
         JMenuItem accountManagement = new JMenuItem("Account management");
         JMenuItem selectRecipient = new JMenuItem("Select recipient");
         menu.add(accountManagement);
-        accountManagement.addActionListener((actionEvent)->AccountView.display(frame));
+        AccountView accountView = new AccountView();
+        accountManagement.addActionListener((actionEvent)->accountView.display(frame));
         menu.add(selectRecipient);
     }
 }

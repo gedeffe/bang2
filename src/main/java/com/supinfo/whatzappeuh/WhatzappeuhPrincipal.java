@@ -15,14 +15,15 @@ public class WhatzappeuhPrincipal {
         AccountManager accountManager = new AccountManagerImplementation(accountsRepository);
 
         // prepare and launch frontend
-        
+
         SwingUtilities.invokeLater(() -> {
             // Frame
             JFrame frame = new JFrame("Whatzappeuh");
             frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
             frame.setLocationRelativeTo(null);
             frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-            MenuBar.display(frame);
+            MenuBar menuBar = new MenuBar();
+            menuBar.display(frame);
             frame.setVisible(true);
         });
     }

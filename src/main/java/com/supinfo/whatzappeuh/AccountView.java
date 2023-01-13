@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class AccountView {
 
-    public static void display(JFrame mainFrame) {
+    public void display(JFrame mainFrame) {
         JDialog frame = new JDialog(mainFrame, "Account manager", true);
         frame.setSize(550, 500);
         frame.setLocationRelativeTo(null);
@@ -14,7 +14,7 @@ public class AccountView {
         frame.setVisible(true);
     }
 
-    private static JPanel panel() {
+    private JPanel panel() {
         // Panels
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
