@@ -43,6 +43,7 @@ public class AccountsRepositoryTests {
         String pseudo = "yolo";
         InetAddress address = InetAddress.getLocalHost();
         Account account = new Account(pseudo, address);
+        accountsRepository.create(account);
 
         // When
         Optional<Account> accountOptional = accountsRepository.retrieve(address);
