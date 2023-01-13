@@ -20,7 +20,7 @@ public class WhatzappeuhPrincipal {
 
             frame.add(placeView.sendingMessageInterface());
 
-            frame.setSize(300, 100);
+            frame.setSize(600, 200);
             frame.pack();
             frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             frame.setVisible(true);
