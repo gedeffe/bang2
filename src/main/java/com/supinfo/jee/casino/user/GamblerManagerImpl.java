@@ -5,14 +5,17 @@ import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
-public class UserManagerImpl implements UserManager {
+public class GamblerManagerImpl implements GamblerManager {
+
+    private GamblerRepository gamblerRepository;
+
     @Override
-    public void addUser(User user) {
+    public void addUser(Gambler user) {
 
     }
 
     @Override
-    public User getUser(String pseudo) {
+    public Gambler getUser(String pseudo) {
         return null;
     }
 }

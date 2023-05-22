@@ -1,6 +1,6 @@
 package com.supinfo.jee.casino.party;
 
-import com.supinfo.jee.casino.user.UserManager;
+import com.supinfo.jee.casino.user.GamblerManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class PartyManagerImpl implements PartyManager {
 
-    private final UserManager userManager;
+    private final GamblerManager gamblerManager;
 
     @Override
     public int newParty() {
