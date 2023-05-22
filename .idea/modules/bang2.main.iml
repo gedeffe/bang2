@@ -12,6 +12,12 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Gradle: org.springframework:spring-context:6.0.9" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.projectlombok:lombok:1.18.22" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework:spring-aop:6.0.9" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework:spring-beans:6.0.9" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework:spring-expression:6.0.9" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework:spring-core:6.0.9" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework:spring-jcl:6.0.9" level="project" />
   </component>
 </module>
