@@ -4,8 +4,11 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 		https://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="partyManager" class="com.supinfo.jee.casino.PartyManagerImpl">
+    <bean id="userManager" class="com.supinfo.jee.casino.user.UserManagerImpl">
         <!-- collaborators and configuration for this bean go here -->
+    </bean>
+    <bean id="partyManager" class="com.supinfo.jee.casino.PartyManagerImpl">
+        <constructor-arg name="userManager" ref="userManager"/>
     </bean>
 
 
