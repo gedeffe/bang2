@@ -1,4 +1,4 @@
-package com.supinfo.jee.casino;
+package com.supinfo.jee.casino.party;
 
 public interface PartyManager {
 
