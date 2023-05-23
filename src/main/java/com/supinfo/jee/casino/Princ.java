@@ -1,7 +1,9 @@
 package com.supinfo.jee.casino;
 
-import com.supinfo.jee.casino.user.Gambler;
-import com.supinfo.jee.casino.user.GamblerRepository;
+import com.supinfo.jee.casino.gambler.Gambler;
+import com.supinfo.jee.casino.gambler.GamblerRepository;
+import com.supinfo.jee.casino.party.Party;
+import com.supinfo.jee.casino.party.PartyRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -17,20 +19,29 @@ public class Princ {
     }
 
     @Bean
-    public CommandLineRunner initDatabase(GamblerRepository repository) {
+    public CommandLineRunner initDatabase(GamblerRepository gamblerRepository, PartyRepository partyRepository) {
         return args -> {
             Gambler user = new Gambler();
             user.setPseudo("pigeon");
             user.setBalance(5000);
             user.setBet(25);
 
-            repository.save(user);
-            repository.save(new Gambler("toto", 500, 100));
-            repository.save(new Gambler("titi", 500, 100));
-            repository.save(new Gambler("tata", 500, 100));
-            repository.save(new Gambler("tutu", 500, 100));
+            user = gamblerRepository.save(user);
+            gamblerRepository.save(new Gambler("toto", 500, 100));
+            gamblerRepository.save(new Gambler("titi", 500, 100));
+            gamblerRepository.save(new Gambler("tata", 500, 100));
+            gamblerRepository.save(new Gambler("tutu", 500, 100));
 
-            repository.findAll().forEach(parieur -> log.info("Created user = {}.", parieur));
+            gamblerRepository.findAll().forEach(parieur -> log.info("Created gambler = {}.", parieur));
+
+            Party party = new Party();
+            party.setInitialValue(45);
+            party.setDiceThrowCounter(5);
+            party.setGambler(user);
+
+            partyRepository.save(party);
+
+            partyRepository.findAll().forEach(parties -> log.info("Created party = {}.", parties));
         };
     }
 }
