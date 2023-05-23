@@ -1,13 +1,14 @@
-package com.supinfo.jee.casino.user;
+package com.supinfo.jee.casino.gambler;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.supinfo.jee.casino.party.Party;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -17,16 +18,23 @@ import lombok.ToString;
 public class Gambler {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private Long id;
     private String pseudo;
     private long balance;
     private int bet;
+    @ToString.Exclude
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "gambler")
+    private List<Party> partyList = new ArrayList<>();
 
     public Gambler(String pseudoParam, long balanceParam, int betParam) {
         this.pseudo = pseudoParam;
         this.balance = balanceParam;
         this.bet = betParam;
+    }
+
+    public Gambler(String pseudoParam) {
+        this(pseudoParam, 0, 0);
     }
 
 }
