@@ -1,5 +1,10 @@
 {
   "pseudo": "pigeon",
   "balance": 5000,
-  "bet": 25
+  "bet": 25,
+  "_links": {
+    "launches": {
+      "href": "http://localhost/launches"
+    }
+  }
 }

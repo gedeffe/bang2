@@ -5,8 +5,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class GameDto {
+public class GameInputDto {
     private String pseudo;
-    private long balance;
-    private int bet;
 }

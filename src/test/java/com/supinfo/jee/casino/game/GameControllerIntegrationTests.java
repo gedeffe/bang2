@@ -32,7 +32,8 @@ public class GameControllerIntegrationTests {
 
         // Then
         String expectedContent = Files.readString(Path.of("src", "test", "resources", "expectations", "correctGamblerGame.json"));
-        resultActions.andDo(MockMvcResultHandlers.print()).andExpect(MockMvcResultMatchers.status().isCreated()).andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+        resultActions.andDo(MockMvcResultHandlers.print()).andExpect(MockMvcResultMatchers.status().isCreated())
+                .andExpect(MockMvcResultMatchers.content().contentType("application/hal+json"))
                 .andExpect(MockMvcResultMatchers.content().json(expectedContent));
 
     }
