@@ -32,7 +32,7 @@ public class GameControllerIntegrationTests {
 
         // Then
         String expectedContent = Files.readString(Path.of("src", "test", "resources", "expectations", "correctGamblerGame.json"));
-        resultActions.andDo(MockMvcResultHandlers.print()).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+        resultActions.andDo(MockMvcResultHandlers.print()).andExpect(MockMvcResultMatchers.status().isCreated()).andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.content().json(expectedContent));
 
     }
@@ -63,9 +63,9 @@ public class GameControllerIntegrationTests {
 
 
         // Then
-        String expectedContent = "Please, pay to play ! Your balance is 0 €";
+        String expectedContent = Files.readString(Path.of("src", "test", "resources", "expectations", "paymentRequiredGame.json"));
         resultActions.andDo(MockMvcResultHandlers.print()).andExpect(MockMvcResultMatchers.status().is4xxClientError()).andExpect(MockMvcResultMatchers.status().is(HttpStatus.PAYMENT_REQUIRED.value()))
-                .andExpect(MockMvcResultMatchers.content().string(expectedContent));
+                .andExpect(MockMvcResultMatchers.content().json(expectedContent));
 
     }
 }

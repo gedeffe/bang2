@@ -31,6 +31,7 @@ public class Princ {
             gamblerRepository.save(new Gambler("titi", 500, 100));
             gamblerRepository.save(new Gambler("tata", 500, 100));
             gamblerRepository.save(new Gambler("tutu", 500, 100));
+            gamblerRepository.save(new Gambler("indebted", -50, 100));
 
             gamblerRepository.findAll().forEach(parieur -> log.info("Created gambler = {}.", parieur));
 
