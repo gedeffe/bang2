@@ -1,10 +1,36 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+    <style>
+        @font-face {
+            font-family: "Poker";
+            src: url("Poker.ttf") format("truetype");
+        }
+        .bord-radius {
+            border-radius: 40px;
+        }
+    </style>
+
+
     <title>Getting Started: Serving Web Content</title>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
 </head>
-<body>
-<p>Get your greeting <a href="/greeting">here</a></p>
+<body style="background-image:url(fond.jpg);background-size:100%">
+<main>
+    <p style="text-align: center; color: white; font-size: 4em; font-family:'Poker',sans-serif">SupinfoCasino</p>
+
+    <div style="display: flex; align-items: end ">
+        <div>
+            <a href="/greeting"><img class="bord-radius" src="dice.png" alt="image dice" width="50%"> </a>
+        </div>
+
+        <div>
+            <a href="/greeting"><img class="bord-radius" src="poker.png" alt="image dice" width="50%"> </a>
+        </div>
+    </div>
+
+</main>
+
+
 </body>
 </html>
