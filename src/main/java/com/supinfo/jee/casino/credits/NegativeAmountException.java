@@ -1,6 +1,6 @@
 package com.supinfo.jee.casino.credits;
 
-public class NegativeAmountException extends Throwable {
+public class NegativeAmountException extends RuntimeException {
     public NegativeAmountException() {
         super("Amount attribute should have a positive value !");
     }

@@ -3,6 +3,7 @@ package com.supinfo.jee.casino.credits;
 import com.supinfo.jee.casino.gambler.Gambler;
 import com.supinfo.jee.casino.gambler.GamblerManager;
 import com.supinfo.jee.casino.game.EmptyPseudoException;
+import com.supinfo.jee.casino.game.WrongBalanceException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.StringUtils;
@@ -29,6 +30,9 @@ public class CreditsController {
             if (newCredits.getAmount() > 1) {
                 result.setNewBalance(balance + newCredits.getAmount());
                 result.setAmount(newCredits.getAmount());
+                if (result.getNewBalance() < 1) {
+                    throw new WrongBalanceException(result.getNewBalance(), pseudo);
+                }
             } else {
                 throw new WrongAmountException();
             }
