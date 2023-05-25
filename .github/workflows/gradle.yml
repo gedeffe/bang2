@@ -9,9 +9,9 @@ name: Java CI with Gradle
 
 on:
   push:
-    branches: [ supinfo_jee_2023 ]
+    branches: [ supinfo_jee_2023_client_part ]
   pull_request:
-    branches: [ supinfo_jee_2023 ]
+    branches: [ supinfo_jee_2023_client_part ]
 
 jobs:
   build:
