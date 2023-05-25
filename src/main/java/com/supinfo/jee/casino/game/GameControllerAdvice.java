@@ -35,7 +35,7 @@ public class GameControllerAdvice {
     @ResponseBody
     @ExceptionHandler(WrongBalanceException.class)
     @ResponseStatus(HttpStatus.PAYMENT_REQUIRED)
-    EntityModel<Problem> wrongBalanceHandler(WrongBalanceException ex) throws NegativeAmountException {
+    EntityModel<Problem> wrongBalanceHandler(WrongBalanceException ex)  {
         Problem problem = Problem.create()
                 .withType(URI.create("https://developer.mozilla.org/fr/docs/Web/HTTP/Status/402"))
                 .withTitle("You do not have enough credit.")

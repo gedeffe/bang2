@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class CreditsController {
     @PostMapping("/credits")
     @ResponseStatus()
-    public EntityModel<GameOutputDto> payToWin(@RequestBody CreditsDto newCredits) throws NegativeAmountException {
+    public EntityModel<GameOutputDto> payToWin(@RequestBody CreditsDto newCredits)  {
         String pseudo = newCredits.getPseudo();
         GameOutputDto result = new GameOutputDto(pseudo);
         if (StringUtils.hasText(pseudo)) {
