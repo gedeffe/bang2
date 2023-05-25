@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CreditsDto {
+public class CreditsInputDto {
     private String pseudo;
     private int amount;
 }

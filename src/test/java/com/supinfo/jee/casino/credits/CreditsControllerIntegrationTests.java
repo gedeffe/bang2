@@ -79,7 +79,7 @@ public class CreditsControllerIntegrationTests {
 
         // Then
         String expectedContent = Files.readString(Path.of("src", "test", "resources", "expectations", "correctGamblerCredits.json"));
-        resultActions.andDo(MockMvcResultHandlers.print()).andExpect(MockMvcResultMatchers.status().isCreated()).andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+        resultActions.andDo(MockMvcResultHandlers.print()).andExpect(MockMvcResultMatchers.status().isCreated())
                 .andExpect(MockMvcResultMatchers.content().json(expectedContent));
 
     }

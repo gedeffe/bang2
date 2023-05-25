@@ -1,8 +1,7 @@
 package com.supinfo.jee.casino.game;
 
 import com.supinfo.jee.casino.credits.CreditsController;
-import com.supinfo.jee.casino.credits.CreditsDto;
-import com.supinfo.jee.casino.credits.NegativeAmountException;
+import com.supinfo.jee.casino.credits.CreditsInputDto;
 import com.supinfo.jee.casino.credits.WrongAmountException;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;
@@ -25,6 +24,7 @@ public class GameControllerAdvice {
     String employeeNotFoundHandler(EmptyPseudoException ex) {
         return ex.getMessage();
     }
+
     @ResponseBody
     @ExceptionHandler(WrongAmountException.class)
     @ResponseStatus(HttpStatus.PRECONDITION_FAILED)
@@ -35,7 +35,7 @@ public class GameControllerAdvice {
     @ResponseBody
     @ExceptionHandler(WrongBalanceException.class)
     @ResponseStatus(HttpStatus.PAYMENT_REQUIRED)
-    EntityModel<Problem> wrongBalanceHandler(WrongBalanceException ex)  {
+    EntityModel<Problem> wrongBalanceHandler(WrongBalanceException ex) {
         Problem problem = Problem.create()
                 .withType(URI.create("https://developer.mozilla.org/fr/docs/Web/HTTP/Status/402"))
                 .withTitle("You do not have enough credit.")
@@ -44,7 +44,7 @@ public class GameControllerAdvice {
                     map.put("balance", ex.getBalance());
                     map.put("pseudo", ex.getPseudo());
                 });
-        CreditsDto newCredits = new CreditsDto();
+        CreditsInputDto newCredits = new CreditsInputDto();
         newCredits.setPseudo(ex.getPseudo());
         newCredits.setAmount(100);
         Link link = WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(CreditsController.class).payToWin(newCredits)).withRel("credits");

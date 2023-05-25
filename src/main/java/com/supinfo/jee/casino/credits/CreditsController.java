@@ -1,13 +1,10 @@
 package com.supinfo.jee.casino.credits;
 
+import com.supinfo.jee.casino.gambler.Gambler;
+import com.supinfo.jee.casino.gambler.GamblerManager;
 import com.supinfo.jee.casino.game.EmptyPseudoException;
-import com.supinfo.jee.casino.game.GameOutputDto;
-import com.supinfo.jee.casino.game.WrongBalanceException;
-import com.supinfo.jee.casino.launches.LaunchController;
-import com.supinfo.jee.casino.launches.LaunchDto;
-import org.springframework.hateoas.EntityModel;
-import org.springframework.hateoas.Link;
-import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,26 +12,30 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequiredArgsConstructor
 public class CreditsController {
+
+    private final GamblerManager gamblerManager;
+
     @PostMapping("/credits")
-    @ResponseStatus()
-    public EntityModel<GameOutputDto> payToWin(@RequestBody CreditsDto newCredits)  {
+    @ResponseStatus(HttpStatus.CREATED)
+    public CreditsOutputDto payToWin(@RequestBody CreditsInputDto newCredits) {
         String pseudo = newCredits.getPseudo();
-        GameOutputDto result = new GameOutputDto(pseudo);
+        CreditsOutputDto result = new CreditsOutputDto();
+        Gambler gambler = gamblerManager.getGambler(pseudo);
+        long balance = gambler.getBalance();
         if (StringUtils.hasText(pseudo)) {
-            newCredits.setPseudo(pseudo);
+            result.setPseudo(pseudo);
             if (newCredits.getAmount() > 1) {
-                result.setBalance(newCredits.getAmount());
-                result.setBet(newCredits.getAmount());
+                result.setNewBalance(balance + newCredits.getAmount());
+                result.setAmount(newCredits.getAmount());
             } else {
                 throw new WrongAmountException();
             }
         } else {
             throw new EmptyPseudoException();
         }
-
-        Link link = WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(LaunchController.class).play(new LaunchDto())).withRel("launches");
-        return EntityModel.of(result, link);
+        return result;
     }
 
 }
