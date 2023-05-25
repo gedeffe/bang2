@@ -4,3 +4,7 @@
 
 To share exercises for our java team ...
 
+To see content of openapi documentation: http://localhost:8081/v3/api-docs
+
+To interact with our REST Api: http://localhost:8081/swagger-ui/index.html
+

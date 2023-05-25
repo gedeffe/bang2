@@ -32,6 +32,7 @@
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-data-jpa:3.1.0" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-hateoas:3.1.0" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-web:3.1.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-aop:3.1.0" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-jdbc:3.1.0" level="project" />
     <orderEntry type="library" name="Gradle: org.hibernate.orm:hibernate-core:6.2.2.Final" level="project" />
@@ -43,6 +44,8 @@
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-tomcat:3.1.0" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework:spring-webmvc:6.0.9" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework:spring-web:6.0.9" level="project" />
+    <orderEntry type="library" name="Gradle: org.springdoc:springdoc-openapi-starter-webmvc-api:2.1.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.webjars:swagger-ui:4.18.2" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework:spring-aop:6.0.9" level="project" />
     <orderEntry type="library" name="Gradle: org.aspectj:aspectjweaver:1.9.19" level="project" />
     <orderEntry type="library" name="Gradle: com.zaxxer:HikariCP:5.0.1" level="project" />
@@ -60,9 +63,9 @@
     <orderEntry type="library" name="Gradle: org.slf4j:slf4j-api:2.0.7" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.plugin:spring-plugin-core:3.0.0" level="project" />
     <orderEntry type="library" name="Gradle: com.jayway.jsonpath:json-path:2.8.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.15.0" level="project" />
     <orderEntry type="library" name="Gradle: com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.15.0" level="project" />
     <orderEntry type="library" name="Gradle: com.fasterxml.jackson.module:jackson-module-parameter-names:2.15.0" level="project" />
-    <orderEntry type="library" name="Gradle: com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.15.0" level="project" />
     <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-databind:2.15.0" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-autoconfigure:3.1.0" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot:3.1.0" level="project" />
@@ -73,16 +76,25 @@
     <orderEntry type="library" name="Gradle: org.apache.tomcat.embed:tomcat-embed-el:10.1.8" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework:spring-expression:6.0.9" level="project" />
     <orderEntry type="library" name="Gradle: io.micrometer:micrometer-observation:1.11.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.springdoc:springdoc-openapi-starter-common:2.1.0" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework:spring-jcl:6.0.9" level="project" />
-    <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-annotations:2.15.0" level="project" />
     <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-core:2.15.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-annotations:2.15.0" level="project" />
     <orderEntry type="library" name="Gradle: ch.qos.logback:logback-classic:1.4.7" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.logging.log4j:log4j-to-slf4j:2.20.0" level="project" />
     <orderEntry type="library" name="Gradle: org.slf4j:jul-to-slf4j:2.0.7" level="project" />
     <orderEntry type="library" name="Gradle: io.micrometer:micrometer-commons:1.11.0" level="project" />
+    <orderEntry type="library" name="Gradle: io.swagger.core.v3:swagger-core-jakarta:2.2.9" level="project" />
     <orderEntry type="library" name="Gradle: ch.randelshofer:fastdoubleparser:0.8.0" level="project" />
     <orderEntry type="library" name="Gradle: ch.qos.logback:logback-core:1.4.7" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.logging.log4j:log4j-api:2.20.0" level="project" />
+    <orderEntry type="library" name="Gradle: io.swagger.core.v3:swagger-models-jakarta:2.2.9" level="project" />
+    <orderEntry type="library" name="Gradle: com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.15.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.commons:commons-lang3:3.12.0" level="project" />
+    <orderEntry type="library" name="Gradle: io.swagger.core.v3:swagger-annotations-jakarta:2.2.9" level="project" />
+    <orderEntry type="library" name="Gradle: jakarta.xml.bind:jakarta.xml.bind-api:4.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: jakarta.validation:jakarta.validation-api:3.0.2" level="project" />
+    <orderEntry type="library" name="Gradle: jakarta.activation:jakarta.activation-api:2.1.2" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.springframework.boot:spring-boot-devtools:3.1.0" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: com.h2database:h2:2.1.214" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.jboss.logging:jboss-logging:3.5.0.Final" level="project" />
@@ -91,10 +103,8 @@
     <orderEntry type="library" scope="RUNTIME" name="Gradle: com.fasterxml:classmate:1.5.1" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: net.bytebuddy:byte-buddy:1.14.4" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.glassfish.jaxb:jaxb-runtime:4.0.2" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: jakarta.xml.bind:jakarta.xml.bind-api:4.0.0" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: jakarta.inject:jakarta.inject-api:2.0.1" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.glassfish.jaxb:jaxb-core:4.0.2" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: jakarta.activation:jakarta.activation-api:2.1.2" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: net.minidev:json-smart:2.4.10" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.eclipse.angus:angus-activation:2.0.0" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.glassfish.jaxb:txw2:4.0.2" level="project" />
