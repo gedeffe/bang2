@@ -2,6 +2,8 @@ package com.supinfo.jee.casino.game;
 
 import com.supinfo.jee.casino.credits.CreditsController;
 import com.supinfo.jee.casino.credits.CreditsDto;
+import com.supinfo.jee.casino.credits.NegativeAmountException;
+import com.supinfo.jee.casino.credits.WrongAmountException;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.mediatype.problem.Problem;
@@ -23,11 +25,17 @@ public class GameControllerAdvice {
     String employeeNotFoundHandler(EmptyPseudoException ex) {
         return ex.getMessage();
     }
+    @ResponseBody
+    @ExceptionHandler(WrongAmountException.class)
+    @ResponseStatus(HttpStatus.PRECONDITION_FAILED)
+    String wrongAmountHandler(WrongAmountException ex) {
+        return ex.getMessage();
+    }
 
     @ResponseBody
     @ExceptionHandler(WrongBalanceException.class)
     @ResponseStatus(HttpStatus.PAYMENT_REQUIRED)
-    EntityModel<Problem> wrongBalanceHandler(WrongBalanceException ex) {
+    EntityModel<Problem> wrongBalanceHandler(WrongBalanceException ex) throws NegativeAmountException {
         Problem problem = Problem.create()
                 .withType(URI.create("https://developer.mozilla.org/fr/docs/Web/HTTP/Status/402"))
                 .withTitle("You do not have enough credit.")
