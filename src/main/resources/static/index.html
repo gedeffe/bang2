@@ -1,10 +1,160 @@
-<!DOCTYPE HTML>
+
+
+
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Getting Started: Serving Web Content</title>
-    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+    <title>Casinox</title>
+    <style>
+        /* Reset some default styles */
+        /* Reset some default styles */
+        body, h1, h2, h3, p, ul, li {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Global styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1, h2, h3 {
+            margin-bottom: 10px;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #222;
+            padding: 20px;
+        }
+
+        header h1 {
+            color: #fff;
+            font-size: 28px;
+        }
+
+        nav ul {
+            display: flex;
+        }
+
+        nav ul li {
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            font-size: 16px;
+        }
+
+        /* Hero section styles */
+        #hero {
+            background-image: url('hero.png');
+            background-size: cover;
+            background-position: center;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #hero h2 {
+            color: #fff;
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Button styles */
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #f44336;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #d32f2f;
+        }
+
+        footer {
+            background-color: #000;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+
+
+    </style>
 </head>
 <body>
-<p>Get your greeting <a href="/greeting">here</a></p>
+<header>
+    <h1>Welcome to Casin'intox</h1>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Games</a></li>
+            <li><a href="#">Promotions</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section id="hero">
+    <div class="container">
+        <h2>Spin the Matix Wheel to win !</h2>
+        <a href="#" class="btn">Play Now</a>
+    </div>
+</section>
+
+<section id="games">
+    <div class="container">
+        <h2>Our Casino Games</h2>
+        <div class="game">
+            <img src="slot.jpg" alt="Game 1">
+            <h3>Slot Machine</h3>
+            <p>Try your luck with our slot machine game.</p>
+            <a href="#" class="btn">Play Now</a>
+        </div>
+        <div class="game">
+            <img src="Roulette.jpg" alt="Game 2">
+            <h3>Roulette</h3>
+            <p>Experience the excitement of roulette.</p>
+            <a href="#" class="btn">Play Now</a>
+        </div>
+        <!-- Add more game divs as needed -->
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2023 Casino Website. All rights reserved.</p>
+        <p>Get your greeting </p>-->
+        <button type="button" onclick="window.location.href='/greeting'">Greeting</button>
+    </div>
+</footer>
 </body>
 </html>
