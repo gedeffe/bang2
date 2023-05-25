@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class LaunchController {
 
     @PostMapping("/launches")
-    public LaunchDto play(@RequestBody LaunchDto newLaunch) {
+    public LaunchInputDto play(@RequestBody LaunchInputDto newLaunch) {
         return newLaunch;
     }
 }

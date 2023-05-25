@@ -1,0 +1,12 @@
+{
+  "type": "https://developer.mozilla.org/fr/docs/Web/HTTP/Status/402",
+  "title": "You do not have enough credit.",
+  "detail": "Payment RequiredPlease, pay to play ! Your balance is 0 €",
+  "balance": 0,
+  "pseudo": "looser",
+  "_links": {
+    "credits": {
+      "href": "http://localhost/credits"
+    }
+  }
+}

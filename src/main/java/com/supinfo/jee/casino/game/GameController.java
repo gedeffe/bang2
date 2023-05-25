@@ -3,7 +3,7 @@ package com.supinfo.jee.casino.game;
 import com.supinfo.jee.casino.gambler.Gambler;
 import com.supinfo.jee.casino.gambler.GamblerManager;
 import com.supinfo.jee.casino.launches.LaunchController;
-import com.supinfo.jee.casino.launches.LaunchDto;
+import com.supinfo.jee.casino.launches.LaunchInputDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;
@@ -41,7 +41,7 @@ public class GameController {
             throw new EmptyPseudoException();
         }
 
-        Link link = WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(LaunchController.class).play(new LaunchDto())).withRel("launches");
+        Link link = WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(LaunchController.class).play(new LaunchInputDto())).withRel("launches");
         return EntityModel.of(result, link);
     }
 }
