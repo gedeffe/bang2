@@ -14,4 +14,9 @@ public class GreetingsController {
         return "greeting";
     }
 
+    @GetMapping("/connexion")
+    public String connexion() {
+        return "Connection";
+    }
+
 }
