@@ -30,4 +30,9 @@ public class GreetingsController {
         return "dice";
     }
 
+    @GetMapping("/connexion")
+    public String connexion() {
+        return "Connection";
+    }
+
 }
