@@ -1,0 +1,118 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: "Poker";
+            src: url("Poker.ttf") format("truetype");
+        }
+
+        .bord-radius {
+            border-radius: 40px;
+        }
+        .form-iten{
+            color: white;
+            display: flex;
+            flex-direction: column;
+        }
+        .mb-3{
+            margin-bottom: 1em;
+        }
+        .form-iten input{
+            border-radius: 10px;
+            border: none;
+            padding: 0.5em;
+            height: 25px;
+
+        }
+        .form-iten input[type="submit"]{
+            background-color: #0d6efd;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 20px;
+            height: 100%;
+            width: 100%;
+        }
+        .form-iten input[type="submit"]:hover{
+            background-color: #0d6efd;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 0 10px #0d6efd;
+        }
+        .form-control{
+            background-color: rgba(0,0,0,0.5);
+            padding: 2em;
+            border-radius: 10px;
+            width: 30vw;
+        }
+        .form-iten label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-family: 'Roboto', sans-serif;
+
+
+        }
+        .h4{
+            color: white;
+            font-family: 'Roboto', sans-serif;
+            text-align: center;
+            width: 100%;
+
+        }
+
+
+    </style>
+
+
+    <title>Getting Started: Serving Web Content</title>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+</head>
+<body style="background-image:url(fond.jpg);background-size:100%; background-repeat: no-repeat; background-size: cover">
+<main style="display: flex; flex-direction: column">
+    <p style="text-align: center; color: white; font-size: 4em; font-family:'Poker',sans-serif">SupinfoCasino</p>
+
+    <div style="width: auto; display: flex; justify-content: center; height: 100%">
+        <div class="form-control">
+            <h1 class="h4"> Merci à toi Grander</h1>
+            <form>
+                <div class="mb-3 form-iten">
+                    <label for="name">Name of titular</label>
+                    <input type="text" name="name" id="name" placeholder="Jean Crien">
+                </div>
+                <div class="mb-3 form-iten">
+                    <label for="ccn">Credit Card Number:</label>
+                    <input id="ccn" type="tel" inputmode="numeric" pattern="[0-9\s]{13,19}" autocomplete="cc-number"
+                           maxlength="19" placeholder="xxxx xxxx xxxx xxxx">
+                </div>
+                <div class="mb-3 form-iten">
+                    <label for="ExpirationDate">Expiration date</label>
+                    <input type="date" name="ExpirationDate" id="ExpirationDate">
+                </div>
+                <div class="mb-3 form-iten">
+                    <label for="ccv">CCV</label>
+                    <input type="text" name="cvv" id="ccv" placeholder="666">
+                </div>
+                <div class="mb-3 form-iten">
+                    <label for="value">Pay To plays</label>
+                    <input type="text" name="value" id="value" value="50">
+                </div>
+                <input type="hidden" name="gander" value="">
+                <div class="mb-3 form-iten">
+                    <input type="submit" value="Buy & play">
+                </div>
+            </form>
+        </div>
+
+
+    </div>
+
+</main>
+
+
+</body>
+</html>
