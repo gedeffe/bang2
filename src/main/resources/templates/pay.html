@@ -1,9 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <style>
         @font-face {
             font-family: "Poker";
@@ -13,22 +11,26 @@
         .bord-radius {
             border-radius: 40px;
         }
-        .form-iten{
+
+        .form-iten {
             color: white;
             display: flex;
             flex-direction: column;
         }
-        .mb-3{
+
+        .mb-3 {
             margin-bottom: 1em;
         }
-        .form-iten input{
+
+        .form-iten input {
             border-radius: 10px;
             border: none;
             padding: 0.5em;
             height: 25px;
 
         }
-        .form-iten input[type="submit"]{
+
+        .form-iten input[type="submit"] {
             background-color: #0d6efd;
             color: white;
             font-weight: bold;
@@ -37,19 +39,22 @@
             height: 100%;
             width: 100%;
         }
-        .form-iten input[type="submit"]:hover{
+
+        .form-iten input[type="submit"]:hover {
             background-color: #0d6efd;
             color: white;
             font-weight: bold;
             cursor: pointer;
             box-shadow: 0 0 10px #0d6efd;
         }
-        .form-control{
-            background-color: rgba(0,0,0,0.5);
+
+        .form-control {
+            background-color: rgba(0, 0, 0, 0.5);
             padding: 2em;
             border-radius: 10px;
             width: 30vw;
         }
+
         .form-iten label {
             font-weight: bold;
             margin-bottom: 5px;
@@ -57,7 +62,8 @@
 
 
         }
-        .h4{
+
+        .h4 {
             color: white;
             font-family: 'Roboto', sans-serif;
             text-align: center;
@@ -82,26 +88,26 @@
             <form>
                 <div class="mb-3 form-iten">
                     <label for="name">Name of titular</label>
-                    <input type="text" name="name" id="name" placeholder="Jean Crien">
+                    <input id="name" name="name" placeholder="Jean Crien" type="text">
                 </div>
                 <div class="mb-3 form-iten">
                     <label for="ccn">Credit Card Number:</label>
-                    <input id="ccn" type="tel" inputmode="numeric" pattern="[0-9\s]{13,19}" autocomplete="cc-number"
-                           maxlength="19" placeholder="xxxx xxxx xxxx xxxx">
+                    <input autocomplete="cc-number" id="ccn" inputmode="numeric" maxlength="19" pattern="[0-9\s]{13,19}"
+                           placeholder="xxxx xxxx xxxx xxxx" type="tel">
                 </div>
                 <div class="mb-3 form-iten">
                     <label for="ExpirationDate">Expiration date</label>
-                    <input type="date" name="ExpirationDate" id="ExpirationDate">
+                    <input id="ExpirationDate" name="ExpirationDate" type="date">
                 </div>
                 <div class="mb-3 form-iten">
                     <label for="ccv">CCV</label>
-                    <input type="text" name="cvv" id="ccv" placeholder="666">
+                    <input id="ccv" name="cvv" placeholder="666" type="text">
                 </div>
                 <div class="mb-3 form-iten">
                     <label for="value">Pay To plays</label>
-                    <input type="text" name="value" id="value" value="50">
+                    <input id="value" name="value" type="text" value="50">
                 </div>
-                <input type="hidden" name="gander" value="">
+                <input name="gander" type="hidden" value="">
                 <div class="mb-3 form-iten">
                     <input type="submit" value="Buy & play">
                 </div>
