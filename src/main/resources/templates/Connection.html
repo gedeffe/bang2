@@ -4,15 +4,7 @@
     <meta charset="UTF-8">
     <title>Crazyno login</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-    <link href="static/Connection.css" rel="stylesheet">
-    <style>
-        .hero {
-            background-image: url('top.jpg');
-            background-repeat: no-repeat;
-            background-size: cover;
-        '; background-position: center;
-        }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/Connection.css}">
 </head>
 <body>
 <div class="hero">
@@ -23,15 +15,21 @@
                     <div class="card bg-dark text-white" style="border-radius: 1rem;">
                         <div class="card-body p-5 text-center">
                             <div class="mb-md-5 mt-md-4 pb-5">
-                                <h2 class="fw-bold mb-2 text-uppercase">Bienvenue sur CrazyNo </h2>
+                                <h2 class="fw-bold mb-2 text-uppercase">Bienvenue sur CrazyNo</h2>
                                 <p class="text-white-50 mb-5">Entrez votre pseudonyme</p>
 
-                                <div class="form-outline form-white mb-4">
-                                    <input class="form-control form-control-lg" id="typeEmailX" type="text"/>
-                                    <label class="form-label">Pseudo</label>
-                                </div>
+                                <form action="#" method="post" th:action="@{/dicestartermng}"
+                                      th:object="${diceStarter}">
+                                    <div class="form-outline form-white mb-4">
+                                        <input class="form-control form-control-lg" th:field="${diceStarter.pseudo}"
+                                               type="text"/>
+                                    </div>
+                                    <button class="btn btn-outline-light btn-lg px-5" name="action" type="submit">
+                                        Login
+                                    </button>
+                                </form>
 
-                                <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
+
                             </div>
                         </div>
                     </div>
