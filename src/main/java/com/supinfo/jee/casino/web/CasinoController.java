@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class GreetingsController {
+public class CasinoController {
 
     @GetMapping("/dice")
     public String greeting(@RequestParam(name = "pseudo", required = false, defaultValue = "gambler") String name, Model model) {
@@ -20,7 +20,7 @@ public class GreetingsController {
     public String diceStartManagement(@ModelAttribute DiceStarter diceStarter, Model model) {
         // call backend to retrieve next step to take
         model.addAttribute("pseudo", diceStarter.getPseudo());
-        return "credits";
+        return "pay";
     }
 
     @PostMapping("/addcredits")
@@ -31,12 +31,15 @@ public class GreetingsController {
     }
 
     @GetMapping("/connexion")
-    public String connexion() {
+    public String connexion(@RequestParam(name = "pseudo", required = false) String name, Model model) {
+        DiceStarter diceStarter = new DiceStarter();
+        diceStarter.setPseudo(name);
+        model.addAttribute("diceStarter", diceStarter);
         return "Connection";
     }
 
     @GetMapping("/pay")
-    public String pay(@RequestParam(name = "name", required = false, defaultValue = "World") String name, Model model) {
+    public String pay(@RequestParam(name = "pseudo", required = false) String name, Model model) {
         model.addAttribute("name", name);
         return "pay";
     }
