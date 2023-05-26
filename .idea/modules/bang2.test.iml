@@ -4,7 +4,6 @@
     <facet external-system-id="GRADLE" type="web" name="Web">
       <configuration>
         <webroots />
-        <sourceRoots />
       </configuration>
     </facet>
     <facet type="Spring" name="Spring">
@@ -24,6 +23,7 @@
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-thymeleaf:3.1.0" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-hateoas:3.1.0" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-web:3.1.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework.cloud:spring-cloud-starter-openfeign:4.0.3" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-test:3.1.0" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter:3.1.0" level="project" />
     <orderEntry type="library" name="Gradle: org.thymeleaf:thymeleaf-spring6:3.1.1.RELEASE" level="project" />
@@ -32,6 +32,11 @@
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-tomcat:3.1.0" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework:spring-webmvc:6.0.9" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework:spring-web:6.0.9" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework.cloud:spring-cloud-starter:4.0.3" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework.cloud:spring-cloud-openfeign-core:4.0.3" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework.cloud:spring-cloud-commons:4.0.3" level="project" />
+    <orderEntry type="library" name="Gradle: io.github.openfeign:feign-slf4j:12.3" level="project" />
+    <orderEntry type="library" name="Gradle: io.github.openfeign:feign-core:12.3" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-test-autoconfigure:3.1.0" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-test:3.1.0" level="project" />
     <orderEntry type="library" name="Gradle: com.jayway.jsonpath:json-path:2.8.0" level="project" />
@@ -40,8 +45,8 @@
     <orderEntry type="library" name="Gradle: org.assertj:assertj-core:3.24.2" level="project" />
     <orderEntry type="library" name="Gradle: org.hamcrest:hamcrest:2.2" level="project" />
     <orderEntry type="library" name="Gradle: org.junit.jupiter:junit-jupiter:5.9.3" level="project" />
-    <orderEntry type="library" name="Gradle: org.mockito:mockito-junit-jupiter:5.3.1" level="project" />
-    <orderEntry type="library" name="Gradle: org.mockito:mockito-core:5.3.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.mockito:mockito-junit-jupiter:4.8.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.mockito:mockito-core:4.8.1" level="project" />
     <orderEntry type="library" name="Gradle: org.skyscreamer:jsonassert:1.5.1" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework:spring-test:6.0.9" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework:spring-core:6.0.9" level="project" />
@@ -66,6 +71,11 @@
     <orderEntry type="library" name="Gradle: org.apache.tomcat.embed:tomcat-embed-el:10.1.8" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework:spring-expression:6.0.9" level="project" />
     <orderEntry type="library" name="Gradle: io.micrometer:micrometer-observation:1.11.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework.cloud:spring-cloud-context:4.0.3" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework.security:spring-security-rsa:1.0.11.RELEASE" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-aop:3.1.0" level="project" />
+    <orderEntry type="library" name="Gradle: io.github.openfeign.form:feign-form-spring:3.8.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework.security:spring-security-crypto:6.1.0" level="project" />
     <orderEntry type="library" name="Gradle: jakarta.activation:jakarta.activation-api:2.1.2" level="project" />
     <orderEntry type="library" name="Gradle: net.minidev:accessors-smart:2.4.9" level="project" />
     <orderEntry type="library" name="Gradle: net.bytebuddy:byte-buddy:1.14.4" level="project" />
@@ -82,6 +92,10 @@
     <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-annotations:2.15.0" level="project" />
     <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-core:2.15.0" level="project" />
     <orderEntry type="library" name="Gradle: io.micrometer:micrometer-commons:1.11.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.bouncycastle:bcpkix-jdk15on:1.69" level="project" />
+    <orderEntry type="library" name="Gradle: org.aspectj:aspectjweaver:1.9.19" level="project" />
+    <orderEntry type="library" name="Gradle: io.github.openfeign.form:feign-form:3.8.0" level="project" />
+    <orderEntry type="library" name="Gradle: commons-fileupload:commons-fileupload:1.4" level="project" />
     <orderEntry type="library" name="Gradle: org.ow2.asm:asm:9.3" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.apiguardian:apiguardian-api:1.1.2" level="project" />
     <orderEntry type="library" name="Gradle: org.junit.platform:junit-platform-commons:1.9.3" level="project" />
@@ -89,8 +103,10 @@
     <orderEntry type="library" name="Gradle: ch.qos.logback:logback-core:1.4.7" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.logging.log4j:log4j-api:2.20.0" level="project" />
     <orderEntry type="library" name="Gradle: ch.randelshofer:fastdoubleparser:0.8.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.bouncycastle:bcutil-jdk15on:1.69" level="project" />
+    <orderEntry type="library" name="Gradle: org.bouncycastle:bcprov-jdk15on:1.69" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.junit.jupiter:junit-jupiter-engine:5.9.3" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.objenesis:objenesis:3.3" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.objenesis:objenesis:3.2" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.junit.platform:junit-platform-engine:1.9.3" level="project" />
   </component>
   <component name="TestModuleProperties" production-module="bang2.main" />
