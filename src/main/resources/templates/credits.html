@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+<div class="container-fluid p-5 text-center">
+    <p th:text="'Hello ' + ${pseudo} + '!'"/>
+    <p>
+        Here is the moment to add some credits to you account.
+    </p>
+    <form action="#" method="post" th:action="@{/addcredits}" th:object="${credits}">
+        <input th:field="${amount}" type="text"/>
+    </form>
+</div>
+</body>
+</html>

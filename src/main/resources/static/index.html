@@ -6,26 +6,31 @@
             font-family: "Poker";
             src: url("Poker.ttf") format("truetype");
         }
+
         .bord-radius {
             border-radius: 40px;
         }
     </style>
 
 
-    <title>Getting Started: Serving Web Content</title>
+    <title>Crazyno</title>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/bootstrap.bundle.min.js"></script>
 </head>
 <body style="background-image:url(fond.jpg);background-size:100%">
 <main>
-    <p style="text-align: center; color: white; font-size: 4em; font-family:'Poker',sans-serif">SupinfoCasino</p>
+    <div class="container-fluid text-center">
+        <h1 class="display-1" style="color: white; font-family:'Poker',sans-serif">SupinfoCasino</h1>
+    </div>
 
-    <div style="display: flex; align-items: end ">
+    <div class="container-fluid text-center">
         <div>
-            <a href="/greeting"><img class="bord-radius" src="dice.png" alt="image dice" width="50%"> </a>
+            <a href="/greeting"><img alt="image dice" class="bord-radius" src="dice.png" width="20%"> </a>
         </div>
-
+        <p/>
         <div>
-            <a href="/greeting"><img class="bord-radius" src="poker.png" alt="image dice" width="50%"> </a>
+            <a href="/greeting"><img alt="image poker" class="bord-radius" src="poker.png" width="30%"> </a>
         </div>
     </div>
 
