@@ -10,12 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class CasinoController {
 
-    @GetMapping("/dice")
-    public String greeting(@RequestParam(name = "pseudo", required = false, defaultValue = "gambler") String name, Model model) {
-        model.addAttribute("pseudo", name);
-        return "dice";
-    }
-
     @PostMapping("/dicestartermng")
     public String diceStartManagement(@ModelAttribute DiceStarter diceStarter, Model model) {
         // call backend to retrieve next step to take
@@ -27,7 +21,7 @@ public class CasinoController {
     public String creditsManagement(@ModelAttribute Credits credits, Model model) {
         // call backend to retrieve next step to take
         model.addAttribute("amount", credits.getAmount());
-        return "dice";
+        return "redirect:/";
     }
 
     @GetMapping("/connexion")
