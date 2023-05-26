@@ -14,7 +14,7 @@ public class CasinoController {
     public String diceStartManagement(@ModelAttribute DiceStarter diceStarter, Model model) {
         // call backend to retrieve next step to take
         model.addAttribute("pseudo", diceStarter.getPseudo());
-        return "pay";
+        return "redirect:/pay";
     }
 
     @PostMapping("/addcredits")
