@@ -1,8 +1,6 @@
 package com.supinfo.jee.casino.web;
 
-import com.supinfo.jee.casino.api.GameApi;
-import com.supinfo.jee.casino.api.GameInputDto;
-import com.supinfo.jee.casino.api.GameOutputDto;
+import com.supinfo.jee.casino.api.*;
 import feign.FeignException;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class CasinoController {
 
     private final GameApi gameApi;
+    private final LaunchApi launchApi;
 
     @PostMapping("/dicestartermng")
     public String diceStartManagement(@ModelAttribute DiceStarter diceStarter, HttpSession httpSession) {
@@ -35,6 +34,7 @@ public class CasinoController {
             EntityModel<GameOutputDto> gameOutputDtoEntityModel = this.gameApi.newGame(newGame);
             GameOutputDto gameOutputDto = gameOutputDtoEntityModel.getContent();
             httpSession.setAttribute("bet", gameOutputDto.getBet());
+            httpSession.setAttribute("balance", gameOutputDto.getBalance());
             target = "redirect:/dice-roll";
         } catch (FeignException.FeignClientException e) {
             log.error("Unable to work with this player {} !", pseudo, e);
@@ -49,6 +49,7 @@ public class CasinoController {
         model.addAttribute("amount", credits.getAmount());
         return "redirect:/";
     }
+
 
     @GetMapping("/connexion")
     public String connexion(@RequestParam(name = "pseudo", required = false) String name, Model model) {
@@ -67,16 +68,45 @@ public class CasinoController {
 
     @GetMapping("/dice-roll")
     public String diceRoll(Model model, HttpSession httpSession) {
+        DiceThrow diceThrow = new DiceThrow();
+        model.addAttribute("diceThrow", diceThrow);
         String name = String.valueOf(httpSession.getAttribute("pseudo"));
         model.addAttribute("pseudo", name);
         Integer bet = (Integer) httpSession.getAttribute("bet");
         if (bet != null) {
-            model.addAttribute("bet", bet);
+            diceThrow.setBetAmount(bet);
         } else {
-            model.addAttribute("bet", 1);
+            diceThrow.setBetAmount(1);
+        }
+        Long balance = (Long) httpSession.getAttribute("balance");
+        if (balance != null) {
+            model.addAttribute("balance", balance);
+        } else {
+            model.addAttribute("balance", 0);
         }
 
         return "dice-roll";
     }
+
+    @PostMapping(value = "/throw-dice")
+    public String throwDice(@ModelAttribute DiceThrow diceThrow, Model model, HttpSession httpSession) {
+        log.info(String.valueOf(diceThrow));
+        String pseudo = String.valueOf(httpSession.getAttribute("pseudo"));
+        int bet = diceThrow.getBetAmount();
+        int initialValue = diceThrow.getWinChance();
+        int numberOfLaunch = diceThrow.getBetNumber();
+        LaunchInputDto newLaunch = new LaunchInputDto(pseudo, initialValue, bet, numberOfLaunch);
+        String target;
+        try {
+            LaunchOutputDto launchOutputDto = this.launchApi.play(newLaunch);
+            httpSession.setAttribute("balance", launchOutputDto.getNewBalance());
+            target = "redirect:/dice-roll";
+        } catch (FeignException.FeignClientException e) {
+            log.error("Unable to work with this player {} !", pseudo, e);
+            target = "redirect:/pay";
+        }
+        return target;
+    }
+
 
 }
