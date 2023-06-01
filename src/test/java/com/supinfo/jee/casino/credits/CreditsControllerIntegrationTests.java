@@ -1,11 +1,15 @@
 package com.supinfo.jee.casino.credits;
 
+import com.supinfo.jee.casino.gambler.Gambler;
+import com.supinfo.jee.casino.gambler.GamblerRepository;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -16,11 +20,15 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ActiveProfiles(value = {"test"})
 @AutoConfigureMockMvc
 public class CreditsControllerIntegrationTests {
 
     @Autowired
     private MockMvc mockMvc;
+
+    @Autowired
+    private GamblerRepository gamblerRepository;
 
     @Test
     void whenPayToWin_givenEmptyPseudo_thenError412() throws Exception {
@@ -68,6 +76,7 @@ public class CreditsControllerIntegrationTests {
 
     }
 
+
     @Test
     public void whenPayToWin_givenCorrectValues() throws Exception {
         // Given
@@ -82,5 +91,14 @@ public class CreditsControllerIntegrationTests {
         resultActions.andDo(MockMvcResultHandlers.print()).andExpect(MockMvcResultMatchers.status().isCreated())
                 .andExpect(MockMvcResultMatchers.content().json(expectedContent));
 
+        String pseudo = "pigeon";
+
+        Gambler gambler = this.gamblerRepository.findByPseudo(pseudo);
+
+        Assertions.assertThat(gambler).isNotNull().hasFieldOrPropertyWithValue("pseudo", pseudo)
+                .hasFieldOrPropertyWithValue("balance", 5015L);
+
     }
+
+
 }
