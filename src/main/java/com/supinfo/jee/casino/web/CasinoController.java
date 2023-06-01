@@ -64,4 +64,11 @@ public class CasinoController {
         return "pay";
     }
 
+    @GetMapping("/dice-roll")
+    public String diceRoll(Model model, HttpSession httpSession) {
+        String name = String.valueOf(httpSession.getAttribute("pseudo"));
+        model.addAttribute("pseudo", name);
+        return "dice-roll";
+    }
+
 }

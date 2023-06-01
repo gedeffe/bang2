@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dice Game</title>
+    <link rel="stylesheet" th:href="@{/css/dice-roll.css}">
+</head>
+<body>
+<div class="container">
+    <button class="dark-mode-button" id="toggle-button">☀️</button>
+    <h1>Dice Game</h1>
+
+    <div class="slidecontainer">
+        <div class="slider-values">
+            <div class="value" style="left: 0%;">0</div>
+            <div class="value" style="left: 25%;">25</div>
+            <div class="value" style="left: 50%;">50</div>
+            <div class="value" style="left: 75%;">75</div>
+            <div class="value" style="left: 100%;">100</div>
+        </div>
+
+        <input class="slider" id="myRange" max="100" min="0" type="range" value="50">
+        <p>Win Chance: <span id="demo">50%</span></p>
+        <p>Payout: <span id="payout-value">2.00</span></p>
+        <div class="additional-info">
+            <div class="input-container">
+                <p>Profit: <span>0.00$</span></p>
+            </div>
+
+            <div class="input-container">
+                <p>Throw result: <span>34</span></p>
+            </div>
+
+            <div class="input-container">
+                <label for="bet-input">Bet Amount:</label>
+                <input min="1" step="0.25" type="number">
+            </div>
+            <div class="input-container">
+                <label for="bet-input">Number of bets:</label>
+                <input id="bet-input" min="1" step="1" type="number">
+            </div>
+        </div>
+    </div>
+
+    <div class="button-container">
+        <button class="button">Bet</button>
+        <button class="button">Auto Bet</button>
+    </div>
+</div>
+
+<script th:src="@{/js/dice-roll.js}"></script>
+</body>
+</html>
