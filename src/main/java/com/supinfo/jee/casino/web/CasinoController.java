@@ -34,7 +34,7 @@ public class CasinoController {
         try {
             EntityModel<GameOutputDto> gameOutputDtoEntityModel = this.gameApi.newGame(newGame);
             GameOutputDto gameOutputDto = gameOutputDtoEntityModel.getContent();
-            target = "redirect:/";
+            target = "redirect:/dice-roll";
         } catch (FeignException.FeignClientException e) {
             log.error("Unable to work with this player {} !", pseudo, e);
             target = "redirect:/pay";
