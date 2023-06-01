@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Objects;
+
 @Slf4j
 @RequiredArgsConstructor
 @Controller
@@ -33,9 +35,14 @@ public class CasinoController {
         try {
             EntityModel<GameOutputDto> gameOutputDtoEntityModel = this.gameApi.newGame(newGame);
             GameOutputDto gameOutputDto = gameOutputDtoEntityModel.getContent();
-            httpSession.setAttribute("bet", gameOutputDto.getBet());
-            httpSession.setAttribute("balance", gameOutputDto.getBalance());
-            target = "redirect:/dice-roll";
+            if (gameOutputDto == null) {
+                log.warn("Error with backend result for {}", pseudo);
+                target = "redirect:/connexion";
+            } else {
+                httpSession.setAttribute("bet", gameOutputDto.getBet());
+                httpSession.setAttribute("balance", gameOutputDto.getBalance());
+                target = "redirect:/dice-roll";
+            }
         } catch (FeignException.FeignClientException e) {
             log.error("Unable to work with this player {} !", pseudo, e);
             target = "redirect:/pay";
@@ -73,23 +80,15 @@ public class CasinoController {
         String name = String.valueOf(httpSession.getAttribute("pseudo"));
         model.addAttribute("pseudo", name);
         Integer bet = (Integer) httpSession.getAttribute("bet");
-        if (bet != null) {
-            diceThrow.setBetAmount(bet);
-        } else {
-            diceThrow.setBetAmount(1);
-        }
+        diceThrow.setBetAmount(Objects.requireNonNullElse(bet, 1));
         Long balance = (Long) httpSession.getAttribute("balance");
-        if (balance != null) {
-            model.addAttribute("balance", balance);
-        } else {
-            model.addAttribute("balance", 0);
-        }
+        model.addAttribute("balance", Objects.requireNonNullElse(balance, 0));
 
         return "dice-roll";
     }
 
     @PostMapping(value = "/throw-dice")
-    public String throwDice(@ModelAttribute DiceThrow diceThrow, Model model, HttpSession httpSession) {
+    public String throwDice(@ModelAttribute DiceThrow diceThrow, HttpSession httpSession) {
         log.info(String.valueOf(diceThrow));
         String pseudo = String.valueOf(httpSession.getAttribute("pseudo"));
         int bet = diceThrow.getBetAmount();
