@@ -3,6 +3,8 @@ package com.supinfo.jee.casino.web;
 import com.supinfo.jee.casino.api.GameApi;
 import com.supinfo.jee.casino.api.GameInputDto;
 import com.supinfo.jee.casino.api.GameOutputDto;
+import feign.FeignException;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.hateoas.EntityModel;
@@ -21,19 +23,20 @@ public class CasinoController {
     private final GameApi gameApi;
 
     @PostMapping("/dicestartermng")
-    public String diceStartManagement(@ModelAttribute DiceStarter diceStarter, Model model) {
+    public String diceStartManagement(@ModelAttribute DiceStarter diceStarter, HttpSession httpSession) {
         // call backend to retrieve next step to take
-        model.addAttribute("pseudo", diceStarter.getPseudo());
+        String pseudo = diceStarter.getPseudo();
+        httpSession.setAttribute("pseudo", pseudo);
 
         GameInputDto newGame = new GameInputDto();
-        newGame.setPseudo(diceStarter.getPseudo());
+        newGame.setPseudo(pseudo);
         String target;
         try {
             EntityModel<GameOutputDto> gameOutputDtoEntityModel = this.gameApi.newGame(newGame);
             GameOutputDto gameOutputDto = gameOutputDtoEntityModel.getContent();
             target = "redirect:/";
-        } catch (Exception e) {
-            log.error("Unable to work with this player {} !", diceStarter.getPseudo(), e);
+        } catch (FeignException.FeignClientException e) {
+            log.error("Unable to work with this player {} !", pseudo, e);
             target = "redirect:/pay";
         }
         return target;
@@ -55,8 +58,9 @@ public class CasinoController {
     }
 
     @GetMapping("/pay")
-    public String pay(@RequestParam(name = "pseudo", required = false) String name, Model model) {
-        model.addAttribute("name", name);
+    public String pay(Model model, HttpSession httpSession) {
+        String name = String.valueOf(httpSession.getAttribute("pseudo"));
+        model.addAttribute("pseudo", name);
         return "pay";
     }
 
