@@ -14,5 +14,7 @@ public class GameOutputDto {
 
     public GameOutputDto(final String pseudoParam) {
         this.pseudo = pseudoParam;
+
     }
+
 }

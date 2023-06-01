@@ -34,6 +34,7 @@ public class CasinoController {
         try {
             EntityModel<GameOutputDto> gameOutputDtoEntityModel = this.gameApi.newGame(newGame);
             GameOutputDto gameOutputDto = gameOutputDtoEntityModel.getContent();
+            httpSession.setAttribute("bet", gameOutputDto.getBet());
             target = "redirect:/dice-roll";
         } catch (FeignException.FeignClientException e) {
             log.error("Unable to work with this player {} !", pseudo, e);
@@ -68,6 +69,13 @@ public class CasinoController {
     public String diceRoll(Model model, HttpSession httpSession) {
         String name = String.valueOf(httpSession.getAttribute("pseudo"));
         model.addAttribute("pseudo", name);
+        Integer bet = (Integer) httpSession.getAttribute("bet");
+        if (bet != null) {
+            model.addAttribute("bet", bet);
+        } else {
+            model.addAttribute("bet", 1);
+        }
+
         return "dice-roll";
     }
 
