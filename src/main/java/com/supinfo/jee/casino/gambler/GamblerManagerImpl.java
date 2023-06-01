@@ -3,6 +3,7 @@ package com.supinfo.jee.casino.gambler;
 import com.supinfo.jee.casino.credits.WrongAmountException;
 import com.supinfo.jee.casino.game.EmptyPseudoException;
 import com.supinfo.jee.casino.game.WrongBalanceException;
+import com.supinfo.jee.casino.launches.WrongBetException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -44,5 +45,25 @@ public class GamblerManagerImpl implements GamblerManager {
         } else {
             throw new EmptyPseudoException();
         }
+    }
+
+    @Override
+    public Gambler playGame(String pseudo, int initialValue, int bet, int numberOfLaunch) {
+        if (pseudo == null || pseudo.isEmpty()) {
+            throw new EmptyPseudoException();
+        }
+        if (bet < 1) {
+            throw new WrongBetException();
+        }
+        Gambler gambler = this.getGambler(pseudo);
+
+        long newBalance = gambler.getBalance() - (long) bet * numberOfLaunch;
+        gambler.setBalance(newBalance);
+        gambler = this.gamblerRepository.save(gambler);
+
+        if (newBalance < 1) {
+            throw new WrongBalanceException(newBalance, pseudo);
+        }
+        return gambler;
     }
 }

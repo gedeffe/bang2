@@ -5,4 +5,7 @@ public interface GamblerManager {
     Gambler getGambler(String pseudo);
 
     Gambler creditBalance(String pseudo, int amount);
+
+    Gambler playGame(String pseudo, int initialValue, int bet, int numberOfLaunch);
 }
+

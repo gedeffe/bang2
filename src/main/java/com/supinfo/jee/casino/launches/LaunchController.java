@@ -2,8 +2,6 @@ package com.supinfo.jee.casino.launches;
 
 import com.supinfo.jee.casino.gambler.Gambler;
 import com.supinfo.jee.casino.gambler.GamblerManager;
-import com.supinfo.jee.casino.game.EmptyPseudoException;
-import com.supinfo.jee.casino.game.WrongBalanceException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -36,19 +34,11 @@ public class LaunchController {
     @ResponseStatus(HttpStatus.CREATED)
     public LaunchOutputDto play(@RequestBody LaunchInputDto newLaunch) {
         String pseudo = newLaunch.getPseudo();
-        if (pseudo == null || pseudo.isEmpty()) {
-            throw new EmptyPseudoException();
-        }
-        if (newLaunch.getBet() < 1) {
-            throw new WrongBetException();
-        }
-        Gambler gambler = this.gamblerManager.getGambler(pseudo);
-        LaunchOutputDto launchOutputDto = new LaunchOutputDto(pseudo, gambler.getBalance() - (long) newLaunch.getBet() * newLaunch.getNumberOfLaunch());
 
-        if (launchOutputDto.getNewBalance() < 1) {
-            throw new WrongBalanceException(launchOutputDto.getNewBalance(), pseudo);
-        }
-        return launchOutputDto;
+        Gambler gambler = this.gamblerManager.playGame(pseudo, newLaunch.getInitialValue(), newLaunch.getBet(), newLaunch.getNumberOfLaunch());
+
+        return new LaunchOutputDto(pseudo, gambler.getBalance());
     }
+
 
 }
