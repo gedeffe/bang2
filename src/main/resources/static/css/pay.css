@@ -178,7 +178,7 @@
 
 @font-face {
     font-family: "Poker";
-    src: url("../Poker.ttf") format("truetype");
+    src: url("ttf/Poker.ttf") format("truetype");
 }
 
 .bord-radius {
