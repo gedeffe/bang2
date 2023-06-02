@@ -11,10 +11,4 @@ public class GameOutputDto {
     private String pseudo;
     private long balance;
     private int bet;
-
-    public GameOutputDto(final String pseudoParam) {
-        this.pseudo = pseudoParam;
-
-    }
-
 }
