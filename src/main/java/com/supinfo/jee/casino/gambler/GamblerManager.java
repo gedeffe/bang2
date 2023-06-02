@@ -7,5 +7,7 @@ public interface GamblerManager {
     Gambler creditBalance(String pseudo, int amount);
 
     Gambler playGame(String pseudo, int initialValue, int bet, int numberOfLaunch);
+
+    void authenticateGambler(String pseudo, String password);
 }
 

@@ -9,11 +9,7 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
-import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
@@ -29,19 +25,17 @@ public class GameController {
          */
         String pseudo = newGame.getPseudo();
         GameOutputDto result = new GameOutputDto(pseudo);
-        if (StringUtils.hasText(pseudo)) {
-            Gambler gambler = this.gamblerManager.getGambler(pseudo);
-            if (gambler.getBalance() > 0) {
-                result.setBalance(gambler.getBalance());
-                result.setBet(gambler.getBet());
-            } else {
-                throw new WrongBalanceException(gambler.getBalance(), pseudo);
-            }
-        } else {
-            throw new EmptyPseudoException();
-        }
+        Gambler gambler = this.gamblerManager.getGambler(pseudo);
+        result.setBalance(gambler.getBalance());
+        result.setBet(gambler.getBet());
 
         Link link = WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(LaunchController.class).play(new LaunchInputDto())).withRel("launches");
         return EntityModel.of(result, link);
+    }
+
+    @GetMapping("/authenticates")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    void authenticate(@RequestBody GameInputDto newGame) {
+        this.gamblerManager.authenticateGambler(newGame.getPseudo(), newGame.getPassword());
     }
 }

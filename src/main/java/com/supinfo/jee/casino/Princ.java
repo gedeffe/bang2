@@ -24,18 +24,15 @@ public class Princ {
     @Bean
     public CommandLineRunner initDatabase(GamblerRepository gamblerRepository, PartyRepository partyRepository) {
         return args -> {
-            Gambler user = new Gambler();
-            user.setPseudo("pigeon");
-            user.setBalance(5000);
-            user.setBet(25);
+            Gambler user = new Gambler("pigeon", "password", 5000, 25);
 
             user = gamblerRepository.save(user);
-            gamblerRepository.save(new Gambler("toto", 500, 100));
-            gamblerRepository.save(new Gambler("titi", 500, 100));
-            gamblerRepository.save(new Gambler("tata", 500, 100));
-            gamblerRepository.save(new Gambler("tutu", 500, 100));
-            gamblerRepository.save(new Gambler("indebted", -50, 100));
-            gamblerRepository.save(new Gambler("looser", 5, 5));
+            gamblerRepository.save(new Gambler("toto", "password", 500, 100));
+            gamblerRepository.save(new Gambler("titi", "password", 500, 100));
+            gamblerRepository.save(new Gambler("tata", "password", 500, 100));
+            gamblerRepository.save(new Gambler("tutu", "password", 500, 100));
+            gamblerRepository.save(new Gambler("indebted", "password", -50, 100));
+            gamblerRepository.save(new Gambler("looser", "password", 5, 5));
 
             gamblerRepository.findAll().forEach(parieur -> log.info("Created gambler = {}.", parieur));
 

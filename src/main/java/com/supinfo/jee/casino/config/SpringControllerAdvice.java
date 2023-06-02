@@ -1,8 +1,12 @@
-package com.supinfo.jee.casino.game;
+package com.supinfo.jee.casino.config;
 
 import com.supinfo.jee.casino.credits.CreditsController;
 import com.supinfo.jee.casino.credits.CreditsInputDto;
-import com.supinfo.jee.casino.credits.WrongAmountException;
+import com.supinfo.jee.casino.gambler.EmptyPseudoException;
+import com.supinfo.jee.casino.gambler.WrongAmountException;
+import com.supinfo.jee.casino.gambler.WrongBalanceException;
+import com.supinfo.jee.casino.gambler.WrongPasswordException;
+import com.supinfo.jee.casino.launches.WrongBetException;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.mediatype.problem.Problem;
@@ -16,7 +20,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.net.URI;
 
 @RestControllerAdvice
-public class GameControllerAdvice {
+public class SpringControllerAdvice {
 
     @ResponseBody
     @ExceptionHandler(EmptyPseudoException.class)
@@ -49,5 +53,19 @@ public class GameControllerAdvice {
         newCredits.setAmount(100);
         Link link = WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(CreditsController.class).payToWin(newCredits)).withRel("credits");
         return EntityModel.of(problem, link);
+    }
+
+    @ResponseBody
+    @ExceptionHandler(WrongBetException.class)
+    @ResponseStatus(HttpStatus.PRECONDITION_FAILED)
+    String wrongBetHandler(WrongBetException ex) {
+        return ex.getMessage();
+    }
+
+    @ResponseBody
+    @ExceptionHandler(WrongPasswordException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    String wrongBetHandler(WrongPasswordException ex) {
+        return ex.getMessage();
     }
 }

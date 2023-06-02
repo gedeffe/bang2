@@ -55,9 +55,9 @@ public class GameControllerIntegrationTests {
     }
 
     @Test
-    public void whenPostGames_givenUnknownPseudo_thenError402() throws Exception {
+    public void whenPostGames_givenIndebtedPseudo_thenError402() throws Exception {
         // Given
-        String requestContent = "{\"pseudo\": \"unknown\"}";
+        String requestContent = "{\"pseudo\": \"indebted\", \"password\": \"password\"}";
 
         // When
         ResultActions resultActions = this.mockMvc.perform(MockMvcRequestBuilders.post("/games").contentType(MediaType.APPLICATION_JSON).content(requestContent));
@@ -67,6 +67,34 @@ public class GameControllerIntegrationTests {
         String expectedContent = Files.readString(Path.of("src", "test", "resources", "expectations", "paymentRequiredGame.json"));
         resultActions.andDo(MockMvcResultHandlers.print()).andExpect(MockMvcResultMatchers.status().is4xxClientError()).andExpect(MockMvcResultMatchers.status().is(HttpStatus.PAYMENT_REQUIRED.value()))
                 .andExpect(MockMvcResultMatchers.content().json(expectedContent));
+
+    }
+
+    @Test
+    public void whenAuthenticates_givenWrongPassword_thenError403() throws Exception {
+        // Given
+        String requestContent = "{\"pseudo\": \"pigeon\", \"password\": \"wrongPassword\"}";
+
+        // When
+        ResultActions resultActions = this.mockMvc.perform(MockMvcRequestBuilders.get("/authenticates").contentType(MediaType.APPLICATION_JSON).content(requestContent));
+
+
+        // Then
+        resultActions.andDo(MockMvcResultHandlers.print()).andExpect(MockMvcResultMatchers.status().is4xxClientError()).andExpect(MockMvcResultMatchers.status().is(HttpStatus.FORBIDDEN.value()));
+
+    }
+
+    @Test
+    public void whenAuthenticates_givenGoodPassword_then202() throws Exception {
+        // Given
+        String requestContent = "{\"pseudo\": \"pigeon\", \"password\": \"password\"}";
+
+        // When
+        ResultActions resultActions = this.mockMvc.perform(MockMvcRequestBuilders.get("/authenticates").contentType(MediaType.APPLICATION_JSON).content(requestContent));
+
+
+        // Then
+        resultActions.andDo(MockMvcResultHandlers.print()).andExpect(MockMvcResultMatchers.status().is2xxSuccessful()).andExpect(MockMvcResultMatchers.status().is(HttpStatus.ACCEPTED.value()));
 
     }
 }

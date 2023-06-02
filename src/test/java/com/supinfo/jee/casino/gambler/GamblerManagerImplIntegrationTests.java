@@ -29,11 +29,7 @@ class GamblerManagerImplIntegrationTests {
         // Given
         String pseudo = "unknown";
 
-        // When
-        Gambler gambler = this.gamblerManager.getGambler(pseudo);
-
-        // Then
-        Assertions.assertThat(gambler).isNotNull().hasFieldOrPropertyWithValue("pseudo", pseudo)
-                .hasFieldOrPropertyWithValue("balance", 0L).hasFieldOrPropertyWithValue("bet", 0);
+        // When + Then
+        Assertions.assertThatThrownBy(() -> this.gamblerManager.getGambler(pseudo)).isInstanceOf(EmptyPseudoException.class);
     }
 }

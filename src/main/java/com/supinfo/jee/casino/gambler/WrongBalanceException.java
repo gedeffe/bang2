@@ -1,4 +1,4 @@
-package com.supinfo.jee.casino.game;
+package com.supinfo.jee.casino.gambler;
 
 import lombok.Getter;
 
