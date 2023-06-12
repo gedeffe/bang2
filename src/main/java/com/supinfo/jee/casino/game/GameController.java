@@ -9,7 +9,10 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
 @RestController
@@ -33,7 +36,7 @@ public class GameController {
         return EntityModel.of(result, link);
     }
 
-    @GetMapping("/authenticates")
+    @PostMapping("/authenticates")
     @ResponseStatus(HttpStatus.ACCEPTED)
     void authenticate(@RequestBody GameInputDto newGame) {
         this.gamblerManager.authenticateGambler(newGame.getPseudo(), newGame.getPassword());

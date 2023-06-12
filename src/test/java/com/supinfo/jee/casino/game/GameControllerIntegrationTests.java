@@ -76,7 +76,7 @@ public class GameControllerIntegrationTests {
         String requestContent = "{\"pseudo\": \"pigeon\", \"password\": \"wrongPassword\"}";
 
         // When
-        ResultActions resultActions = this.mockMvc.perform(MockMvcRequestBuilders.get("/authenticates").contentType(MediaType.APPLICATION_JSON).content(requestContent));
+        ResultActions resultActions = this.mockMvc.perform(MockMvcRequestBuilders.post("/authenticates").contentType(MediaType.APPLICATION_JSON).content(requestContent));
 
 
         // Then
@@ -90,7 +90,7 @@ public class GameControllerIntegrationTests {
         String requestContent = "{\"pseudo\": \"pigeon\", \"password\": \"password\"}";
 
         // When
-        ResultActions resultActions = this.mockMvc.perform(MockMvcRequestBuilders.get("/authenticates").contentType(MediaType.APPLICATION_JSON).content(requestContent));
+        ResultActions resultActions = this.mockMvc.perform(MockMvcRequestBuilders.post("/authenticates").contentType(MediaType.APPLICATION_JSON).content(requestContent));
 
 
         // Then
