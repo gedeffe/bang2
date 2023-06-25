@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Dice Game</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/css/dice-roll.css}">
 </head>
 <body>
@@ -11,6 +12,7 @@
     <div class="info-gambler">
         <p th:text="${pseudo}"></p>
         <p th:text="${balance}"></p>
+        <a class="btn btn-success" href="/logout">Logout</a>
     </div>
 </div>
 <div class="container">
@@ -40,7 +42,7 @@
 
                 <div class="input-container">
                     <label for="bet-input">Bet Amount:</label>
-                    <input min="1" step="0.25" th:field="${diceThrow.betAmount}" type="number">
+                    <input min="1" step="1" th:field="${diceThrow.betAmount}" type="number">
                 </div>
                 <div class="input-container">
                     <label for="bet-input">Number of bets:</label>
