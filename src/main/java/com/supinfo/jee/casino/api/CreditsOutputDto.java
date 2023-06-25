@@ -1,13 +1,11 @@
-package com.supinfo.jee.casino.web;
+package com.supinfo.jee.casino.api;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
-public class Credits {
+public class CreditsOutputDto {
     private String pseudo;
     private int amount;
 }

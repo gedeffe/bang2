@@ -22,7 +22,10 @@ import java.util.Objects;
 public class CasinoController {
 
     private final GameApi gameApi;
+
     private final LaunchApi launchApi;
+
+    private final CreditApi creditApi;
 
     @GetMapping("/dicestartermng")
     public String diceStartManagement(HttpSession httpSession) {
@@ -30,7 +33,6 @@ public class CasinoController {
         String pseudo = String.valueOf(authentication.getPrincipal());
         log.info("try to start game for {}.", pseudo);
         httpSession.setAttribute("pseudo", pseudo);
-
         GameInputDto newGame = new GameInputDto(pseudo, null);
         String target;
         try {
@@ -58,22 +60,35 @@ public class CasinoController {
     }
 
     @PostMapping("/addcredits")
-    public String creditsManagement(@ModelAttribute Credits credits, Model model) {
+    public String creditsManagement(@ModelAttribute Credits credits, HttpSession httpSession) {
         // call backend to retrieve next step to take
-        model.addAttribute("amount", credits.getAmount());
-        return "redirect:/";
+        String target;
+        int amount = credits.getAmount();
+        String pseudo = String.valueOf(httpSession.getAttribute("pseudo"));
+        try {
+            CreditsInputDto newCredits = new CreditsInputDto(pseudo, amount);
+            this.creditApi.payToWin(newCredits);
+            target = "redirect:/dicestartermng";
+        } catch (FeignException.FeignClientException e) {
+            log.error("Error add credits for {} !", pseudo, e);
+            target = "redirect:/pay";
+        }
+        return target;
     }
-
 
     @GetMapping("/login")
     public String connexion() {
         return "connection";
     }
 
+
     @GetMapping("/pay")
     public String pay(Model model, HttpSession httpSession) {
         String name = String.valueOf(httpSession.getAttribute("pseudo"));
         model.addAttribute("pseudo", name);
+        int defaultAmount = 1000;
+        Credits credits = new Credits(name, defaultAmount);
+        model.addAttribute("credits", credits);
         return "pay";
     }
 
@@ -85,9 +100,10 @@ public class CasinoController {
         model.addAttribute("pseudo", name);
         Integer bet = (Integer) httpSession.getAttribute("bet");
         diceThrow.setBetAmount(Objects.requireNonNullElse(bet, 1));
+        int defaultBetNumber = 10;
+        diceThrow.setBetNumber(defaultBetNumber);
         Long balance = (Long) httpSession.getAttribute("balance");
         model.addAttribute("balance", Objects.requireNonNullElse(balance, 0));
-
         return "dice-roll";
     }
 
@@ -110,6 +126,4 @@ public class CasinoController {
         }
         return target;
     }
-
-
 }
