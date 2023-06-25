@@ -8,7 +8,10 @@ import lombok.ToString;
 @Setter
 @ToString
 public class DiceThrow {
+
     private int betAmount;
+
     private int betNumber;
+
     private int winChance;
 }

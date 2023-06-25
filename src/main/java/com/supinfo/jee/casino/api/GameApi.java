@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @FeignClient(value = "gameapi", url = "http://localhost:8081/")
 public interface GameApi {
+
     @PostMapping("/games")
     @ResponseStatus(HttpStatus.CREATED)
     EntityModel<GameOutputDto> newGame(@RequestBody GameInputDto newGame);

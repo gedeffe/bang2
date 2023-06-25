@@ -8,8 +8,12 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class LaunchInputDto {
+
     private String pseudo;
+
     private int initialValue;
+
     private int bet;
+
     private int numberOfLaunch;
 }

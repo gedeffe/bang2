@@ -6,6 +6,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class DiceStarter {
+
     private String pseudo;
+
     private String password;
 }

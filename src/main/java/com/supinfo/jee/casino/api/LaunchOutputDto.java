@@ -10,6 +10,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LaunchOutputDto {
+
     private String pseudo;
+
     private long newBalance;
 }

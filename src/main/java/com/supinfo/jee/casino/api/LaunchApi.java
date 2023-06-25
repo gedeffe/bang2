@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @FeignClient(value = "launchapi", url = "http://localhost:8081/")
 public interface LaunchApi {
-
     @PostMapping("/launches")
     LaunchOutputDto play(@RequestBody LaunchInputDto newLaunch);
 }

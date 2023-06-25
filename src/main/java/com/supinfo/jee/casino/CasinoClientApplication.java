@@ -9,10 +9,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableFeignClients
 @SpringBootApplication
 public class CasinoClientApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(CasinoClientApplication.class, args);
     }
-
-
 }
