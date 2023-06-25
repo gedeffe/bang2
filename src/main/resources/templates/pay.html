@@ -7,21 +7,22 @@
     <title>Pay or Consequences !!</title>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
 </head>
-<body style="background-image:url(fond.jpg);background-size:100%; background-repeat: no-repeat; background-size: cover">
+<body style="background-image:url(/img/fond.jpg);background-size:100%; background-repeat: no-repeat; background-size: cover">
 <main style="display: flex; flex-direction: column">
     <p style="text-align: center; color: white; font-size: 4em; font-family:'Poker',sans-serif">Crazyno</p>
-    <form action="">
+    <form action="" method="POST" th:action="@{/addcredits}" th:objet="${credits}">
         <div style="width: auto; display: flex; justify-content: center; height: auto">
             <div class="form-control">
                 <h1 class="h4"> Merci à toi Pigeo... euh Client !</h1>
 
                 <div class="mb-3 form-iten">
                     <label for="clientName">Pseudo</label>
-                    <input id="clientName" name="clientName" readonly="readonly" th:value="${pseudo}" type="text">
+                    <input id="clientName" name="clientName" readonly="readonly" th:field="${credits.pseudo}"
+                           type="text">
                 </div>
                 <div class="mb-3 form-iten">
                     <label for="value">Amount</label>
-                    <input id="value" name="value" type="text" value="1.000.000">
+                    <input id="value" name="value" th:field="${credits.amount}" type="text">
                 </div>
 
             </div>
