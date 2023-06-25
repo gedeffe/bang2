@@ -8,8 +8,11 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class GameOutputDto {
+
     private String pseudo;
+
     private long balance;
+
     private int bet;
 
     public GameOutputDto(final String pseudoParam) {

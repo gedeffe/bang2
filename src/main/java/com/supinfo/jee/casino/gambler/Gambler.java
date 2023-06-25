@@ -36,6 +36,4 @@ public class Gambler {
         this.balance = balanceParam;
         this.bet = betParam;
     }
-    
-
 }

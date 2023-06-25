@@ -4,7 +4,9 @@ import lombok.Getter;
 
 @Getter
 public class WrongBalanceException extends RuntimeException {
+
     private final long balance;
+
     private final String pseudo;
 
     public WrongBalanceException(long balanceParam, String pseudoParam) {

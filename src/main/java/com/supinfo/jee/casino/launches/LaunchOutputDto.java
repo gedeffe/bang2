@@ -6,7 +6,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class LaunchOutputDto {
+
     private String pseudo;
+
     private long newBalance;
 
     public LaunchOutputDto(String pseudo, long balance) {

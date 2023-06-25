@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 public class LaunchController {
+
     private final GamblerManager gamblerManager;
 
     @Operation(summary = "Start a new Dice game")
@@ -34,11 +35,7 @@ public class LaunchController {
     @ResponseStatus(HttpStatus.CREATED)
     public LaunchOutputDto play(@RequestBody LaunchInputDto newLaunch) {
         String pseudo = newLaunch.getPseudo();
-
         Gambler gambler = this.gamblerManager.playGame(pseudo, newLaunch.getInitialValue(), newLaunch.getBet(), newLaunch.getNumberOfLaunch());
-
         return new LaunchOutputDto(pseudo, gambler.getBalance());
     }
-
-
 }
