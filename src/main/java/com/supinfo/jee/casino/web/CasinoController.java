@@ -67,7 +67,7 @@ public class CasinoController {
 
     @GetMapping("/login")
     public String connexion() {
-        return "Connection";
+        return "connection";
     }
 
     @GetMapping("/pay")
