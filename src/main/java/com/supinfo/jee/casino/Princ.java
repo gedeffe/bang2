@@ -1,5 +1,6 @@
 package com.supinfo.jee.casino;
 
+import com.supinfo.jee.casino.config.GamblerProperties;
 import com.supinfo.jee.casino.gambler.Gambler;
 import com.supinfo.jee.casino.gambler.GamblerRepository;
 import com.supinfo.jee.casino.party.Party;
@@ -10,10 +11,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 
 @OpenAPIDefinition(info = @Info(title = "Supinfo's Casino backed by the best team..."))
 @Slf4j
+@EnableConfigurationProperties(value = {GamblerProperties.class})
 @SpringBootApplication
 public class Princ {
 
