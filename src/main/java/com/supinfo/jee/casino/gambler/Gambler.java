@@ -27,7 +27,7 @@ public class Gambler {
     private long balance;
     private int bet;
     @ToString.Exclude
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "gambler")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "gambler", fetch = FetchType.EAGER)
     private List<Party> partyList = new ArrayList<>();
 
     public Gambler(String pseudoParam, String passwordParam, long balanceParam, int betParam) {

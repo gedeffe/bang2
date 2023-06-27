@@ -11,16 +11,19 @@ import lombok.ToString;
 @ToString
 @Entity
 public class Party {
-
     @Id
     @GeneratedValue
     private Long id;
-
     private int initialValue;
-
     private int diceThrowCounter;
-
+    private int bet;
+    private boolean isWin;
     @ManyToOne
     @JoinColumn(name = "GAMBLER_ID", nullable = false)
     private Gambler gambler;
+
+
+
+
+
 }

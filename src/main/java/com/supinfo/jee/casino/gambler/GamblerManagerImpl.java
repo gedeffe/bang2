@@ -2,11 +2,13 @@ package com.supinfo.jee.casino.gambler;
 
 import com.supinfo.jee.casino.config.GamblerProperties;
 import com.supinfo.jee.casino.launches.WrongBetException;
+import com.supinfo.jee.casino.party.Party;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -17,12 +19,13 @@ public class GamblerManagerImpl implements GamblerManager {
     private final GamblerRepository gamblerRepository;
     private final GamblerProperties gamblerProperties;
 
-    public void createGambler(String pseudo, String password) {
+    public Gambler createGambler(String pseudo, String password) {
+        Gambler gambler;
         if (StringUtils.hasText(pseudo)) {
             if (StringUtils.hasText(password)) {
                 if (this.retrieveGambler(pseudo).isEmpty()) {
-                    gamblerRepository.save(new Gambler(pseudo, password, 0, 25));
-                    gamblerRepository.findAll().forEach(parieur -> log.info("Created gambler = {}.", parieur));
+                    gambler = gamblerRepository.save(new Gambler(pseudo, password, 0, 25));
+                    log.debug("Created gambler = {}.", gambler);
                 } else {
                     throw new ExistingGamblerException();
                 }
@@ -32,6 +35,7 @@ public class GamblerManagerImpl implements GamblerManager {
         } else {
             throw new EmptyPseudoException();
         }
+        return gambler;
     }
 
     @Override
@@ -45,8 +49,10 @@ public class GamblerManagerImpl implements GamblerManager {
         } else {
             throw new EmptyPseudoException();
         }
+
         return gambler;
     }
+
 
     @Override
     public void authenticateGambler(String pseudo, String password) {
@@ -55,6 +61,7 @@ public class GamblerManagerImpl implements GamblerManager {
                 this.createGambler(pseudo, password);
             } else {
                 Gambler gambler = this.retrieveGambler(pseudo).orElseThrow(EmptyPseudoException::new);
+
                 if (!password.startsWith("{bcryp}") && !gambler.getPassword().equals(password)) {
                     throw new WrongPasswordException();
                 }
@@ -94,6 +101,19 @@ public class GamblerManagerImpl implements GamblerManager {
         }
     }
 
+    private int getNumberOfWin(Gambler gambler) {
+        List<Party> partyList = gambler.getPartyList();
+        int numberOfWin = 0;
+        int startIndex = Math.max(0, partyList.size() - 10); // Commencer à l'indice 0 ou l'indice correspondant aux 10 dernières parties
+        for (int i = startIndex; i < partyList.size(); i++) {
+            if (partyList.get(i).isWin()) {
+                numberOfWin++;
+            }
+        }
+
+        return numberOfWin;
+    }
+
     @Override
     public Gambler playGame(String pseudo, int initialValue, int bet, int numberOfLaunch) {
         if (pseudo == null || pseudo.isEmpty()) {
@@ -105,24 +125,50 @@ public class GamblerManagerImpl implements GamblerManager {
         Gambler gambler = this.retrieveGambler(pseudo).orElseThrow(EmptyPseudoException::new);
         log.debug("Start bet ({}):", numberOfLaunch);
 
+        int recentWins = getNumberOfWin(gambler);
         for (int i = 0; i < numberOfLaunch; i++) {
-            gambler.setBalance(gambler.getBalance() - (long) bet);
-            if (gambler.getBalance() < 1) {
-                gambler = this.gamblerRepository.save(gambler);
-                throw new WrongBalanceException(gambler.getBalance(), pseudo);
-            }
             if (this.gamblerProperties.isEnabled()) {
-                int number = (int) (Math.random() * 100);
-                log.debug("random dice roll {}", number);
-                if (number <= initialValue) {
+                Party newParty = new Party();
+                newParty.setGambler(gambler);
+                newParty.setBet(bet);
+                newParty.setDiceThrowCounter(initialValue);
+                if (recentWins >= 10) {
+                    // Si le joueur a gagné les 10 dernières parties, il perd directement
+                    gambler.setBalance(gambler.getBalance() - bet);
+                }
+                boolean isWin = false;
+                int random = (int) (Math.random() * 98 + 1);
+                log.debug("random dice roll {}", random);
+                if (initialValue < random) {
+                    isWin = true;
+                    newParty.setWin(true);
+                }
+
+                if (!isWin || getNumberOfWin(gambler) + i >= 8) {
+                    gambler.setBalance(gambler.getBalance() - bet);
+                    newParty.setWin(false);
+                    isWin = false;
+                }
+
+                log.debug("Has win ? {}", isWin);
+
+                if (isWin) {
                     gambler.setBalance(gambler.getBalance() + (long) bet * 100 / initialValue);
                 }
+
+                gambler.getPartyList().add(newParty);
+            } else {
+                gambler.setBalance(gambler.getBalance() - (long) bet);
             }
         }
+
         gambler = this.gamblerRepository.save(gambler);
+
         if (gambler.getBalance() < 1) {
             throw new WrongBalanceException(gambler.getBalance(), pseudo);
         }
         return gambler;
     }
+
+
 }
