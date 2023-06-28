@@ -19,13 +19,14 @@ public class GamblerManagerImpl implements GamblerManager {
     private final GamblerRepository gamblerRepository;
     private final GamblerProperties gamblerProperties;
 
+    @Override
     public Gambler createGambler(String pseudo, String password) {
         Gambler gambler;
         if (StringUtils.hasText(pseudo)) {
             if (StringUtils.hasText(password)) {
                 if (this.retrieveGambler(pseudo).isEmpty()) {
                     gambler = gamblerRepository.save(new Gambler(pseudo, password, 0, 25));
-                    log.debug("Created gambler = {}.", gambler);
+                    log.info("Created gambler = {}.", gambler);
                 } else {
                     throw new ExistingGamblerException();
                 }
@@ -57,15 +58,12 @@ public class GamblerManagerImpl implements GamblerManager {
     @Override
     public void authenticateGambler(String pseudo, String password) {
         if (StringUtils.hasText(pseudo)) {
-            if (this.retrieveGambler(pseudo).isEmpty()) {
-                this.createGambler(pseudo, password);
-            } else {
-                Gambler gambler = this.retrieveGambler(pseudo).orElseThrow(EmptyPseudoException::new);
+            Gambler gambler = this.retrieveGambler(pseudo).orElseThrow(EmptyPseudoException::new);
 
-                if (!password.startsWith("{bcryp}") && !gambler.getPassword().equals(password)) {
-                    throw new WrongPasswordException();
-                }
+            if (!password.startsWith("{bcryp}") && !gambler.getPassword().equals(password)) {
+                throw new WrongPasswordException();
             }
+            log.info("authenticates {} with success.", pseudo);
         } else {
             throw new EmptyPseudoException();
         }
@@ -132,8 +130,8 @@ public class GamblerManagerImpl implements GamblerManager {
                 newParty.setGambler(gambler);
                 newParty.setBet(bet);
                 newParty.setDiceThrowCounter(initialValue);
-                if (recentWins >= 10) {
-                    // Si le joueur a gagné les 10 dernières parties, il perd directement
+                if (recentWins >= 5) {
+                    // Si le joueur a gagné 5 parties sur les 10 dernières parties, il perd directement
                     gambler.setBalance(gambler.getBalance() - bet);
                 }
                 boolean isWin = false;
