@@ -7,7 +7,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class CreditsOutputDto {
-    String pseudo;
-    int amount;
+public class GamblerOutputDto {
+    private String pseudo;
 }

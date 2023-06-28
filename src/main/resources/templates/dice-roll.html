@@ -27,13 +27,14 @@
             <div class="value" style="left: 100%;">100</div>
         </div>
         <form action="#" method="post" th:action="@{/throw-dice}" th:object="${diceThrow}">
-            <input class="slider" id="myRange" max="100" min="0" th:field="${diceThrow.winChance}" type="range"
-                   value="50">
+            <input class="slider" id="myRange" max="100" min="0" th:field="${diceThrow.winChance}"
+                   th:value="${initialValue}"
+                   type="range">
             <p>Win Chance: <span id="demo">50%</span></p>
             <p>Payout: <span id="payout-value">2.00</span></p>
             <div class="additional-info">
                 <div class="input-container">
-                    <p>Profit: <span>0.00$</span></p>
+                    <p>Profit <span> <p $ th:text=" ${profit} "></p></span></p>
                 </div>
 
                 <div class="input-container">
@@ -46,7 +47,8 @@
                 </div>
                 <div class="input-container">
                     <label for="bet-input">Number of bets:</label>
-                    <input id="bet-input" min="1" step="1" th:field="${diceThrow.betNumber}" type="number">
+                    <input id="bet-input" min="1" step="1" th:field="${diceThrow.betNumber}"
+                           th:value="${numberOfLaunch}" type="number">
                 </div>
             </div>
             <div class="button-container">

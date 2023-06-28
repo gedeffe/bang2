@@ -32,6 +32,7 @@ public class WebSecurityConfig {
                         .password(passwordEncoder.encode("password"))
                         .roles("GUEST")
                         .build();
+
         return new InMemoryUserDetailsManager(user);
     }
 
@@ -42,19 +43,20 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/index").permitAll()
                         .requestMatchers("/login").permitAll()
+                        .requestMatchers("/registration").permitAll()
                         .requestMatchers("/").permitAll()
                         .requestMatchers("/css/**").permitAll()
                         .requestMatchers("/img/**").permitAll()
                         .requestMatchers("/js/**").permitAll()
                         .requestMatchers("/ttf/**").permitAll()
                         .anyRequest().authenticated()
-                )
-                .formLogin((form) -> form
+                ).formLogin((form) -> form
                         .loginPage("/login")
                         .permitAll()
                 )
                 .logout((logout) -> logout.permitAll().logoutSuccessUrl("/index"))
                 .httpBasic(withDefaults());
+
         http.authenticationProvider(this.casinoAuthenticationProvider);
         return http.build();
     }

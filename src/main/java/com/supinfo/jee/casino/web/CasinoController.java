@@ -22,10 +22,11 @@ import java.util.Objects;
 public class CasinoController {
 
     private final GameApi gameApi;
-
     private final LaunchApi launchApi;
 
-    private final CreditApi creditApi;
+    private final CreditsApi creditsApi;
+
+    private final GamblerApi gamblerApi;
 
     @GetMapping("/dicestartermng")
     public String diceStartManagement(HttpSession httpSession) {
@@ -33,6 +34,8 @@ public class CasinoController {
         String pseudo = String.valueOf(authentication.getPrincipal());
         log.info("try to start game for {}.", pseudo);
         httpSession.setAttribute("pseudo", pseudo);
+
+
         GameInputDto newGame = new GameInputDto(pseudo, null);
         String target;
         try {
@@ -67,20 +70,20 @@ public class CasinoController {
         String pseudo = String.valueOf(httpSession.getAttribute("pseudo"));
         try {
             CreditsInputDto newCredits = new CreditsInputDto(pseudo, amount);
-            this.creditApi.payToWin(newCredits);
+            this.creditsApi.payToWin(newCredits);
             target = "redirect:/dicestartermng";
         } catch (FeignException.FeignClientException e) {
-            log.error("Error add credits for {} !", pseudo, e);
+            log.error("Error adding credits for {} !", pseudo, e);
             target = "redirect:/pay";
         }
         return target;
     }
 
+
     @GetMapping("/login")
     public String connexion() {
         return "connection";
     }
-
 
     @GetMapping("/pay")
     public String pay(Model model, HttpSession httpSession) {
@@ -104,6 +107,18 @@ public class CasinoController {
         diceThrow.setBetNumber(defaultBetNumber);
         Long balance = (Long) httpSession.getAttribute("balance");
         model.addAttribute("balance", Objects.requireNonNullElse(balance, 0));
+
+
+        if (httpSession.getAttribute("initialValue") == null) {
+            httpSession.setAttribute("initialValue", 50);
+        }
+        if (httpSession.getAttribute("numberOfLaunch") == null) {
+            httpSession.setAttribute("numberOfLaunch", 1);
+        }
+        model.addAttribute("initialValue", httpSession.getAttribute("initialValue"));
+        model.addAttribute("numberOfLaunch", httpSession.getAttribute("numberOfLaunch"));
+
+
         return "dice-roll";
     }
 
@@ -112,9 +127,14 @@ public class CasinoController {
         log.info(String.valueOf(diceThrow));
         String pseudo = String.valueOf(httpSession.getAttribute("pseudo"));
         int bet = diceThrow.getBetAmount();
+        httpSession.setAttribute("bet", bet);
+        httpSession.setAttribute("initialValue", diceThrow.getWinChance());
+        httpSession.setAttribute("numberOfLaunch", diceThrow.getBetNumber());
+
         int initialValue = diceThrow.getWinChance();
         int numberOfLaunch = diceThrow.getBetNumber();
         LaunchInputDto newLaunch = new LaunchInputDto(pseudo, initialValue, bet, numberOfLaunch);
+        // valeur du de
         String target;
         try {
             LaunchOutputDto launchOutputDto = this.launchApi.play(newLaunch);
@@ -124,6 +144,31 @@ public class CasinoController {
             log.error("Unable to work with this player {} !", pseudo, e);
             target = "redirect:/pay";
         }
+
         return target;
     }
+
+
+    @GetMapping("/registration")
+    public String showRegistrationForm(Model model) {
+        GamblerInputDto userDto = new GamblerInputDto();
+        model.addAttribute("user", userDto);
+        return "registration";
+    }
+
+    @PostMapping("/registration")
+    public String registerUserAccount(
+            @ModelAttribute("user") GamblerInputDto newGambler) {
+        String target;
+        try {
+            log.info("Start creation of user with pseudo {} and password {}.", newGambler.getPseudo(), newGambler.getPassword());
+            this.gamblerApi.register(newGambler);
+            target = "redirect:/login";
+        } catch (FeignException.FeignClientException e) {
+            return "/registration";
+        }
+
+        return target;
+    }
+
 }

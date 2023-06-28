@@ -6,10 +6,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-@FeignClient(value = "creditapi", url = "http://localhost:8081/")
-public interface CreditApi {
+@FeignClient(value = "creditsapi", url = "http://localhost:8081/")
+public interface CreditsApi {
 
     @PostMapping("/credits")
     @ResponseStatus(HttpStatus.CREATED)
     CreditsOutputDto payToWin(@RequestBody CreditsInputDto newCredits);
+
+    @PostMapping("/credits/add")
+    CreditsOutputDto addCredits(CreditsInputDto newCredits);
 }
