@@ -1,13 +1,25 @@
 package agency;
 
+import org.apache.commons.lang3.StringUtils;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
 public class TripAgency extends JFrame {
+    private final PlaceModel placeModel;
+    private final DefaultComboBoxModel<Place> fromComboBoxModel = new DefaultComboBoxModel<>();
+    private final DefaultComboBoxModel<Place> toComboBoxModel = new DefaultComboBoxModel<>();
+
+    public TripAgency(PlaceModel placeModel) {
+        this.placeModel = placeModel;
+    }
+
     public static void main(String[] args) {
+        PlaceModel placeModel = new PlaceModel();
         SwingUtilities.invokeLater(() -> {
-            TripAgency tripAgency = new TripAgency();
+            TripAgency tripAgency = new TripAgency(placeModel);
 
             tripAgency.displayFrame();
 
@@ -40,7 +52,23 @@ public class TripAgency extends JFrame {
         JTextField textField = new JTextField();
 
         panel.add(textField, BorderLayout.CENTER);
-        JButton button = new JButton("Valider");
+        JButton button = new JButton();
+        AbstractAction action = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String text = textField.getText();
+                if (StringUtils.isNotEmpty(text)) {
+
+                    Place place = new Place(text);
+
+                    placeModel.getPlaces().add(place);
+                    fromComboBoxModel.addElement(place);
+                    toComboBoxModel.addElement(place);
+                }
+            }
+        };
+        action.putValue(AbstractAction.NAME, "Valider");
+        button.setAction(action);
         panel.add(button, BorderLayout.EAST);
 
         return panel;
@@ -51,8 +79,9 @@ public class TripAgency extends JFrame {
         Border blackline = BorderFactory.createTitledBorder("Ajouter un voyage");
         panel.setBorder(blackline);
 
-        JComboBox comboBoxD = new JComboBox();
-        JComboBox comboBoxA = new JComboBox();
+
+        JComboBox<Place> comboBoxD = new JComboBox<>(fromComboBoxModel);
+        JComboBox<Place> comboBoxA = new JComboBox<>(toComboBoxModel);
         JPanel insidePanel = new JPanel(new GridBagLayout());
 
         GridBagConstraints c = new GridBagConstraints();
