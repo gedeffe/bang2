@@ -2,12 +2,18 @@ package agency;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.ToString;
+
+import java.util.UUID;
 
 @Getter
 @RequiredArgsConstructor
-@ToString
 public class Place {
 
+    private final UUID id;
     private final String name;
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }

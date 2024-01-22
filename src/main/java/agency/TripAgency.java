@@ -1,11 +1,13 @@
 package agency;
 
+import agency.database.DbTools;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.util.List;
 import java.util.UUID;
 
 public class TripAgency extends JFrame {
@@ -21,10 +23,16 @@ public class TripAgency extends JFrame {
         this.placeModel = placeModel;
         this.tripModel = tripModel;
 
+        // initialize places combo boxes
+        List<Place> placeList = this.placeModel.getPlaces();
+        this.fromComboBoxModel.addAll(placeList);
+        this.toComboBoxModel.addAll(placeList);
     }
 
     public static void main(String[] args) {
-        PlaceModel placeModel = new PlaceModel();
+        DbTools dbTools = new DbTools();
+        dbTools.initDatabase();
+        PlaceModel placeModel = new PlaceModel(dbTools);
         TripModel tripModel = new TripModel();
         SwingUtilities.invokeLater(() -> {
             TripAgency tripAgency = new TripAgency(placeModel, tripModel);
@@ -80,9 +88,9 @@ public class TripAgency extends JFrame {
                 String text = textField.getText();
                 if (StringUtils.isNotEmpty(text)) {
 
-                    Place place = new Place(text);
+                    Place place = new Place(UUID.randomUUID(), text);
 
-                    placeModel.getPlaces().add(place);
+                    placeModel.addPlace(place);
                     fromComboBoxModel.addElement(place);
                     toComboBoxModel.addElement(place);
                 }
