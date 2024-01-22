@@ -1,6 +1,7 @@
-package agency;
+package agency.model;
 
-import agency.database.DbTools;
+import agency.data.Place;
+import agency.model.database.DbTools;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -11,9 +12,10 @@ import java.util.UUID;
 
 @Getter
 @RequiredArgsConstructor
-public class PlaceModel {
+public class PlaceModel implements PlaceModelEventsSubscriber {
 
     private final DbTools database;
+    private final List<PlaceModelEvents> listeners = new ArrayList<>();
 
     public void addPlace(Place place) {
         String sql = "INSERT INTO place (id, name) VALUES (?, ?)";
@@ -22,6 +24,7 @@ public class PlaceModel {
             statement.setString(1, place.getId().toString());
             statement.setString(2, place.getName());
             statement.execute();
+            this.listeners.forEach(listener -> listener.onPlaceCreated(place));
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
@@ -46,5 +49,30 @@ public class PlaceModel {
             throw new RuntimeException(e);
         }
         return placeList;
+    }
+
+    public Place getPlace(String fromId) {
+        Place result = null;
+        String sql = "SELECT * FROM place WHERE id = ?";
+        try (Connection connection = database.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql);) {
+
+            statement.setString(1, fromId);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                String id = rs.getString("id");
+                String name = rs.getString("name");
+                result = new Place(UUID.fromString(id), name);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+        return result;
+    }
+
+    @Override
+    public void subscribe(PlaceModelEvents listener) {
+        this.listeners.add(listener);
     }
 }

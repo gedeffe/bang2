@@ -20,4 +20,14 @@
             <column name="price" type="double"/>
         </createTable>
     </changeSet>
+    <changeSet id="2" author="Liquibase">
+        <renameColumn columnDataType="varchar"
+                      newColumnName="fromPlaceId"
+                      oldColumnName="from"
+                      tableName="trip"/>
+        <renameColumn columnDataType="varchar"
+                      newColumnName="toPlaceId"
+                      oldColumnName="to"
+                      tableName="trip"/>
+    </changeSet>
 </databaseChangeLog>

@@ -1,4 +1,6 @@
-package agency;
+package agency.view;
+
+import agency.data.Trip;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
@@ -17,7 +19,7 @@ public class TripTableModel extends AbstractTableModel {
         return trips.size();
     }
 
-   
+
     @Override
     public String getColumnName(int col) {
 
@@ -46,5 +48,10 @@ public class TripTableModel extends AbstractTableModel {
         this.trips.add(trip);
 
         fireTableDataChanged();
+    }
+
+    public void addTrips(List<Trip> tripList) {
+        this.trips.addAll(tripList);
+        this.fireTableDataChanged();
     }
 }

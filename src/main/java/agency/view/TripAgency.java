@@ -1,7 +1,11 @@
-package agency;
+package agency.view;
 
-import agency.database.DbTools;
-import org.apache.commons.lang3.StringUtils;
+import agency.control.PlaceController;
+import agency.data.Place;
+import agency.data.Trip;
+import agency.model.PlaceModel;
+import agency.model.PlaceModelEvents;
+import agency.model.TripModel;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -10,37 +14,30 @@ import java.awt.event.ActionEvent;
 import java.util.List;
 import java.util.UUID;
 
-public class TripAgency extends JFrame {
-    private final PlaceModel placeModel;
+public class TripAgency extends JFrame implements PlaceModelEvents {
+
+    private final PlaceController placeController;
     private final TripModel tripModel;
     private final DefaultComboBoxModel<Place> fromComboBoxModel = new DefaultComboBoxModel<>();
     private final DefaultComboBoxModel<Place> toComboBoxModel = new DefaultComboBoxModel<>();
 
     private final TripTableModel tripTableModel = new TripTableModel();
 
+    private final JTextField placeTextField = new JTextField();
 
-    public TripAgency(PlaceModel placeModel, TripModel tripModel) {
-        this.placeModel = placeModel;
+    public TripAgency(PlaceModel placeModel, TripModel tripModel, PlaceController placeController) {
+        this.placeController = placeController;
         this.tripModel = tripModel;
+        // listen to model events to update view components
+        placeModel.subscribe(this);
 
         // initialize places combo boxes
-        List<Place> placeList = this.placeModel.getPlaces();
+        List<Place> placeList = placeModel.getPlaces();
         this.fromComboBoxModel.addAll(placeList);
         this.toComboBoxModel.addAll(placeList);
-    }
 
-    public static void main(String[] args) {
-        DbTools dbTools = new DbTools();
-        dbTools.initDatabase();
-        PlaceModel placeModel = new PlaceModel(dbTools);
-        TripModel tripModel = new TripModel();
-        SwingUtilities.invokeLater(() -> {
-            TripAgency tripAgency = new TripAgency(placeModel, tripModel);
-
-            tripAgency.displayFrame();
-
-
-        });
+        // initialize trips table model
+        this.tripTableModel.addTrips(this.tripModel.getTrips());
     }
 
     public void displayFrame() {
@@ -78,26 +75,19 @@ public class TripAgency extends JFrame {
         JPanel panel = new JPanel(new BorderLayout());
         Border blackline = BorderFactory.createTitledBorder("Ajouter une destination");
         panel.setBorder(blackline);
-        JTextField textField = new JTextField();
 
-        panel.add(textField, BorderLayout.CENTER);
+        panel.add(placeTextField, BorderLayout.CENTER);
         JButton button = new JButton();
         AbstractAction action = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String text = textField.getText();
-                if (StringUtils.isNotEmpty(text)) {
-
-                    Place place = new Place(UUID.randomUUID(), text);
-
-                    placeModel.addPlace(place);
-                    fromComboBoxModel.addElement(place);
-                    toComboBoxModel.addElement(place);
-                }
+                String text = placeTextField.getText();
+                placeController.createPlace(text);
             }
         };
         action.putValue(AbstractAction.NAME, "Valider");
         button.setAction(action);
+        placeTextField.setAction(action);
         panel.add(button, BorderLayout.EAST);
 
         return panel;
@@ -164,7 +154,7 @@ public class TripAgency extends JFrame {
                     trip.setTo(to);
                     trip.setPrice(price);
 
-                    tripModel.getTrips().add(trip);
+                    tripModel.addTrip(trip);
                     // add to table model
                     tripTableModel.addTrip(trip);
 
@@ -180,4 +170,12 @@ public class TripAgency extends JFrame {
         return panel;
     }
 
+    @Override
+    public void onPlaceCreated(Place place) {
+        fromComboBoxModel.addElement(place);
+        toComboBoxModel.addElement(place);
+
+        // clear textfield
+        this.placeTextField.setText("");
+    }
 }

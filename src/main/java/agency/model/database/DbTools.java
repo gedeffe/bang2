@@ -1,4 +1,4 @@
-package agency.database;
+package agency.model.database;
 
 import liquibase.Liquibase;
 import liquibase.Scope;
