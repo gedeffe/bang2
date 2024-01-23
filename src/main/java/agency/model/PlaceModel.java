@@ -20,7 +20,7 @@ public class PlaceModel implements PlaceModelEventsSubscriber {
     public void addPlace(Place place) {
         String sql = "INSERT INTO place (id, name) VALUES (?, ?)";
         try (Connection connection = database.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql);) {
+             PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, place.getId().toString());
             statement.setString(2, place.getName());
             statement.execute();
@@ -34,7 +34,7 @@ public class PlaceModel implements PlaceModelEventsSubscriber {
     public List<Place> getPlaces() {
         List<Place> placeList = new ArrayList<>();
         try (Connection connection = database.getConnection();
-             Statement statement = connection.createStatement();) {
+             Statement statement = connection.createStatement()) {
 
             ResultSet rs = statement.executeQuery("SELECT * FROM place");
             while (rs.next()) {
@@ -55,7 +55,7 @@ public class PlaceModel implements PlaceModelEventsSubscriber {
         Place result = null;
         String sql = "SELECT * FROM place WHERE id = ?";
         try (Connection connection = database.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql);) {
+             PreparedStatement statement = connection.prepareStatement(sql)) {
 
             statement.setString(1, fromId);
             ResultSet rs = statement.executeQuery();
