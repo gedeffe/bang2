@@ -1,20 +1,19 @@
 plugins {
     id 'java'
     id 'application'
-    id 'org.openjfx.javafxplugin' version '0.0.10'
-    id "io.freefair.lombok" version "6.3.0"
+    id 'org.openjfx.javafxplugin' version '0.1.0'
+    id "io.freefair.lombok" version "8.4"
 }
 
 group 'com.supinfo'
 version '1.0-SNAPSHOT'
-mainClassName = 'com.supinfo.java.day5.MainExo3'
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_15
-    targetCompatibility = JavaVersion.VERSION_15
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 }
 javafx {
-    version = "17"
+    version = "21"
     modules = ['javafx.controls', 'javafx.fxml']
 }
 
