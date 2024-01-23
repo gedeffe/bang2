@@ -1,6 +1,4 @@
-package agency.view;
-
-import agency.trip.Trip;
+package agency.trip;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;

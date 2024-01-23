@@ -2,10 +2,12 @@ package agency;
 
 import agency.common.database.DbTools;
 import agency.place.PlaceController;
+import agency.place.PlaceCreationComponent;
 import agency.place.PlaceModel;
+import agency.trip.TripAgency;
 import agency.trip.TripController;
+import agency.trip.TripCreationComponent;
 import agency.trip.TripModel;
-import agency.view.TripAgency;
 
 import javax.swing.*;
 
@@ -22,10 +24,14 @@ public class Princ {
         TripController tripController = new TripController(tripModel);
 
         // view layer
-        SwingUtilities.invokeLater(() -> {
-            TripAgency tripAgency = new TripAgency(placeModel, tripModel, placeController, tripController);
+        PlaceCreationComponent placeCreationComponent = new PlaceCreationComponent(placeController);
+        placeModel.subscribe(placeCreationComponent);
+        TripCreationComponent tripCreationComponent = new TripCreationComponent(placeModel, tripModel, tripController);
 
-            tripAgency.displayFrame();
+        SwingUtilities.invokeLater(() -> {
+            TripAgency tripAgency = new TripAgency(tripModel);
+
+            tripAgency.displayFrame(placeCreationComponent, tripCreationComponent);
 
 
         });
