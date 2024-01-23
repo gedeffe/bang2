@@ -22,12 +22,14 @@ public class TripModel implements TripModelEventsSubscriber {
     public void addTrip(Trip trip) {
         String sql = "INSERT INTO trip (id, fromPlaceId, toPlaceId, price) VALUES (?, ?, ?, ?)";
         try (Connection connection = database.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql);) {
+             PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, trip.getId().toString());
             statement.setString(2, trip.getFrom().getId().toString());
             statement.setString(3, trip.getTo().getId().toString());
             statement.setDouble(4, trip.getPrice());
             statement.execute();
+
+            this.listeners.forEach(listener -> listener.onTripCreated(trip));
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
@@ -38,7 +40,7 @@ public class TripModel implements TripModelEventsSubscriber {
     public List<Trip> getTrips() {
         List<Trip> tripList = new ArrayList<>();
         try (Connection connection = database.getConnection();
-             Statement statement = connection.createStatement();) {
+             Statement statement = connection.createStatement()) {
 
             ResultSet rs = statement.executeQuery("SELECT * FROM trip");
             while (rs.next()) {
