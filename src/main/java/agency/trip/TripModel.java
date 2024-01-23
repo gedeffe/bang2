@@ -1,8 +1,8 @@
-package agency.model;
+package agency.trip;
 
-import agency.data.Place;
-import agency.data.Trip;
-import agency.model.database.DbTools;
+import agency.common.database.DbTools;
+import agency.place.Place;
+import agency.place.PlaceModel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 

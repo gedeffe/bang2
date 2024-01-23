@@ -1,7 +1,6 @@
-package agency.model;
+package agency.place;
 
-import agency.data.Place;
-import agency.model.database.DbTools;
+import agency.common.database.DbTools;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 

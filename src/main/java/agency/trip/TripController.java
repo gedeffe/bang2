@@ -1,8 +1,6 @@
-package agency.control;
+package agency.trip;
 
-import agency.data.Place;
-import agency.data.Trip;
-import agency.model.TripModel;
+import agency.place.Place;
 import lombok.RequiredArgsConstructor;
 
 import java.util.UUID;

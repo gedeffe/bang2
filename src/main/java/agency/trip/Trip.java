@@ -1,5 +1,6 @@
-package agency.data;
+package agency.trip;
 
+import agency.place.Place;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

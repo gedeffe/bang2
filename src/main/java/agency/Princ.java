@@ -1,10 +1,10 @@
 package agency;
 
-import agency.control.PlaceController;
-import agency.control.TripController;
-import agency.model.PlaceModel;
-import agency.model.TripModel;
-import agency.model.database.DbTools;
+import agency.common.database.DbTools;
+import agency.place.PlaceController;
+import agency.place.PlaceModel;
+import agency.trip.TripController;
+import agency.trip.TripModel;
 import agency.view.TripAgency;
 
 import javax.swing.*;

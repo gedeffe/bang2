@@ -1,4 +1,4 @@
-package agency.data;
+package agency.place;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

@@ -1,13 +1,13 @@
 package agency.view;
 
-import agency.control.PlaceController;
-import agency.control.TripController;
-import agency.data.Place;
-import agency.data.Trip;
-import agency.model.PlaceModel;
-import agency.model.PlaceModelEvents;
-import agency.model.TripModel;
-import agency.model.TripModelEvents;
+import agency.place.Place;
+import agency.place.PlaceController;
+import agency.place.PlaceModel;
+import agency.place.PlaceModelEvents;
+import agency.trip.Trip;
+import agency.trip.TripController;
+import agency.trip.TripModel;
+import agency.trip.TripModelEvents;
 
 import javax.swing.*;
 import javax.swing.border.Border;

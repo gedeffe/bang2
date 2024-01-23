@@ -1,6 +1,4 @@
-package agency.model;
-
-import agency.data.Place;
+package agency.place;
 
 public interface PlaceModelEvents {
     void onPlaceCreated(Place place);

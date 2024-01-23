@@ -1,7 +1,5 @@
-package agency.control;
+package agency.place;
 
-import agency.data.Place;
-import agency.model.PlaceModel;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 
