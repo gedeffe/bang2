@@ -13,9 +13,11 @@ import java.util.UUID;
 
 @Getter
 @RequiredArgsConstructor
-public class TripModel {
+public class TripModel implements TripModelEventsSubscriber {
     private final DbTools database;
     private final PlaceModel placeModel;
+
+    private final List<TripModelEvents> listeners = new ArrayList<>();
 
     public void addTrip(Trip trip) {
         String sql = "INSERT INTO trip (id, fromPlaceId, toPlaceId, price) VALUES (?, ?, ?, ?)";
@@ -58,5 +60,10 @@ public class TripModel {
             throw new RuntimeException(e);
         }
         return tripList;
+    }
+
+    @Override
+    public void subscribe(TripModelEvents listener) {
+        this.listeners.add(listener);
     }
 }

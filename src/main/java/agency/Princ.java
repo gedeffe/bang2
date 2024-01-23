@@ -1,6 +1,7 @@
 package agency;
 
 import agency.control.PlaceController;
+import agency.control.TripController;
 import agency.model.PlaceModel;
 import agency.model.TripModel;
 import agency.model.database.DbTools;
@@ -18,10 +19,11 @@ public class Princ {
 
         // control layer
         PlaceController placeController = new PlaceController(placeModel);
+        TripController tripController = new TripController(tripModel);
 
         // view layer
         SwingUtilities.invokeLater(() -> {
-            TripAgency tripAgency = new TripAgency(placeModel, tripModel, placeController);
+            TripAgency tripAgency = new TripAgency(placeModel, tripModel, placeController, tripController);
 
             tripAgency.displayFrame();
 

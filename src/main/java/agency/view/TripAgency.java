@@ -1,23 +1,24 @@
 package agency.view;
 
 import agency.control.PlaceController;
+import agency.control.TripController;
 import agency.data.Place;
 import agency.data.Trip;
 import agency.model.PlaceModel;
 import agency.model.PlaceModelEvents;
 import agency.model.TripModel;
+import agency.model.TripModelEvents;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.List;
-import java.util.UUID;
 
-public class TripAgency extends JFrame implements PlaceModelEvents {
+public class TripAgency extends JFrame implements PlaceModelEvents, TripModelEvents {
 
     private final PlaceController placeController;
-    private final TripModel tripModel;
+    private final TripController tripController;
     private final DefaultComboBoxModel<Place> fromComboBoxModel = new DefaultComboBoxModel<>();
     private final DefaultComboBoxModel<Place> toComboBoxModel = new DefaultComboBoxModel<>();
 
@@ -25,11 +26,12 @@ public class TripAgency extends JFrame implements PlaceModelEvents {
 
     private final JTextField placeTextField = new JTextField();
 
-    public TripAgency(PlaceModel placeModel, TripModel tripModel, PlaceController placeController) {
+    public TripAgency(PlaceModel placeModel, TripModel tripModel, PlaceController placeController, TripController tripController) {
         this.placeController = placeController;
-        this.tripModel = tripModel;
+        this.tripController = tripController;
         // listen to model events to update view components
         placeModel.subscribe(this);
+        tripModel.subscribe(this);
 
         // initialize places combo boxes
         List<Place> placeList = placeModel.getPlaces();
@@ -37,7 +39,7 @@ public class TripAgency extends JFrame implements PlaceModelEvents {
         this.toComboBoxModel.addAll(placeList);
 
         // initialize trips table model
-        this.tripTableModel.addTrips(this.tripModel.getTrips());
+        this.tripTableModel.addTrips(tripModel.getTrips());
     }
 
     public void displayFrame() {
@@ -146,19 +148,7 @@ public class TripAgency extends JFrame implements PlaceModelEvents {
                 Place to = (Place) comboBoxA.getSelectedItem();
                 double price = (double) spinnerModel.getValue();
 
-                if (from != null && to != null && price > 0) {
-
-                    Trip trip = new Trip();
-                    trip.setId(UUID.randomUUID());
-                    trip.setFrom(from);
-                    trip.setTo(to);
-                    trip.setPrice(price);
-
-                    tripModel.addTrip(trip);
-                    // add to table model
-                    tripTableModel.addTrip(trip);
-
-                }
+                tripController.createTrip(from, to, price);
             }
         };
         action.putValue(AbstractAction.NAME, "Valider");
@@ -177,5 +167,13 @@ public class TripAgency extends JFrame implements PlaceModelEvents {
 
         // clear textfield
         this.placeTextField.setText("");
+    }
+
+    @Override
+    public void onTripCreated(Trip trip) {
+        // add to table model
+        tripTableModel.addTrip(trip);
+
+        // reset trip fields
     }
 }
