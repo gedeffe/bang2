@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DbTools {
-    private String url = "jdbc:h2:file:./build/tripeagency";
+    private String url = "jdbc:h2:file:./build/tripagency;AUTO_SERVER=true";
     private String user = "sa";
     private String passwd = "";
 
