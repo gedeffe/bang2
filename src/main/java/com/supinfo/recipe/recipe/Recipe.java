@@ -1,69 +1,23 @@
 package com.supinfo.recipe.recipe;
 
-<<<<<<< HEAD
+import com.supinfo.recipe.ingredient.Ingredient;
+import com.supinfo.recipe.step.Step;
+import com.supinfo.recipe.tools.Tools;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Getter
-=======
-import com.supinfo.recipe.recipe.RecipeDifficulty;
-
->>>>>>> recipes
 public class Recipe {
 
     private final String name;
     private final String description;
-    private final String image;
-    private final String[] ingredients;
-    private final String[] steps;
+    private final List<Ingredient> ingredients;
+    private final List<Step> steps;
+    private final List<Tools> tools;
     private final int personNumber;
     private final int duration;
     private final RecipeDifficulty difficulty;
-
-<<<<<<< HEAD
-=======
-    public Recipe(String name, String description, String image, String[] ingredients, String[] steps, int personNumber, int duration, RecipeDifficulty difficulty) {
-        this.name = name;
-        this.description = description;
-        this.image = image;
-        this.ingredients = ingredients;
-        this.steps = steps;
-        this.personNumber = personNumber;
-        this.duration = duration;
-        this.difficulty = difficulty;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public String[] getIngredients() {
-        return ingredients;
-    }
-
-    public String[] getSteps() {
-        return steps;
-    }
-
-    public int getPersonNumber() {
-        return personNumber;
-    }
-
-    public int getDuration() {
-        return duration;
-    }
-
-    public RecipeDifficulty getDifficulty() {
-        return difficulty;
-    }
->>>>>>> recipes
 }
