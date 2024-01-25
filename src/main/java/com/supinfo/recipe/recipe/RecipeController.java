@@ -18,4 +18,8 @@ public class RecipeController {
         recipe.addIngredient(ingredient);
         recipeModel.updateRecipe(recipe);
     }
+
+    public void listRecipes(RecipeSortType sortType) {
+        recipeModel.listRecipes(sortType);
+    }
 }
