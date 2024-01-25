@@ -1,4 +1,4 @@
-package com.supinfo.recipe;
+package com.supinfo.recipe.recipe;
 
 public enum RecipeDifficulty {
     EASY,

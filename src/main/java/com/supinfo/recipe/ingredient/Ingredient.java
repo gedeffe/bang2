@@ -1,4 +1,4 @@
-package ingredient;
+package com.supinfo.recipe.ingredient;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
