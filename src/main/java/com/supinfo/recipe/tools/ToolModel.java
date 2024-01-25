@@ -9,21 +9,21 @@ import java.util.List;
 public class ToolModel {
     private final List<Tool> tools;
 
-    public void addRecipe(Tool ingredient) { tools.add(ingredient); }
+    public void addTool(Tool ingredient) { tools.add(ingredient); }
 
-    public void deleteRecipe(Tool tool) {
+    public void deleteTool(Tool tool) {
         tools.remove(tool);
     }
 
-    public void updateRecipe(Tool tool) {
+    public void updateTool(Tool tool) {
         tools.set(tools.indexOf(tool), tool);
     }
 
-    public Tool getIngredient(int index) {
+    public Tool getTool(int index) {
         return tools.get(index);
     }
 
-    public List<Tool> getIngredients() {
+    public List<Tool> getTools() {
         return tools;
     }
 }
