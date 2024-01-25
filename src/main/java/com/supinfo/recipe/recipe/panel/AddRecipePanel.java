@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-@RequiredArgsConstructor
 public class AddRecipePanel extends JPanel {
     private JButton addButton;
     private JLabel nameLabel;
