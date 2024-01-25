@@ -14,15 +14,10 @@ import java.util.List;
 @Getter
 public class AddRecipePanel extends JPanel {
     private final JButton addButton;
-    private final JLabel nameLabel;
     private final JTextField nameField;
-    private final JLabel descriptionLabel;
     private final JTextField descriptionField;
-    private final JLabel personNumberLabel;
     private final JSpinner personNumberField;
-    private final JLabel durationLabel;
     private final JSpinner durationField;
-    private final JLabel difficultyLabel;
     private final JComboBox<RecipeDifficulty> difficultyField;
     private final JPanel fieldsPanel;
     private final RecipeModel recipeModel;
@@ -39,44 +34,44 @@ public class AddRecipePanel extends JPanel {
         this.addButton.setAction(action);
 
         // Recipe name
-        this.nameLabel = new JLabel("Recipe Name");
+        JLabel nameLabel = new JLabel("Recipe Name");
         this.nameField = new JTextField(20);
         this.nameField.setToolTipText("Text field to specify the recipe's name");
 
-        this.fieldsPanel.add(this.nameLabel);
+        this.fieldsPanel.add(nameLabel);
         this.fieldsPanel.add(this.nameField);
 
         // Recipe description
-        this.descriptionLabel = new JLabel("Recipe Description");
+        JLabel descriptionLabel = new JLabel("Recipe Description");
         this.descriptionField = new JTextField(20);
         this.descriptionField.setToolTipText("Text area to specify the recipe's description");
 
-        this.fieldsPanel.add(this.descriptionLabel);
+        this.fieldsPanel.add(descriptionLabel);
         this.fieldsPanel.add(this.descriptionField);
 
         // Recipe person number
-        this.personNumberLabel = new JLabel("Number of person");
+        JLabel personNumberLabel = new JLabel("Number of person");
         SpinnerModel spPersonNumber = new SpinnerNumberModel(0, 0, 100, 1);
         this.personNumberField = new JSpinner(spPersonNumber);
 
-        this.fieldsPanel.add(this.personNumberLabel);
+        this.fieldsPanel.add(personNumberLabel);
         this.fieldsPanel.add(this.personNumberField);
 
         // Recipe duration
-        this.durationLabel = new JLabel("Duration");
+        JLabel durationLabel = new JLabel("Duration");
         SpinnerModel spDuration = new SpinnerNumberModel(0, 0, 1000, 15);
         this.durationField = new JSpinner(spDuration);
 
-        this.fieldsPanel.add(this.durationLabel);
+        this.fieldsPanel.add(durationLabel);
         this.fieldsPanel.add(this.durationField);
 
         // Recipe difficulty
-        this.difficultyLabel = new JLabel("Difficulty");
+        JLabel difficultyLabel = new JLabel("Difficulty");
         DefaultComboBoxModel<RecipeDifficulty> difficultyModel = new DefaultComboBoxModel<>();
         difficultyModel.addAll(List.of(RecipeDifficulty.values()));
         this.difficultyField = new JComboBox<>(difficultyModel);
 
-        this.fieldsPanel.add(this.difficultyLabel);
+        this.fieldsPanel.add(difficultyLabel);
         this.fieldsPanel.add(this.difficultyField);
 
 
