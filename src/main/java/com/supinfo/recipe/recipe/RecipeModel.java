@@ -9,7 +9,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @Getter
 public class RecipeModel {
-    // create list of Recipe and create method to add recipe, list, delete, update
 
     private final List<Recipe> recipes;
 
