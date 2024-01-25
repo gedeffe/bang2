@@ -32,47 +32,58 @@ public class AddRecipePanel extends JPanel {
         this.recipeModel = recipeModel;
         this.fieldsPanel = new JPanel(new SpringLayout());
 
+        // validate button
         this.addButton = new JButton("Add Recipe"); // naming here is redundant because action defines name
 
         AbstractAction action = getAbstractAction(recipeModel);
         this.addButton.setAction(action);
 
+        // Recipe name
         this.nameLabel = new JLabel("Recipe Name");
         this.nameField = new JTextField(20);
         this.nameField.setToolTipText("Text field to specify the recipe's name");
 
+        this.fieldsPanel.add(this.nameLabel);
+        this.fieldsPanel.add(this.nameField);
+
+        // Recipe description
         this.descriptionLabel = new JLabel("Recipe Description");
         this.descriptionField = new JTextField(20);
         this.descriptionField.setToolTipText("Text area to specify the recipe's description");
 
+        this.fieldsPanel.add(this.descriptionLabel);
+        this.fieldsPanel.add(this.descriptionField);
+
+        // Recipe person number
         this.personNumberLabel = new JLabel("Number of person");
-        SpinnerModel spinnerModel = new SpinnerNumberModel(0, 0, 1000, 0.1);
-        this.personNumberField = new JSpinner(spinnerModel);
+        SpinnerModel spPersonNumber = new SpinnerNumberModel(0, 0, 100, 1);
+        this.personNumberField = new JSpinner(spPersonNumber);
 
+        this.fieldsPanel.add(this.personNumberLabel);
+        this.fieldsPanel.add(this.personNumberField);
+
+        // Recipe duration
         this.durationLabel = new JLabel("Duration");
-        this.durationField = new JSpinner(spinnerModel);
+        SpinnerModel spDuration = new SpinnerNumberModel(0, 0, 1000, 15);
+        this.durationField = new JSpinner(spDuration);
 
+        this.fieldsPanel.add(this.durationLabel);
+        this.fieldsPanel.add(this.durationField);
+
+        // Recipe difficulty
         this.difficultyLabel = new JLabel("Difficulty");
         DefaultComboBoxModel<RecipeDifficulty> difficultyModel = new DefaultComboBoxModel<>();
         difficultyModel.addAll(List.of(RecipeDifficulty.values()));
         this.difficultyField = new JComboBox<>(difficultyModel);
 
-        this.fieldsPanel.add(this.nameLabel);
-        this.fieldsPanel.add(this.nameField);
-
-        this.fieldsPanel.add(this.descriptionLabel);
-        this.fieldsPanel.add(this.descriptionField);
-
-        this.fieldsPanel.add(this.personNumberLabel);
-        this.fieldsPanel.add(this.personNumberField);
-
-        this.fieldsPanel.add(this.durationLabel);
-        this.fieldsPanel.add(this.durationField);
-
         this.fieldsPanel.add(this.difficultyLabel);
         this.fieldsPanel.add(this.difficultyField);
 
+
+        // add fields panel
         this.add(this.fieldsPanel);
+
+        // add the button
         this.add(this.addButton);
 
         AddRecipePanel.makeCompactGrid(this.fieldsPanel,
