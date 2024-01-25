@@ -3,13 +3,16 @@ package com.supinfo.recipe.recipe;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @RequiredArgsConstructor
 @Getter
 public class RecipeModel {
-    // create list of Recipe and create method to add recipe, list, delete, update
 
     private final List<Recipe> recipes;
 
@@ -29,8 +32,12 @@ public class RecipeModel {
         return recipes.get(index);
     }
 
-    public List<Recipe> listRecipes() {
-        return recipes;
+    public List<Recipe> listRecipes(RecipeSortType sortType) {
+        return switch (sortType) {
+            case NAME -> recipes.stream().sorted(Comparator.comparing(Recipe::getName)).collect(Collectors.toCollection(ArrayList::new));
+            case DURATION -> recipes.stream().sorted(Comparator.comparing(Recipe::getDuration)).collect(Collectors.toCollection(ArrayList::new));
+            case DIFFICULTY -> recipes.stream().sorted(Comparator.comparingInt(o -> o.getDifficulty().ordinal())).collect(Collectors.toCollection(ArrayList::new));
+            default -> recipes;
+        };
     }
-
 }

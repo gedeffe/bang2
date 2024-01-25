@@ -20,4 +20,13 @@ public class Recipe {
     private final int personNumber;
     private final int duration;
     private final RecipeDifficulty difficulty;
+
+    public void addStep(Step step) {
+        steps.add(step);
+    }
+
+    public void addIngredient(Ingredient ingredient) {
+        ingredients.add(ingredient);
+    }
 }
+
