@@ -1,4 +1,6 @@
-package com.supinfo.recipe;
+package com.supinfo.recipe.recipe;
+
+import com.supinfo.recipe.recipe.RecipeDifficulty;
 
 public class Recipe {
 

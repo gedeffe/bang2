@@ -1,4 +1,4 @@
-package com.supinfo.recipe;
+package com.supinfo.recipe.tools;
 
 import lombok.Getter;
 
