@@ -1,10 +1,13 @@
 package com.supinfo.recipe.recipe.panel;
 
+import com.supinfo.recipe.recipe.RecipeModel;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class AddRecipeFrame extends JFrame {
-    private final AddRecipePanel addRecipePanel = new AddRecipePanel();
+    private final AddRecipePanel addRecipePanel = new AddRecipePanel(new RecipeModel(new ArrayList<>()));
     AddRecipeFrame() {
         this.setTitle("Add Recipe Frame");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
