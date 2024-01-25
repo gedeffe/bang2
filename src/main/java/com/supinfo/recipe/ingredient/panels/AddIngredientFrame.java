@@ -8,12 +8,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class addIngredientFrame extends JFrame {
-        private JTextField placeTextField;
+public class AddIngredientFrame extends JFrame {
+        private JTextField ingredientNameTextField;
         private JSpinner spinner1;
         private JComboBox<MeasureUnit> destinationComboBox2;
 
-        public addIngredientFrame() {
+        public AddIngredientFrame() {
             super();
             setTitle("Add Ingredient");
             setSize(400, 220);
@@ -30,12 +30,12 @@ public class addIngredientFrame extends JFrame {
             panel.add(new JLabel("Ingredient : "), gbc);
 
             // Ajout zone de texte pour entrer le nom ingredient
-            placeTextField = new JTextField(20);
+            ingredientNameTextField = new JTextField(20);
             gbc.gridx = 1;
             gbc.gridy = 0;
             gbc.gridwidth = 3;
             gbc.insets = new Insets(10, 10, 0, 10);
-            panel.add(placeTextField, gbc);
+            panel.add(ingredientNameTextField, gbc);
 
             // Ajout de "Quantite : "
             gbc.gridx = 0;
@@ -76,6 +76,7 @@ public class addIngredientFrame extends JFrame {
             addButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    // use Ingredient model to create tool and store it
                 }
             });
 
@@ -107,7 +108,7 @@ public class addIngredientFrame extends JFrame {
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
-                    new addIngredientFrame();
+                    new AddIngredientFrame();
                 }
             });
         }
