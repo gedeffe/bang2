@@ -8,10 +8,13 @@ import com.supinfo.recipe.tools.Tool;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecipeEvent implements RecipeEventListener {
+public class RecipeEventProducer implements RecipeEventListener {
     List<RecipeEventListener> listeners = new ArrayList<>();
 
     public void subscribe(RecipeEventListener listener) {
+        if (listener == this || this.listeners.contains(listener)) {
+            return;
+        }
         this.listeners.add(listener);
     }
 
