@@ -10,22 +10,26 @@ public class AddRecipePanel extends JPanel {
     private JTextField nameField;
     private JLabel descriptionLabel;
     private JTextField descriptionField;
-    private JTextField personNumberField;
+
+    private JLabel personNumberLabel;
+    private JSpinner personNumberField;
     private JPanel fieldsPanel;
 
     public AddRecipePanel() {
         super();
         this.fieldsPanel = new JPanel(new SpringLayout());
-        this.addButton = new JButton();
-        this.addButton.setVerticalAlignment(AbstractButton.CENTER);
-        this.addButton.setHorizontalAlignment(AbstractButton.LEADING);
-        this.addButton.setPreferredSize(new Dimension(50,10));
-        this.addButton.setAction(new AbstractAction() {
+
+        this.addButton = new JButton("Add Recipe"); // naming here is redundant because action defines name
+
+        AbstractAction action = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
             }
-        });
+        };
+
+        action.putValue(AbstractAction.NAME, "Add Recipe");
+        this.addButton.setAction(action);
 
         this.nameLabel = new JLabel("Recipe Name");
         this.nameField = new JTextField(20);
@@ -35,15 +39,23 @@ public class AddRecipePanel extends JPanel {
         this.descriptionField = new JTextField(20);
         this.descriptionField.setToolTipText("Text area to specify the recipe's description");
 
+        this.personNumberLabel = new JLabel("Number of person");
+        SpinnerModel spinnerModel = new SpinnerNumberModel(0, 0, 1000, 0.1);
+        this.personNumberField = new JSpinner(spinnerModel);
+
         this.fieldsPanel.add(this.nameLabel);
         this.fieldsPanel.add(this.nameField);
+
+        this.fieldsPanel.add(this.personNumberLabel);
+        this.fieldsPanel.add(this.personNumberField);
+
         this.fieldsPanel.add(this.descriptionLabel);
         this.fieldsPanel.add(this.descriptionField);
         this.add(this.fieldsPanel);
         this.add(this.addButton);
 
         AddRecipePanel.makeCompactGrid(this.fieldsPanel,
-                2, 2, //rows, cols
+                3, 2, //rows, cols
                 6, 6,        //initX, initY
                 6, 6);       //xPad, yPad
     }

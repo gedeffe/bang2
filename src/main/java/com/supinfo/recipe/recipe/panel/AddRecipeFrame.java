@@ -8,9 +8,10 @@ public class AddRecipeFrame extends JFrame {
     AddRecipeFrame() {
         this.setTitle("Add Recipe Frame");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setPreferredSize(new Dimension(500,500));
+
         this.add(this.addRecipePanel, BorderLayout.CENTER);
 
-        this.setPreferredSize(new Dimension(500,500));
         this.pack();
         this.setVisible(true);
     }
