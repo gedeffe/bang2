@@ -10,7 +10,7 @@ import java.util.List;
 
 public class addIngredientFrame extends JFrame {
         private JTextField placeTextField;
-        private JTextField placeTextField1;
+        private JSpinner spinner1;
         private JComboBox<MeasureUnit> destinationComboBox2;
 
         public addIngredientFrame() {
@@ -44,12 +44,13 @@ public class addIngredientFrame extends JFrame {
             panel.add(new JLabel("Quantite : "), gbc);
 
             // Ajout zone de texte pour entrer la quantite
-            placeTextField1 = new JTextField(20);
+            SpinnerNumberModel model = new SpinnerNumberModel(0,0,1000,1);
+            spinner1 = new JSpinner(model);
             gbc.gridx = 1;
             gbc.gridy = 1;
             gbc.gridwidth = 3;
             gbc.insets = new Insets(10, 10, 0, 10);
-            panel.add(placeTextField1, gbc);
+            panel.add(spinner1, gbc);
 
             // Ajout de "Mesure : "
             gbc.gridx = 0;
