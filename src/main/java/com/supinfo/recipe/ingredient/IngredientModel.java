@@ -2,10 +2,11 @@ package com.supinfo.recipe.ingredient;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+import java.util.Iterator;
 import java.util.List;
 
-@RequiredArgsConstructor
 @Getter
+@RequiredArgsConstructor
 public class IngredientModel {
     private final List<Ingredient> ingredients;
 
@@ -25,7 +26,7 @@ public class IngredientModel {
         return ingredients.get(index);
     }
 
-    public List<Ingredient> getIngredients() {
-        return ingredients;
+    public Iterator<Ingredient> iterIngredient() {
+        return this.ingredients.iterator();
     }
 }
