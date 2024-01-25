@@ -1,23 +1,22 @@
 package com.supinfo.recipe.ingredient.panels;
 
+import com.supinfo.recipe.ingredient.MeasureUnit;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.util.List;
 
 public class addIngredientFrame extends JFrame {
         private JTextField placeTextField;
         private JTextField placeTextField1;
-        private JTextField placeTextField2;
-
+        private JComboBox<MeasureUnit> destinationComboBox2;
 
         public addIngredientFrame() {
             super();
             setTitle("Add Ingredient");
-            setSize(400, 200);
+            setSize(400, 220);
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             setLocationRelativeTo(null);
 
@@ -59,12 +58,17 @@ public class addIngredientFrame extends JFrame {
             panel.add(new JLabel("Mesure : "), gbc);
 
             // Ajout zone de texte pour entrer la mesure
-            placeTextField2 = new JTextField(20);
+            DefaultComboBoxModel<MeasureUnit> destinationComboBox2model = new DefaultComboBoxModel<MeasureUnit>();
+            destinationComboBox2model.addAll(List.of(MeasureUnit.values()));
+            destinationComboBox2 = new JComboBox<>(destinationComboBox2model);
+
+            // Ajout combobox au panneau
             gbc.gridx = 1;
             gbc.gridy = 2;
             gbc.gridwidth = 3;
             gbc.insets = new Insets(10, 10, 0, 10);
-            panel.add(placeTextField2, gbc);
+            panel.add(destinationComboBox2, gbc);
+
 
             // bouton "Add Ingredient"
             JButton addButton = new JButton("Add Ingredient");
