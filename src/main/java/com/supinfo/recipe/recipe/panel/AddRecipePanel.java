@@ -20,6 +20,8 @@ public class AddRecipePanel extends JPanel {
     private final JSpinner durationField;
     private final JComboBox<RecipeDifficulty> difficultyField;
     private final JPanel fieldsPanel;
+
+    // Models
     private final RecipeModel recipeModel;
 
     public AddRecipePanel(RecipeModel recipeModel) {
@@ -30,23 +32,8 @@ public class AddRecipePanel extends JPanel {
         // validate button
         this.addButton = new JButton("Add Recipe"); // naming here is redundant because action defines name
 
-        AbstractAction action = new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                recipeModel.addRecipe(new Recipe(
-                        nameField.getText(),
-                        descriptionField.getText(),
-                        new ArrayList<>(),
-                        new ArrayList<>(),
-                        new ArrayList<>(),
-                        (int) personNumberField.getValue(),
-                        (int) durationField.getValue(),
-                        null)
-                );
-            }
-        };
+        AbstractAction action = getAbstractAction(recipeModel);
 
-        action.putValue(AbstractAction.NAME, "Add Recipe");
         this.addButton.setAction(action);
 
         // Recipe name
@@ -101,6 +88,27 @@ public class AddRecipePanel extends JPanel {
                 5, 2, //rows, cols
                 6, 6,        //initX, initY
                 6, 6);       //xPad, yPad
+    }
+
+    private AbstractAction getAbstractAction(RecipeModel recipeModel) {
+        AbstractAction action = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                recipeModel.addRecipe(new Recipe(
+                        nameField.getText(),
+                        descriptionField.getText(),
+                        new ArrayList<>(),
+                        new ArrayList<>(),
+                        new ArrayList<>(),
+                        (int) personNumberField.getValue(),
+                        (int) durationField.getValue(),
+                        null)
+                );
+            }
+        };
+
+        action.putValue(AbstractAction.NAME, "Add Recipe");
+        return action;
     }
 
     // From https://docs.oracle.com/javase/tutorial/uiswing/examples/layout/SpringGridProject/src/layout/SpringUtilities.java

@@ -9,15 +9,15 @@ import java.util.List;
 public class IngredientModel {
     private final List<Ingredient> ingredients;
 
-    public void addRecipe(Ingredient ingredient) {
+    public void addIngredient(Ingredient ingredient) {
         ingredients.add(ingredient);
     }
 
-    public void deleteRecipe(Ingredient ingredient) {
+    public void deleteIngredient(Ingredient ingredient) {
         ingredients.remove(ingredient);
     }
 
-    public void updateRecipe(Ingredient ingredient) {
+    public void updateIngredient(Ingredient ingredient) {
         ingredients.set(ingredients.indexOf(ingredient), ingredient);
     }
 
