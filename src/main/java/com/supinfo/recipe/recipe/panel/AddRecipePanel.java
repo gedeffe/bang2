@@ -4,7 +4,6 @@ import com.supinfo.recipe.recipe.Recipe;
 import com.supinfo.recipe.recipe.RecipeDifficulty;
 import com.supinfo.recipe.recipe.RecipeModel;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,18 +13,18 @@ import java.util.List;
 
 @Getter
 public class AddRecipePanel extends JPanel {
-    private JButton addButton;
-    private JLabel nameLabel;
-    private JTextField nameField;
-    private JLabel descriptionLabel;
-    private JTextField descriptionField;
-    private JLabel personNumberLabel;
-    private JSpinner personNumberField;
-    private JLabel durationLabel;
-    private JSpinner durationField;
-    private JLabel difficultyLabel;
-    private JComboBox<RecipeDifficulty> difficultyField;
-    private JPanel fieldsPanel;
+    private final JButton addButton;
+    private final JLabel nameLabel;
+    private final JTextField nameField;
+    private final JLabel descriptionLabel;
+    private final JTextField descriptionField;
+    private final JLabel personNumberLabel;
+    private final JSpinner personNumberField;
+    private final JLabel durationLabel;
+    private final JSpinner durationField;
+    private final JLabel difficultyLabel;
+    private final JComboBox<RecipeDifficulty> difficultyField;
+    private final JPanel fieldsPanel;
     private final RecipeModel recipeModel;
 
     public AddRecipePanel(RecipeModel recipeModel) {
@@ -35,23 +34,7 @@ public class AddRecipePanel extends JPanel {
 
         this.addButton = new JButton("Add Recipe"); // naming here is redundant because action defines name
 
-        AbstractAction action = new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                recipeModel.addRecipe(new Recipe(
-                        nameField.getText(),
-                        descriptionField.getText(),
-                        new ArrayList<>(),
-                        new ArrayList<>(),
-                        new ArrayList<>(),
-                        (int) personNumberField.getValue(),
-                        (int) durationField.getValue(),
-                        null)
-                );
-            }
-        };
-
-        action.putValue(AbstractAction.NAME, "Add Recipe");
+        AbstractAction action = getAbstractAction(recipeModel);
         this.addButton.setAction(action);
 
         this.nameLabel = new JLabel("Recipe Name");
@@ -70,7 +53,7 @@ public class AddRecipePanel extends JPanel {
         this.durationField = new JSpinner(spinnerModel);
 
         this.difficultyLabel = new JLabel("Difficulty");
-        DefaultComboBoxModel<RecipeDifficulty> difficultyModel = new DefaultComboBoxModel<RecipeDifficulty>();
+        DefaultComboBoxModel<RecipeDifficulty> difficultyModel = new DefaultComboBoxModel<>();
         difficultyModel.addAll(List.of(RecipeDifficulty.values()));
         this.difficultyField = new JComboBox<>(difficultyModel);
 
@@ -96,6 +79,27 @@ public class AddRecipePanel extends JPanel {
                 5, 2, //rows, cols
                 6, 6,        //initX, initY
                 6, 6);       //xPad, yPad
+    }
+
+    private AbstractAction getAbstractAction(RecipeModel recipeModel) {
+        AbstractAction action = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                recipeModel.addRecipe(new Recipe(
+                        nameField.getText(),
+                        descriptionField.getText(),
+                        new ArrayList<>(),
+                        new ArrayList<>(),
+                        new ArrayList<>(),
+                        (int) personNumberField.getValue(),
+                        (int) durationField.getValue(),
+                        null)
+                );
+            }
+        };
+
+        action.putValue(AbstractAction.NAME, "Add Recipe");
+        return action;
     }
 
     // From https://docs.oracle.com/javase/tutorial/uiswing/examples/layout/SpringGridProject/src/layout/SpringUtilities.java
