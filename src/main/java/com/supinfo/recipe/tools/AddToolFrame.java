@@ -7,13 +7,21 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AddToolFrame extends JFrame {
     private JTextField toolNameTextField;
     private JSpinner spinner1;
     private JComboBox<MeasureUnit> destinationComboBox2;
 
-    public AddToolFrame() {
+    private ToolModel toolModel;
+
+    public AddToolFrame(ToolModel toolModel) {
         super();
+
+        this.toolModel = toolModel;
+
         setTitle("Add Tool");
         setSize(400, 220);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -42,7 +50,9 @@ public class AddToolFrame extends JFrame {
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // use Tool model to create tool and store it
+                // create tool and add it to the model
+                String toolName = toolNameTextField.getText();
+                toolModel.addTool(new Tool(toolName));
             }
         });
 
@@ -71,10 +81,13 @@ public class AddToolFrame extends JFrame {
     }
 
     public static void main(String[] args) {
+
+        List<Tool> tools = new ArrayList<>();
+        ToolModel toolModel = new ToolModel(tools);
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new AddToolFrame();
+                new AddToolFrame(toolModel);
             }
         });
     }

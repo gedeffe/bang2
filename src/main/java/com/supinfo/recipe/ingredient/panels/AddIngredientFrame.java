@@ -1,20 +1,30 @@
 package com.supinfo.recipe.ingredient.panels;
 
+import com.supinfo.recipe.ingredient.Ingredient;
+import com.supinfo.recipe.ingredient.IngredientModel;
 import com.supinfo.recipe.ingredient.MeasureUnit;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AddIngredientFrame extends JFrame {
         private JTextField ingredientNameTextField;
-        private JSpinner spinner1;
-        private JComboBox<MeasureUnit> destinationComboBox2;
+        private JSpinner spinnerQuantity;
 
-        public AddIngredientFrame() {
+        private SpinnerModel spinnerModelQuantity;
+        private JComboBox<MeasureUnit> unitComboBox;
+
+        private IngredientModel ingredientModel;
+
+        public AddIngredientFrame(IngredientModel ingredientModel) {
             super();
+
+            this.ingredientModel = ingredientModel;
+
             setTitle("Add Ingredient");
             setSize(400, 220);
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -44,13 +54,13 @@ public class AddIngredientFrame extends JFrame {
             panel.add(new JLabel("Quantite : "), gbc);
 
             // Ajout zone de texte pour entrer la quantite
-            SpinnerNumberModel model = new SpinnerNumberModel(0,0,1000,1);
-            spinner1 = new JSpinner(model);
+            this.spinnerModelQuantity = new SpinnerNumberModel(0,0,1000,1);
+            this.spinnerQuantity = new JSpinner(this.spinnerModelQuantity);
             gbc.gridx = 1;
             gbc.gridy = 1;
             gbc.gridwidth = 3;
             gbc.insets = new Insets(10, 10, 0, 10);
-            panel.add(spinner1, gbc);
+            panel.add(this.spinnerQuantity, gbc);
 
             // Ajout de "Mesure : "
             gbc.gridx = 0;
@@ -61,14 +71,14 @@ public class AddIngredientFrame extends JFrame {
             // Ajout zone de texte pour entrer la mesure
             DefaultComboBoxModel<MeasureUnit> destinationComboBox2model = new DefaultComboBoxModel<MeasureUnit>();
             destinationComboBox2model.addAll(List.of(MeasureUnit.values()));
-            destinationComboBox2 = new JComboBox<>(destinationComboBox2model);
+            this.unitComboBox = new JComboBox<>(destinationComboBox2model);
 
             // Ajout combobox au panneau
             gbc.gridx = 1;
             gbc.gridy = 2;
             gbc.gridwidth = 3;
             gbc.insets = new Insets(10, 10, 0, 10);
-            panel.add(destinationComboBox2, gbc);
+            panel.add(this.unitComboBox, gbc);
 
 
             // bouton "Add Ingredient"
@@ -77,6 +87,11 @@ public class AddIngredientFrame extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     // use Ingredient model to create tool and store it
+                    String name = ingredientNameTextField.getText();
+                    double quantity = (double)spinnerModelQuantity.getValue();
+                    MeasureUnit unit = (MeasureUnit)unitComboBox.getSelectedItem();
+
+                    ingredientModel.addIngredient(new Ingredient(name, quantity, unit));
                 }
             });
 
@@ -105,10 +120,12 @@ public class AddIngredientFrame extends JFrame {
         }
 
         public static void main(String[] args) {
+            ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
+            IngredientModel ingredientModel = new IngredientModel(ingredients);
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
-                    new AddIngredientFrame();
+                    new AddIngredientFrame(ingredientModel);
                 }
             });
         }
