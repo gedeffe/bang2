@@ -1,31 +1,41 @@
 package com.supinfo.recipe.recipe.panel;
 
+import com.supinfo.recipe.recipe.Recipe;
+import com.supinfo.recipe.recipe.RecipeDifficulty;
+import com.supinfo.recipe.recipe.RecipeModel;
+import lombok.Getter;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.List;
 
+@Getter
 public class AddRecipePanel extends JPanel {
-    private JButton addButton;
-    private JLabel nameLabel;
-    private JTextField nameField;
-    private JLabel descriptionLabel;
-    private JTextField descriptionField;
-    private JTextField personNumberField;
-    private JPanel fieldsPanel;
+    private final JButton addButton;
+    private final JLabel nameLabel;
+    private final JTextField nameField;
+    private final JLabel descriptionLabel;
+    private final JTextField descriptionField;
+    private final JLabel personNumberLabel;
+    private final JSpinner personNumberField;
+    private final JLabel durationLabel;
+    private final JSpinner durationField;
+    private final JLabel difficultyLabel;
+    private final JComboBox<RecipeDifficulty> difficultyField;
+    private final JPanel fieldsPanel;
+    private final RecipeModel recipeModel;
 
-    public AddRecipePanel() {
+    public AddRecipePanel(RecipeModel recipeModel) {
         super();
+        this.recipeModel = recipeModel;
         this.fieldsPanel = new JPanel(new SpringLayout());
-        this.addButton = new JButton();
-        this.addButton.setVerticalAlignment(AbstractButton.CENTER);
-        this.addButton.setHorizontalAlignment(AbstractButton.LEADING);
-        this.addButton.setPreferredSize(new Dimension(50,10));
-        this.addButton.setAction(new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
 
-            }
-        });
+        this.addButton = new JButton("Add Recipe"); // naming here is redundant because action defines name
+
+        AbstractAction action = getAbstractAction(recipeModel);
+        this.addButton.setAction(action);
 
         this.nameLabel = new JLabel("Recipe Name");
         this.nameField = new JTextField(20);
@@ -35,17 +45,61 @@ public class AddRecipePanel extends JPanel {
         this.descriptionField = new JTextField(20);
         this.descriptionField.setToolTipText("Text area to specify the recipe's description");
 
+        this.personNumberLabel = new JLabel("Number of person");
+        SpinnerModel spinnerModel = new SpinnerNumberModel(0, 0, 1000, 0.1);
+        this.personNumberField = new JSpinner(spinnerModel);
+
+        this.durationLabel = new JLabel("Duration");
+        this.durationField = new JSpinner(spinnerModel);
+
+        this.difficultyLabel = new JLabel("Difficulty");
+        DefaultComboBoxModel<RecipeDifficulty> difficultyModel = new DefaultComboBoxModel<>();
+        difficultyModel.addAll(List.of(RecipeDifficulty.values()));
+        this.difficultyField = new JComboBox<>(difficultyModel);
+
         this.fieldsPanel.add(this.nameLabel);
         this.fieldsPanel.add(this.nameField);
+
         this.fieldsPanel.add(this.descriptionLabel);
         this.fieldsPanel.add(this.descriptionField);
+
+        this.fieldsPanel.add(this.personNumberLabel);
+        this.fieldsPanel.add(this.personNumberField);
+
+        this.fieldsPanel.add(this.durationLabel);
+        this.fieldsPanel.add(this.durationField);
+
+        this.fieldsPanel.add(this.difficultyLabel);
+        this.fieldsPanel.add(this.difficultyField);
+
         this.add(this.fieldsPanel);
         this.add(this.addButton);
 
         AddRecipePanel.makeCompactGrid(this.fieldsPanel,
-                2, 2, //rows, cols
+                5, 2, //rows, cols
                 6, 6,        //initX, initY
                 6, 6);       //xPad, yPad
+    }
+
+    private AbstractAction getAbstractAction(RecipeModel recipeModel) {
+        AbstractAction action = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                recipeModel.addRecipe(new Recipe(
+                        nameField.getText(),
+                        descriptionField.getText(),
+                        new ArrayList<>(),
+                        new ArrayList<>(),
+                        new ArrayList<>(),
+                        (int) personNumberField.getValue(),
+                        (int) durationField.getValue(),
+                        null)
+                );
+            }
+        };
+
+        action.putValue(AbstractAction.NAME, "Add Recipe");
+        return action;
     }
 
     // From https://docs.oracle.com/javase/tutorial/uiswing/examples/layout/SpringGridProject/src/layout/SpringUtilities.java
