@@ -1,10 +1,15 @@
 package com.supinfo.recipe.recipe;
 
+<<<<<<< HEAD
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Getter
+=======
+import com.supinfo.recipe.recipe.RecipeDifficulty;
+
+>>>>>>> recipes
 public class Recipe {
 
     private final String name;
@@ -16,4 +21,49 @@ public class Recipe {
     private final int duration;
     private final RecipeDifficulty difficulty;
 
+<<<<<<< HEAD
+=======
+    public Recipe(String name, String description, String image, String[] ingredients, String[] steps, int personNumber, int duration, RecipeDifficulty difficulty) {
+        this.name = name;
+        this.description = description;
+        this.image = image;
+        this.ingredients = ingredients;
+        this.steps = steps;
+        this.personNumber = personNumber;
+        this.duration = duration;
+        this.difficulty = difficulty;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public String[] getIngredients() {
+        return ingredients;
+    }
+
+    public String[] getSteps() {
+        return steps;
+    }
+
+    public int getPersonNumber() {
+        return personNumber;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public RecipeDifficulty getDifficulty() {
+        return difficulty;
+    }
+>>>>>>> recipes
 }
