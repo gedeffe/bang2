@@ -1,30 +1,36 @@
 package com.supinfo.recipe.step;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import com.supinfo.recipe.common.DataModel;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-@RequiredArgsConstructor
-@Getter
-public class StepModel {
-    private final List<Step> steps;
+public class StepModel implements DataModel<Step> {
+    private final List<Step> steps = new ArrayList<>();
 
-    public void addStep(Step step) { steps.add(step); }
-
-    public void deleteStep(Step step) {
-        steps.remove(step);
+    @Override
+    public void add(Step item) {
+        this.steps.add(item);
     }
 
-    public void updateStep(Step step) {
-        steps.set(steps.indexOf(step), step);
+    @Override
+    public void delete(Step item) {
+        this.steps.remove(item);
     }
 
-    public Step getStep(int index) {
-        return steps.get(index);
+    @Override
+    public void update(Step item) {
+        this.steps.set(this.steps.indexOf(item), item);
     }
 
-    public List<Step> getSteps() {
-        return steps;
+    @Override
+    public Step get(int index) {
+        return this.steps.get(index);
+    }
+
+    @Override
+    public Iterator<Step> iterator() {
+        return this.steps.iterator();
     }
 }
