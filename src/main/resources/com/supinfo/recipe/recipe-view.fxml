@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea"
+            fx:controller="com.supinfo.recipe.RecipeDisplayController">
+    <center>
+        <fx:include fx:id="recipeListView" source="recipe/recipe-list.fxml" />
+    </center>
+</BorderPane>
