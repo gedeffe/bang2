@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<fx:root xmlns:fx="http://javafx.com/fxml/1" type="BorderPane" xmlns="http://javafx.com/javafx/19" prefHeight="200.0"
+         prefWidth="200.0">
+    <left>
+        <VBox prefHeight="200.0" prefWidth="648.0" BorderPane.alignment="CENTER">
+            <children>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" fx:id="recipeName">
+                    <VBox.margin>
+                        <Insets/>
+                    </VBox.margin>
+                    <font>
+                        <Font size="24.0"/>
+                    </font>
+                </Text>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" fx:id="recipeDescription">
+                    <font>
+                        <Font size="18.0"/>
+                    </font>
+                    <VBox.margin>
+                        <Insets top="10.0"/>
+                    </VBox.margin>
+                </Text>
+            </children>
+            <BorderPane.margin>
+                <Insets/>
+            </BorderPane.margin>
+            <padding>
+                <Insets top="10.0"/>
+            </padding>
+        </VBox>
+    </left>
+    <right>
+        <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="TOP_RIGHT">
+            <top>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Duration" BorderPane.alignment="TOP_RIGHT">
+                    <font>
+                        <Font size="24.0"/>
+                    </font>
+                </Text>
+            </top>
+            <bottom>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="7 pers - Medium" BorderPane.alignment="BOTTOM_RIGHT">
+                    <font>
+                        <Font size="24.0"/>
+                    </font>
+                </Text>
+            </bottom>
+        </BorderPane>
+    </right>
+</fx:root>

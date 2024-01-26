@@ -1,21 +1,32 @@
 package com.supinfo.recipe.recipe;
 
-import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Text;
 
-public class RecipeCard extends Pane {
+import java.io.IOException;
 
-    private final Recipe recipe;
+public class RecipeCard extends BorderPane {
 
-        public RecipeCard(Recipe recipe) {
-            super();
-            this.recipe = recipe;
+    @FXML
+    private Text recipeName;
 
-            Label recipeName = new Label(recipe.getName());
-            this.getChildren().add(recipeName);
+    @FXML
+    private Text recipeDescription;
 
+    public RecipeCard(Recipe recipe) {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("recipe-card.fxml"));
+        fxmlLoader.setRoot(this);
+        fxmlLoader.setController(RecipeCard.this);
+
+        try {
+            fxmlLoader.load();
+            recipeName.setText("Recipe name");
+            recipeDescription.setText("Recipe description");
+        } catch (IOException exception) {
+            throw new RuntimeException(exception);
         }
+    }
 
 }
-
-
