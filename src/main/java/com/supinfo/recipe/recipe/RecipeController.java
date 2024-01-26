@@ -2,7 +2,6 @@ package com.supinfo.recipe.recipe;
 
 import com.supinfo.recipe.ingredient.Ingredient;
 import com.supinfo.recipe.step.Step;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
