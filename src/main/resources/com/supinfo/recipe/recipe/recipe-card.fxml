@@ -5,9 +5,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<fx:root prefHeight="201.0" prefWidth="536.0" style="-fx-border-style: solid none none; -fx-border-width: 2;" type="BorderPane" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="150.0" style="-fx-border-style: solid none none; -fx-border-width: 2;" type="BorderPane" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
     <left>
-        <VBox prefHeight="182.0" prefWidth="353.0" BorderPane.alignment="CENTER">
+        <VBox prefHeight="182.0" BorderPane.alignment="CENTER">
             <children>
             <HBox prefHeight="34.0" prefWidth="386.0">
                <children>
@@ -39,14 +39,14 @@
     <right>
         <BorderPane prefHeight="182.0" prefWidth="120.0" BorderPane.alignment="TOP_RIGHT">
             <top>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Duration" BorderPane.alignment="TOP_RIGHT">
+                <Text fx:id="recipeDuration" strokeType="OUTSIDE" strokeWidth="0.0" text="Duration" BorderPane.alignment="TOP_RIGHT">
                     <font>
                         <Font size="24.0" />
                     </font>
                 </Text>
             </top>
             <bottom>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="7 pers - Medium" BorderPane.alignment="BOTTOM_RIGHT">
+                <Text fx:id="recipeDifficulty" strokeType="OUTSIDE" strokeWidth="0.0" text="7 pers - Medium" BorderPane.alignment="BOTTOM_RIGHT">
                     <font>
                         <Font size="24.0" />
                     </font>

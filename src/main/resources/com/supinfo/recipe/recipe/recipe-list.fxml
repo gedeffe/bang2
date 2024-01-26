@@ -18,7 +18,7 @@
         </MenuBar>
         <BorderPane>
             <center>
-                <ScrollPane prefHeight="200.0" prefWidth="200.0" vbarPolicy="ALWAYS" BorderPane.alignment="CENTER">
+                <ScrollPane prefHeight="400.0" prefWidth="200.0" vbarPolicy="ALWAYS" BorderPane.alignment="CENTER">
                     <content>
                         <VBox fx:id="recipeList" prefHeight="600.0" />
                     </content>
