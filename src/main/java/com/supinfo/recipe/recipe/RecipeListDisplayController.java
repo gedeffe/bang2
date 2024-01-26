@@ -2,6 +2,7 @@ package com.supinfo.recipe.recipe;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.MenuBar;
 import javafx.scene.layout.VBox;
 
 public class RecipeListDisplayController {
@@ -17,6 +18,9 @@ public class RecipeListDisplayController {
 
     @FXML
     private VBox recipeList;
+
+    @FXML
+    private MenuBar menuBar;
 
     private RecipeModel recipeModel;
 
@@ -38,5 +42,10 @@ public class RecipeListDisplayController {
     public void setRecipeModel(RecipeModel recipeModel) {
         this.recipeModel = recipeModel;
         this.recipeModel.listRecipes(RecipeSortType.NAME).forEach(recipe -> recipeList.getChildren().add(new RecipeCard(recipe)));
+    }
+
+    @FXML
+    protected void handleAddRecipeButtonAction() {
+        System.out.println("Add recipe button clicked");
     }
 }
