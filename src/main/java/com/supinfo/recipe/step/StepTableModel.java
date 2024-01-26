@@ -36,7 +36,7 @@ public class StepTableModel extends AbstractTableModel {
         };
     }
 
-    public void addTrip(Step trip) {
+    public void addStep(Step trip) {
         this.steps.add(trip);
 
         fireTableDataChanged();

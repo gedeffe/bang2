@@ -2,6 +2,7 @@ package com.supinfo.recipe.step.panels;
 
 import com.supinfo.recipe.recipe.Recipe;
 import com.supinfo.recipe.step.Step;
+import com.supinfo.recipe.step.StepTableModel;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -12,7 +13,7 @@ import java.awt.event.ActionListener;
 public class AddStepPanel extends JPanel {
     private final JTextArea stepTextArea;
 
-    public AddStepPanel(Recipe recipe) {
+    public AddStepPanel(Recipe recipe, StepTableModel stepTableModel) {
         super(new BorderLayout());
 
         Border blackline = BorderFactory.createTitledBorder("Add a step");
@@ -41,6 +42,8 @@ public class AddStepPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 Step step = new Step(stepTextArea.getText());
                 recipe.addStep(step);
+
+                stepTableModel.addStep(step);
             }
         });
 

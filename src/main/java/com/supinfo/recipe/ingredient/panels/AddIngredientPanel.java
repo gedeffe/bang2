@@ -1,6 +1,7 @@
 package com.supinfo.recipe.ingredient.panels;
 
 import com.supinfo.recipe.ingredient.Ingredient;
+import com.supinfo.recipe.ingredient.IngredientTableModel;
 import com.supinfo.recipe.ingredient.MeasureUnit;
 import com.supinfo.recipe.recipe.Recipe;
 
@@ -17,7 +18,7 @@ public class AddIngredientPanel extends JPanel {
     private SpinnerModel spinnerModelQuantity;
     private JComboBox<MeasureUnit> unitComboBox;
 
-    public AddIngredientPanel(Recipe recipe) {
+    public AddIngredientPanel(Recipe recipe, IngredientTableModel ingredientTableModel) {
         super(new BorderLayout());
 
         Border blackline = BorderFactory.createTitledBorder("Add an ingredient");
@@ -38,6 +39,8 @@ public class AddIngredientPanel extends JPanel {
 
                 Ingredient ingredient = new Ingredient(name, quantity, unit);
                 recipe.addIngredient(ingredient);
+
+                ingredientTableModel.addIngredient(ingredient);
             }
         });
 

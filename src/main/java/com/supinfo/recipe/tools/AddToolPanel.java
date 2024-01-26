@@ -14,7 +14,7 @@ public class AddToolPanel extends JPanel {
     private JSpinner spinner1;
     private JComboBox<MeasureUnit> destinationComboBox2;
 
-    public AddToolPanel(Recipe recipe) {
+    public AddToolPanel(Recipe recipe, ToolTableModel toolTableModel) {
         super(new BorderLayout());
 
         Border blackline = BorderFactory.createTitledBorder("Add a tool");
@@ -45,8 +45,10 @@ public class AddToolPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String toolName = toolNameTextField.getText();
-                recipe.addTool(new Tool(toolName));
+                Tool tool = new Tool(toolName);
+                recipe.addTool(tool);
 
+                toolTableModel.addTool(tool);
             }
         });
 
