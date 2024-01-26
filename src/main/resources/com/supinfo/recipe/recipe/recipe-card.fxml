@@ -5,11 +5,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<fx:root prefHeight="200.0" prefWidth="200.0" type="BorderPane" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="197.0" prefWidth="536.0" style="-fx-border-style: solid none none; -fx-border-width: 2;" type="BorderPane" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
     <left>
-        <VBox prefHeight="200.0" prefWidth="385.0" BorderPane.alignment="CENTER">
+        <VBox prefHeight="182.0" prefWidth="353.0" BorderPane.alignment="CENTER">
             <children>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox prefHeight="34.0" prefWidth="386.0">
                <children>
                       <Text fx:id="recipeName" strokeType="OUTSIDE" strokeWidth="0.0" text="Recipe Name">
                           <font>
@@ -37,7 +37,7 @@
         </VBox>
     </left>
     <right>
-        <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="TOP_RIGHT">
+        <BorderPane prefHeight="182.0" prefWidth="120.0" BorderPane.alignment="TOP_RIGHT">
             <top>
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Duration" BorderPane.alignment="TOP_RIGHT">
                     <font>
