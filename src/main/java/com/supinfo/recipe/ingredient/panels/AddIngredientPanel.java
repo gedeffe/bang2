@@ -5,13 +5,14 @@ import com.supinfo.recipe.ingredient.IngredientModel;
 import com.supinfo.recipe.ingredient.MeasureUnit;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddIngredientFrame extends JFrame {
+public class AddIngredientPanel extends JPanel {
         private JTextField ingredientNameTextField;
         private JSpinner spinnerQuantity;
 
@@ -20,65 +21,67 @@ public class AddIngredientFrame extends JFrame {
 
         private IngredientModel ingredientModel;
 
-        public AddIngredientFrame(IngredientModel ingredientModel) {
-            super();
+        public AddIngredientPanel(IngredientModel ingredientModel) {
+            super(new BorderLayout());
+
+            Border blackline = BorderFactory.createTitledBorder("Add an ingredient");
+            this.setBorder(blackline);
+
+            JPanel insidePanel = new JPanel(new GridBagLayout());
 
             this.ingredientModel = ingredientModel;
 
-            setTitle("Add Ingredient");
-            setSize(400, 220);
-            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            setLocationRelativeTo(null);
-
-            JPanel panel = new JPanel(new GridBagLayout());
             GridBagConstraints gbc = new GridBagConstraints();
+
+            gbc.fill = GridBagConstraints.HORIZONTAL;
+            gbc.weightx = 1.0;
 
             // Ajout de "Ingredient : "
             gbc.gridx = 0;
             gbc.gridy = 0;
-            gbc.insets = new Insets(10, 0, 0, 10);
-            panel.add(new JLabel("Ingredient : "), gbc);
+//            gbc.insets = new Insets(10, 0, 0, 10);
+            insidePanel.add(new JLabel("Ingredient : "), gbc);
 
             // Ajout zone de texte pour entrer le nom ingredient
             ingredientNameTextField = new JTextField(20);
             gbc.gridx = 1;
             gbc.gridy = 0;
-            gbc.gridwidth = 3;
-            gbc.insets = new Insets(10, 10, 0, 10);
-            panel.add(ingredientNameTextField, gbc);
+//            gbc.gridwidth = 3;
+//            gbc.insets = new Insets(10, 10, 0, 10);
+            insidePanel.add(ingredientNameTextField, gbc);
 
             // Ajout de "Quantite : "
             gbc.gridx = 0;
             gbc.gridy = 1;
-            gbc.insets = new Insets(10, 0, 0, 10);
-            panel.add(new JLabel("Quantite : "), gbc);
+//            gbc.insets = new Insets(10, 0, 0, 10);
+            insidePanel.add(new JLabel("Quantite : "), gbc);
 
             // Ajout zone de texte pour entrer la quantite
-            this.spinnerModelQuantity = new SpinnerNumberModel(0,0,1000,1);
+            this.spinnerModelQuantity = new SpinnerNumberModel(0,0,1000,1.0);
             this.spinnerQuantity = new JSpinner(this.spinnerModelQuantity);
             gbc.gridx = 1;
             gbc.gridy = 1;
-            gbc.gridwidth = 3;
-            gbc.insets = new Insets(10, 10, 0, 10);
-            panel.add(this.spinnerQuantity, gbc);
+//            gbc.gridwidth = 3;
+//            gbc.insets = new Insets(10, 10, 0, 10);
+            insidePanel.add(this.spinnerQuantity, gbc);
 
             // Ajout de "Mesure : "
             gbc.gridx = 0;
             gbc.gridy = 2;
-            gbc.insets = new Insets(10, 0, 0, 10);
-            panel.add(new JLabel("Mesure : "), gbc);
+//            gbc.insets = new Insets(10, 0, 0, 10);
+            insidePanel.add(new JLabel("Mesure : "), gbc);
 
             // Ajout zone de texte pour entrer la mesure
-            DefaultComboBoxModel<MeasureUnit> destinationComboBox2model = new DefaultComboBoxModel<MeasureUnit>();
+            DefaultComboBoxModel<MeasureUnit> destinationComboBox2model = new DefaultComboBoxModel<>();
             destinationComboBox2model.addAll(List.of(MeasureUnit.values()));
             this.unitComboBox = new JComboBox<>(destinationComboBox2model);
 
             // Ajout combobox au panneau
             gbc.gridx = 1;
             gbc.gridy = 2;
-            gbc.gridwidth = 3;
-            gbc.insets = new Insets(10, 10, 0, 10);
-            panel.add(this.unitComboBox, gbc);
+//            gbc.gridwidth = 3;
+//            gbc.insets = new Insets(10, 10, 0, 10);
+            insidePanel.add(this.unitComboBox, gbc);
 
 
             // bouton "Add Ingredient"
@@ -97,37 +100,13 @@ public class AddIngredientFrame extends JFrame {
 
             gbc.gridx = 1;
             gbc.gridy = 4;
-            gbc.insets = new Insets(10, 10, 10, 10);
-            panel.add(addButton, gbc);
+//            gbc.insets = new Insets(10, 10, 10, 10);
+            this.add(addButton, BorderLayout.EAST);
 
-            // Ajout bouton "Cancel"
-            JButton cancelButton = new JButton("Cancel");
-            cancelButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    dispose();
-                }
-            });
+            this.add(insidePanel, BorderLayout.CENTER);
 
-            gbc.gridx = 0;
-            gbc.gridy = 4;
-            gbc.insets = new Insets(10, 10, 10, 10);
-            panel.add(cancelButton, gbc);
 
-            add(panel);
-
-            setVisible(true);
-        }
-
-        public static void main(String[] args) {
-            ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
-            IngredientModel ingredientModel = new IngredientModel(ingredients);
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    new AddIngredientFrame(ingredientModel);
-                }
-            });
+//            setVisible(true);
         }
     }
 
