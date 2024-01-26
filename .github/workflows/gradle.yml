@@ -11,7 +11,7 @@ on:
   push:
     branches: [ recipes ]
   pull_request:
-    branches: [ recipes ]
+    types: [ opened, synchronize, reopened ]
 
 jobs:
   build:
