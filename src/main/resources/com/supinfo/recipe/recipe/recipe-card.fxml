@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<fx:root prefHeight="197.0" prefWidth="536.0" style="-fx-border-style: solid none none; -fx-border-width: 2;" type="BorderPane" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="201.0" prefWidth="536.0" style="-fx-border-style: solid none none; -fx-border-width: 2;" type="BorderPane" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
     <left>
         <VBox prefHeight="182.0" prefWidth="353.0" BorderPane.alignment="CENTER">
             <children>
