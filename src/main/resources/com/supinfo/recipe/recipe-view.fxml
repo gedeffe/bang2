@@ -2,8 +2,8 @@
 
 <?import javafx.scene.layout.*?>
 
-<BorderPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.supinfo.recipe.RecipeController">
+<BorderPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.supinfo.recipe.RecipeDisplayController">
     <center>
-        <fx:include source="recipe/recipe-list.fxml" />
+        <fx:include fx:id="recipeListView" source="recipe/recipe-list.fxml" />
     </center>
 </BorderPane>

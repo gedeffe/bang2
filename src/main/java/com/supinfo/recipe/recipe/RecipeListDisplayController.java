@@ -3,11 +3,8 @@ package com.supinfo.recipe.recipe;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Rectangle;
 
-import java.util.List;
-
-public class RecipeListController {
+public class RecipeListDisplayController {
 
     @FXML
     private ChoiceBox<String> choiceBox1;
@@ -21,11 +18,7 @@ public class RecipeListController {
     @FXML
     private VBox recipeList;
 
-
-
-    Recipe recipe = new Recipe("tarte a Tom", "test", List.of(), List.of(), List.of(), 1, 1, RecipeDifficulty.EASY);
-    Recipe recipe2 = new Recipe("Tomme de Tom", "test2", List.of(), List.of(), List.of(), 1, 2, RecipeDifficulty.MEDIUM);
-    Recipe recipe3 = new Recipe("crumble de Tom", "test3", List.of(), List.of(), List.of(), 1, 3, RecipeDifficulty.EASY);
+    private RecipeModel recipeModel;
 
     @FXML
     public void initialize() {
@@ -40,8 +33,10 @@ public class RecipeListController {
             choiceBox3.getItems().add(recipeDifficulty.getDisplayName());
         }
         choiceBox3.setValue(RecipeDifficulty.values()[0].getDisplayName());
-//
-        recipeList.getChildren().add(new RecipeCard(recipe));
     }
 
+    public void setRecipeModel(RecipeModel recipeModel) {
+        this.recipeModel = recipeModel;
+        this.recipeModel.listRecipes(RecipeSortType.NAME).forEach(recipe -> recipeList.getChildren().add(new RecipeCard(recipe)));
+    }
 }
