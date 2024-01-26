@@ -3,6 +3,7 @@ module com.example.supinmiton {
     requires javafx.fxml;
     requires static lombok;
     requires java.desktop;
+    requires javafx.swing;
 
 
     opens com.supinfo.recipe to javafx.fxml;

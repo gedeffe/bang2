@@ -13,8 +13,11 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.projectlombok:lombok:1.18.30" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: com.github.spotbugs:spotbugs-annotations:4.7.3" level="project" />
     <orderEntry type="library" name="Gradle: org.openjfx:javafx-fxml:win:21" level="project" />
     <orderEntry type="library" name="Gradle: org.openjfx:javafx-controls:win:21" level="project" />
+    <orderEntry type="library" name="Gradle: org.openjfx:javafx-swing:win:21" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: com.google.code.findbugs:jsr305:3.0.2" level="project" />
     <orderEntry type="library" name="Gradle: org.openjfx:javafx-graphics:win:21" level="project" />
     <orderEntry type="library" name="Gradle: org.openjfx:javafx-base:win:21" level="project" />
   </component>
