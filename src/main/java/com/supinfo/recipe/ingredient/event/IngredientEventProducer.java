@@ -1,13 +1,15 @@
 package com.supinfo.recipe.ingredient.event;
 
+import com.supinfo.recipe.EventProducer;
 import com.supinfo.recipe.ingredient.Ingredient;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class IngredientEventProducer implements IngredientEventListener{
+public class IngredientEventProducer implements IngredientEventListener, EventProducer<IngredientEventListener> {
     List<IngredientEventListener> listeners = new ArrayList<>();
 
+    @Override
     public void subscribe(IngredientEventListener listener) {
         if (listener == this || this.listeners.contains(listener)) {
             return;
