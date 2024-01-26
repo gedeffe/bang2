@@ -12,6 +12,7 @@ public class RecipeApplication extends Application {
         launch();
     }
 
+
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(RecipeApplication.class.getResource("recipe-view.fxml"));
@@ -20,5 +21,6 @@ public class RecipeApplication extends Application {
         stage.setTitle("Recipe Application");
         stage.setScene(scene);
         stage.show();
+
     }
 }
