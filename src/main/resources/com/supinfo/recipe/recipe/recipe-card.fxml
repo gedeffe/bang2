@@ -7,19 +7,19 @@
 
 <fx:root prefHeight="200.0" prefWidth="200.0" type="BorderPane" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
     <left>
-        <VBox prefHeight="200.0" prefWidth="648.0" BorderPane.alignment="CENTER">
+        <VBox prefHeight="200.0" prefWidth="385.0" BorderPane.alignment="CENTER">
             <children>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                      <Text fx:id="recipeName" strokeType="OUTSIDE" strokeWidth="0.0">
+                      <Text fx:id="recipeName" strokeType="OUTSIDE" strokeWidth="0.0" text="Recipe Name">
                           <font>
                               <Font size="24.0" />
                           </font>
                       </Text>
-                  <Button mnemonicParsing="false" text="Détails" fx:id="recipeDetailsButton" onAction="#handleRecipeDetailsButtonAction" />
+                  <Button fx:id="recipeDetailsButton" mnemonicParsing="false" onAction="#handleRecipeDetailsButtonAction" text="Détails" />
                </children>
             </HBox>
-                <Text fx:id="recipeDescription" strokeType="OUTSIDE" strokeWidth="0.0">
+                <Text fx:id="recipeDescription" strokeType="OUTSIDE" strokeWidth="0.0" text="Recipe Description">
                     <font>
                         <Font size="18.0" />
                     </font>
