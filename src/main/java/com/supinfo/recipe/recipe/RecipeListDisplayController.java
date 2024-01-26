@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 
+import javax.swing.*;
+
 public class RecipeListDisplayController implements RecipeEventListener {
 
     @FXML
@@ -21,9 +23,6 @@ public class RecipeListDisplayController implements RecipeEventListener {
 
     @FXML
     private VBox recipeList;
-
-    @FXML
-    private MenuBar menuBar;
 
     private RecipeModel recipeModel;
 
@@ -45,6 +44,7 @@ public class RecipeListDisplayController implements RecipeEventListener {
     public void setRecipeModel(RecipeModel recipeModel) {
         this.recipeModel = recipeModel;
         this.recipeModel.listRecipes(RecipeSortType.NAME).forEach(recipe -> recipeList.getChildren().add(new RecipeCard(recipe)));
+        this.recipeModel.subscribe(this);
     }
 
     @FXML
