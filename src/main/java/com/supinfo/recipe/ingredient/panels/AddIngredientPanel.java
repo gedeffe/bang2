@@ -11,18 +11,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class AddIngredientPanel extends JPanel {
         private JTextField ingredientNameTextField;
         private JSpinner spinnerQuantity;
-
         private SpinnerModel spinnerModelQuantity;
         private JComboBox<MeasureUnit> unitComboBox;
-
         private IngredientModel ingredientModel;
+        private UUID recipeUUID;
 
-        public AddIngredientPanel(IngredientModel ingredientModel) {
+    public AddIngredientPanel(UUID recipeUUID, IngredientModel ingredientModel) {
             super(new BorderLayout());
+            this.recipeUUID = recipeUUID;
 
             Border blackline = BorderFactory.createTitledBorder("Add an ingredient");
             this.setBorder(blackline);

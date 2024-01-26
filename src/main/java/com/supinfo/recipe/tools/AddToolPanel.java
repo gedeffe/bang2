@@ -7,16 +7,18 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.UUID;
 
 public class AddToolPanel extends JPanel {
     private JTextField toolNameTextField;
     private JSpinner spinner1;
     private JComboBox<MeasureUnit> destinationComboBox2;
-
     private ToolModel toolModel;
+    private UUID recipeUUID;
 
-    public AddToolPanel(ToolModel toolModel) {
+    public AddToolPanel(UUID recipeUUID, ToolModel toolModel) {
         super(new BorderLayout());
+        this.recipeUUID = recipeUUID;
 
         Border blackline = BorderFactory.createTitledBorder("Add a tool");
         this.setBorder(blackline);

@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 public class AddRecipePanel extends JPanel {
@@ -20,12 +21,14 @@ public class AddRecipePanel extends JPanel {
     private final JSpinner durationField;
     private final JComboBox<RecipeDifficulty> difficultyField;
     private final JPanel fieldsPanel;
+    private final UUID recipeUUID;
 
     // Models
     private final RecipeModel recipeModel;
 
-    public AddRecipePanel(RecipeModel recipeModel) {
+    public AddRecipePanel(UUID recipeUUID, RecipeModel recipeModel) {
         super();
+        this.recipeUUID = recipeUUID;
         this.recipeModel = recipeModel;
         this.fieldsPanel = new JPanel(new SpringLayout());
 

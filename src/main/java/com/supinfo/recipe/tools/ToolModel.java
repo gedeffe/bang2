@@ -9,7 +9,7 @@ import java.util.List;
 public class ToolModel {
     private final List<Tool> tools;
 
-    public void addTool(Tool ingredient) { tools.add(ingredient); }
+    public void addTool(Tool tool) { tools.add(tool); }
 
     public void deleteTool(Tool tool) {
         tools.remove(tool);
