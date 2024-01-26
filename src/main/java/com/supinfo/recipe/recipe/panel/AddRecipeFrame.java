@@ -2,6 +2,7 @@ package com.supinfo.recipe.recipe.panel;
 
 import com.supinfo.recipe.ingredient.IngredientModel;
 import com.supinfo.recipe.ingredient.panels.AddIngredientPanel;
+import com.supinfo.recipe.recipe.Recipe;
 import com.supinfo.recipe.recipe.RecipeModel;
 import com.supinfo.recipe.step.StepModel;
 import com.supinfo.recipe.step.panels.AddStepPanel;
@@ -15,13 +16,13 @@ import java.util.UUID;
 
 public class AddRecipeFrame extends JFrame {
     // UUID for the current recipe
-    private UUID recipeUUID = UUID.randomUUID();
+    private Recipe recipe = new Recipe();
 
     // Panels
-    private final AddRecipePanel addRecipePanel = new AddRecipePanel(recipeUUID, new RecipeModel(new ArrayList<>()));
-    private final AddIngredientPanel addIngredientPanel = new AddIngredientPanel(recipeUUID, new IngredientModel(new ArrayList<>()));
-    private final AddToolPanel addToolPanel = new AddToolPanel(recipeUUID, new ToolModel(new ArrayList<>()));
-    private final AddStepPanel addStepPanel = new AddStepPanel(recipeUUID, new StepModel(new ArrayList<>()));
+    private final AddRecipePanel addRecipePanel = new AddRecipePanel(recipe);
+    private final AddIngredientPanel addIngredientPanel = new AddIngredientPanel(recipe);
+    private final AddToolPanel addToolPanel = new AddToolPanel(recipe);
+    private final AddStepPanel addStepPanel = new AddStepPanel(recipe);
 
     AddRecipeFrame() {
         super();

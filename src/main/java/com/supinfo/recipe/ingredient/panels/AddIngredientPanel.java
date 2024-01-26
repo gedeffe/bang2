@@ -3,6 +3,7 @@ package com.supinfo.recipe.ingredient.panels;
 import com.supinfo.recipe.ingredient.Ingredient;
 import com.supinfo.recipe.ingredient.IngredientModel;
 import com.supinfo.recipe.ingredient.MeasureUnit;
+import com.supinfo.recipe.recipe.Recipe;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -18,19 +19,14 @@ public class AddIngredientPanel extends JPanel {
         private JSpinner spinnerQuantity;
         private SpinnerModel spinnerModelQuantity;
         private JComboBox<MeasureUnit> unitComboBox;
-        private IngredientModel ingredientModel;
-        private UUID recipeUUID;
 
-    public AddIngredientPanel(UUID recipeUUID, IngredientModel ingredientModel) {
+    public AddIngredientPanel(Recipe recipe) {
             super(new BorderLayout());
-            this.recipeUUID = recipeUUID;
 
             Border blackline = BorderFactory.createTitledBorder("Add an ingredient");
             this.setBorder(blackline);
 
             JPanel insidePanel = new JPanel(new GridBagLayout());
-
-            this.ingredientModel = ingredientModel;
 
             GridBagConstraints gbc = new GridBagConstraints();
 
@@ -95,7 +91,7 @@ public class AddIngredientPanel extends JPanel {
                     double quantity = (double)spinnerModelQuantity.getValue();
                     MeasureUnit unit = (MeasureUnit)unitComboBox.getSelectedItem();
 
-                    ingredientModel.addIngredient(new Ingredient(name, quantity, unit));
+                    // change this.recipe
                 }
             });
 

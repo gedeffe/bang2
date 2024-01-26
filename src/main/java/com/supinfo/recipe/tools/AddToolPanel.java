@@ -1,6 +1,7 @@
 package com.supinfo.recipe.tools;
 
 import com.supinfo.recipe.ingredient.MeasureUnit;
+import com.supinfo.recipe.recipe.Recipe;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -13,19 +14,14 @@ public class AddToolPanel extends JPanel {
     private JTextField toolNameTextField;
     private JSpinner spinner1;
     private JComboBox<MeasureUnit> destinationComboBox2;
-    private ToolModel toolModel;
-    private UUID recipeUUID;
 
-    public AddToolPanel(UUID recipeUUID, ToolModel toolModel) {
+    public AddToolPanel(Recipe recipe) {
         super(new BorderLayout());
-        this.recipeUUID = recipeUUID;
 
         Border blackline = BorderFactory.createTitledBorder("Add a tool");
         this.setBorder(blackline);
 
         JPanel insidePanel = new JPanel(new GridBagLayout());
-
-        this.toolModel = toolModel;
 
         GridBagConstraints gbc = new GridBagConstraints();
 
@@ -51,7 +47,8 @@ public class AddToolPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 // create tool and add it to the model
                 String toolName = toolNameTextField.getText();
-                toolModel.addTool(new Tool(toolName));
+
+                // change recipe
             }
         });
 

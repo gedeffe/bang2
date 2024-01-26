@@ -1,6 +1,7 @@
 package com.supinfo.recipe.step.panels;
 
 import com.supinfo.recipe.ingredient.MeasureUnit;
+import com.supinfo.recipe.recipe.Recipe;
 import com.supinfo.recipe.step.Step;
 import com.supinfo.recipe.step.StepModel;
 import com.supinfo.recipe.tools.Tool;
@@ -15,19 +16,14 @@ import java.util.UUID;
 
 public class AddStepPanel extends JPanel {
     private JTextArea stepTextArea;
-    private StepModel stepModel;
-    private UUID recipeUUID;
 
-    public AddStepPanel(UUID recipeUUID, StepModel stepModel) {
+    public AddStepPanel(Recipe recipe) {
         super(new BorderLayout());
-        this.recipeUUID = recipeUUID;
 
         Border blackline = BorderFactory.createTitledBorder("Add a step");
         this.setBorder(blackline);
 
         JPanel insidePanel = new JPanel(new GridBagLayout());
-
-        this.stepModel = stepModel;
 
         GridBagConstraints gbc = new GridBagConstraints();
 
@@ -37,7 +33,7 @@ public class AddStepPanel extends JPanel {
         insidePanel.add(new JLabel("Step : "), gbc);
 
         // Ajout zone de texte pour entrer la description de la step
-        this.stepTextArea = new JTextArea();
+        this.stepTextArea = new JTextArea(5,20);
         gbc.gridx = 1;
         gbc.gridy = 0;
         insidePanel.add(this.stepTextArea, gbc);
@@ -50,7 +46,8 @@ public class AddStepPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 // create tool and add it to the model
                 String stepDescription = stepTextArea.getText();
-                stepModel.addStep(new Step(stepDescription));
+
+                // change recipe (add step)
             }
         });
 

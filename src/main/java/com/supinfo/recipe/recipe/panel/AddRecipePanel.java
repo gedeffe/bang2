@@ -21,21 +21,15 @@ public class AddRecipePanel extends JPanel {
     private final JSpinner durationField;
     private final JComboBox<RecipeDifficulty> difficultyField;
     private final JPanel fieldsPanel;
-    private final UUID recipeUUID;
 
-    // Models
-    private final RecipeModel recipeModel;
-
-    public AddRecipePanel(UUID recipeUUID, RecipeModel recipeModel) {
+    public AddRecipePanel(Recipe recipe) {
         super();
-        this.recipeUUID = recipeUUID;
-        this.recipeModel = recipeModel;
         this.fieldsPanel = new JPanel(new SpringLayout());
 
         // validate button
         this.addButton = new JButton("Add Recipe"); // naming here is redundant because action defines name
 
-        AbstractAction action = getAbstractAction(recipeModel);
+        AbstractAction action = getAbstractAction(recipe);
 
         this.addButton.setAction(action);
 
@@ -93,20 +87,11 @@ public class AddRecipePanel extends JPanel {
                 6, 6);       //xPad, yPad
     }
 
-    private AbstractAction getAbstractAction(RecipeModel recipeModel) {
+    private AbstractAction getAbstractAction(Recipe recipe) {
         AbstractAction action = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                recipeModel.addRecipe(new Recipe(
-                        nameField.getText(),
-                        descriptionField.getText(),
-                        new ArrayList<>(),
-                        new ArrayList<>(),
-                        new ArrayList<>(),
-                        (int) personNumberField.getValue(),
-                        (int) durationField.getValue(),
-                        null)
-                );
+                // change recipe
             }
         };
 
