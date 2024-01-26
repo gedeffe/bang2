@@ -1,9 +1,9 @@
 package com.supinfo.recipe.recipe;
 
-import com.supinfo.recipe.recipe.Recipe;
-import com.supinfo.recipe.recipe.RecipeDifficulty;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 
 import java.util.List;
 
@@ -17,6 +17,10 @@ public class RecipeListController {
 
     @FXML
     private ChoiceBox<String> choiceBox3;
+
+    @FXML
+    private VBox recipeList;
+
 
 
     Recipe recipe = new Recipe("tarte a Tom", "test", List.of(), List.of(), List.of(), 1, 1, RecipeDifficulty.EASY);
@@ -36,6 +40,8 @@ public class RecipeListController {
             choiceBox3.getItems().add(recipeDifficulty.getDisplayName());
         }
         choiceBox3.setValue(RecipeDifficulty.values()[0].getDisplayName());
+//
+        recipeList.getChildren().add(new RecipeCard(recipe));
     }
 
 }
