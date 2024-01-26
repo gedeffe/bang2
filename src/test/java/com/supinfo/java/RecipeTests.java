@@ -16,7 +16,10 @@ public class RecipeTests {
         Recipe recipe2 = new Recipe("test2", "test2", List.of(), List.of(), List.of(), 1, 1, RecipeDifficulty.MEDIUM);
         Recipe recipe3 = new Recipe("test3", "test3", List.of(), List.of(), List.of(), 1, 1, RecipeDifficulty.EASY);
 
-        RecipeModel recipeModel = new RecipeModel(List.of(recipe, recipe2, recipe3));
+        RecipeModel recipeModel = new RecipeModel();
+        recipeModel.addRecipe(recipe);
+        recipeModel.addRecipe(recipe2);
+        recipeModel.addRecipe(recipe3);
 
         List<Recipe> recipes = recipeModel.listRecipes(RecipeSortType.NAME);
 
@@ -31,7 +34,10 @@ public class RecipeTests {
         Recipe recipe2 = new Recipe("test2", "test2", List.of(), List.of(), List.of(), 1, 2, RecipeDifficulty.MEDIUM);
         Recipe recipe3 = new Recipe("test3", "test3", List.of(), List.of(), List.of(), 1, 3, RecipeDifficulty.EASY);
 
-        RecipeModel recipeModel = new RecipeModel(List.of(recipe, recipe2, recipe3));
+        RecipeModel recipeModel = new RecipeModel();
+        recipeModel.addRecipe(recipe);
+        recipeModel.addRecipe(recipe2);
+        recipeModel.addRecipe(recipe3);
 
         List<Recipe> recipes = recipeModel.listRecipes(RecipeSortType.DURATION);
 
@@ -46,8 +52,11 @@ public class RecipeTests {
         Recipe recipe2 = new Recipe("test2", "test2", List.of(), List.of(), List.of(), 1, 2, RecipeDifficulty.MEDIUM);
         Recipe recipe3 = new Recipe("test3", "test3", List.of(), List.of(), List.of(), 1, 3, RecipeDifficulty.EASY);
 
-        RecipeModel recipeModel = new RecipeModel(List.of(recipe, recipe2, recipe3));
-
+        RecipeModel recipeModel = new RecipeModel();
+        recipeModel.addRecipe(recipe);
+        recipeModel.addRecipe(recipe2);
+        recipeModel.addRecipe(recipe3);
+        
         List<Recipe> recipes = recipeModel.listRecipes(RecipeSortType.DIFFICULTY);
 
         Assertions.assertEquals(recipes.get(0).getName(), "test");

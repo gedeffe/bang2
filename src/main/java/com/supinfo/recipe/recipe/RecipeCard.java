@@ -1,13 +1,19 @@
 package com.supinfo.recipe.recipe;
 
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 
-public class RecipeCard extends Rectangle {
+public class RecipeCard extends Pane {
+
+    private final Recipe recipe;
 
         public RecipeCard(Recipe recipe) {
-            super(600, 135);
-            setFill(Color.RED);
+            super();
+            this.recipe = recipe;
+
+            Label recipeName = new Label(recipe.getName());
+            this.getChildren().add(recipeName);
+
         }
 
 }

@@ -7,7 +7,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class AddRecipeFrame extends JFrame {
-    private final AddRecipePanel addRecipePanel = new AddRecipePanel(new RecipeModel(new ArrayList<>()));
+    private final AddRecipePanel addRecipePanel = new AddRecipePanel(new RecipeModel());
     AddRecipeFrame() {
         this.setTitle("Add Recipe Frame");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);

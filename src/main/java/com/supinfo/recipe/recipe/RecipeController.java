@@ -21,4 +21,5 @@ public class RecipeController {
     public void listRecipes(RecipeSortType sortType) {
         recipeModel.listRecipes(sortType);
     }
+
 }
