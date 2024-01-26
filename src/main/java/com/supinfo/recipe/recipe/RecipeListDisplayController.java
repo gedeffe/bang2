@@ -3,13 +3,14 @@ package com.supinfo.recipe.recipe;
 import com.supinfo.recipe.recipe.panel.AddRecipeFrame;
 import javafx.embed.swing.SwingNode;
 import javafx.event.ActionEvent;
+import com.supinfo.recipe.recipe.event.RecipeEventListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 
 import javax.swing.*;
 
-public class RecipeListDisplayController {
+public class RecipeListDisplayController implements RecipeEventListener {
 
     @FXML
     private ChoiceBox<String> choiceBox1;
@@ -22,9 +23,6 @@ public class RecipeListDisplayController {
 
     @FXML
     private VBox recipeList;
-
-    @FXML
-    private MenuBar menuBar;
 
     private RecipeModel recipeModel;
 
@@ -45,8 +43,8 @@ public class RecipeListDisplayController {
 
     public void setRecipeModel(RecipeModel recipeModel) {
         this.recipeModel = recipeModel;
-        this.recipeModel.listRecipes(RecipeSortType.NAME)
-                .forEach(recipe -> recipeList.getChildren().add(new RecipeCard(recipe)));
+        this.recipeModel.listRecipes(RecipeSortType.NAME).forEach(recipe -> recipeList.getChildren().add(new RecipeCard(recipe)));
+        this.recipeModel.subscribe(this);
     }
 
     @FXML
@@ -68,6 +66,16 @@ public class RecipeListDisplayController {
         createSwingContent(swingNode, btOk);
         dialog.showAndWait();
 
+    }
+
+    @Override
+    public void onCreated(Recipe recipe) {
+        recipeList.getChildren().add(new RecipeCard(recipe));
+    }
+
+    @Override
+    public void onDeleted(Recipe recipe) {
+        recipeList.getChildren().removeIf(node -> ((RecipeCard) node).getRecipe() == recipe);
     }
 
     private void createSwingContent(final SwingNode swingNode, Button button) {
