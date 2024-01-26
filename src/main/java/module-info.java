@@ -11,4 +11,6 @@ module com.example.supinmiton {
     opens com.supinfo.recipe.recipe to javafx.fxml;
     exports com.supinfo.recipe.common;
     opens com.supinfo.recipe.common to javafx.fxml;
+    exports com.supinfo.recipe.recipe.details;
+    opens com.supinfo.recipe.recipe.details to javafx.fxml;
 }
