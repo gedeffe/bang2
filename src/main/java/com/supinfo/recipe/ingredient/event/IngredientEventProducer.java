@@ -5,10 +5,13 @@ import com.supinfo.recipe.ingredient.Ingredient;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IngredientEvent implements IngredientEventListener{
+public class IngredientEventProducer implements IngredientEventListener{
     List<IngredientEventListener> listeners = new ArrayList<>();
 
     public void subscribe(IngredientEventListener listener) {
+        if (listener == this || this.listeners.contains(listener)) {
+            return;
+        }
         this.listeners.add(listener);
     }
 
