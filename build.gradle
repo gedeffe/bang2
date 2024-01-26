@@ -29,12 +29,6 @@ repositories {
 }
 
 dependencies {
-    implementation group: 'com.h2database', name: 'h2', version: '2.0.206'
-    implementation 'org.liquibase:liquibase-core:4.25.1'
-
-    implementation group: 'org.jsoup', name: 'jsoup', version: '1.14.3'
-    implementation group: 'com.opencsv', name: 'opencsv', version: '5.5.2'
-
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
 
