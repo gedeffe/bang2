@@ -8,10 +8,9 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.UUID;
 
 public class AddToolPanel extends JPanel {
-    private JTextField toolNameTextField;
+    private final JTextField toolNameTextField;
     private JSpinner spinner1;
     private JComboBox<MeasureUnit> destinationComboBox2;
 
@@ -45,10 +44,9 @@ public class AddToolPanel extends JPanel {
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // create tool and add it to the model
                 String toolName = toolNameTextField.getText();
+                recipe.addTool(new Tool(toolName));
 
-                // change recipe
             }
         });
 
