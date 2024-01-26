@@ -1,21 +1,25 @@
 package com.supinfo.recipe.recipe;
 
+import com.supinfo.recipe.recipe.event.RecipeEventProducer;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 
-public class RecipeModel {
+public class RecipeModel extends RecipeEventProducer {
 
     private final List<Recipe> recipes = new ArrayList<>();
 
     public void addRecipe(Recipe recipe) {
         recipes.add(recipe);
+        this.onCreated(recipe);
     }
 
     public void deleteRecipe(Recipe recipe) {
         recipes.remove(recipe);
+        this.onDeleted(recipe);
     }
 
     public void updateRecipe(Recipe recipe) {

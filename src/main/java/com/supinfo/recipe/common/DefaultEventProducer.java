@@ -1,8 +1,11 @@
 package com.supinfo.recipe.common;
 
+import lombok.Getter;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 public class DefaultEventProducer<T> implements EventProducer<T> {
     private final List<T> listeners = new ArrayList<>();
     @Override
@@ -13,7 +16,4 @@ public class DefaultEventProducer<T> implements EventProducer<T> {
         this.listeners.add(listener);
     }
 
-    public List<T> getListeners() {
-        return this.listeners;
-    }
 }

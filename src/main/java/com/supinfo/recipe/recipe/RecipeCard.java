@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import java.io.IOException;
@@ -20,6 +21,7 @@ public class RecipeCard extends BorderPane {
     @FXML
     private Button recipeDetailsButton;
 
+    @Getter
     private final Recipe recipe;
 
     public RecipeCard(Recipe recipe) {

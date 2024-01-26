@@ -1,11 +1,12 @@
 package com.supinfo.recipe.recipe;
 
+import com.supinfo.recipe.recipe.event.RecipeEventListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.MenuBar;
 import javafx.scene.layout.VBox;
 
-public class RecipeListDisplayController {
+public class RecipeListDisplayController implements RecipeEventListener {
 
     @FXML
     private ChoiceBox<String> choiceBox1;
@@ -42,10 +43,21 @@ public class RecipeListDisplayController {
     public void setRecipeModel(RecipeModel recipeModel) {
         this.recipeModel = recipeModel;
         this.recipeModel.listRecipes(RecipeSortType.NAME).forEach(recipe -> recipeList.getChildren().add(new RecipeCard(recipe)));
+        this.recipeModel.subscribe(this);
     }
 
     @FXML
     protected void handleAddRecipeButtonAction() {
         System.out.println("Add recipe button clicked");
+    }
+
+    @Override
+    public void onCreated(Recipe recipe) {
+        recipeList.getChildren().add(new RecipeCard(recipe));
+    }
+
+    @Override
+    public void onDeleted(Recipe recipe) {
+        recipeList.getChildren().removeIf(node -> ((RecipeCard) node).getRecipe() == recipe);
     }
 }
