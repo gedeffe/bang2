@@ -4,7 +4,6 @@ import com.supinfo.recipe.ingredient.Ingredient;
 import com.supinfo.recipe.step.Step;
 import com.supinfo.recipe.tools.Tool;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
@@ -14,16 +13,16 @@ import java.util.List;
 @Setter
 public class Recipe {
 
-    private final String name;
-    private final String description;
-    private final List<Ingredient> ingredients;
-    private final List<Step> steps;
-    private final List<Tool> tools;
-    private final int personNumber;
-    private final int duration;
-    private final RecipeDifficulty difficulty;
+    private String name;
+    private String description;
+    private List<Ingredient> ingredients;
+    private List<Step> steps;
+    private List<Tool> tools;
+    private int personNumber;
+    private int duration;
+    private RecipeDifficulty difficulty;
 
-    public Recipe(){
+    public Recipe() {
         this.name = "";
         this.description = "";
         this.steps = new ArrayList<>();
@@ -41,7 +40,7 @@ public class Recipe {
                   List<Tool> tools,
                   int personNumber,
                   int duration,
-                  RecipeDifficulty difficulty){
+                  RecipeDifficulty difficulty) {
         this.name = name;
         this.description = description;
         this.steps = steps;
@@ -58,6 +57,10 @@ public class Recipe {
 
     public void addIngredient(Ingredient ingredient) {
         ingredients.add(ingredient);
+    }
+
+    public void addTool(Tool tool) {
+        tools.add(tool);
     }
 }
 

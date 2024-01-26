@@ -1,23 +1,19 @@
 package com.supinfo.recipe.step.panels;
 
-import com.supinfo.recipe.ingredient.MeasureUnit;
 import com.supinfo.recipe.recipe.Recipe;
 import com.supinfo.recipe.step.Step;
-import com.supinfo.recipe.step.StepModel;
-import com.supinfo.recipe.tools.Tool;
-import com.supinfo.recipe.tools.ToolModel;
+import com.supinfo.recipe.step.StepTableModel;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.UUID;
 
 public class AddStepPanel extends JPanel {
-    private JTextArea stepTextArea;
+    private final JTextArea stepTextArea;
 
-    public AddStepPanel(Recipe recipe) {
+    public AddStepPanel(Recipe recipe, StepTableModel stepTableModel) {
         super(new BorderLayout());
 
         Border blackline = BorderFactory.createTitledBorder("Add a step");
@@ -33,7 +29,7 @@ public class AddStepPanel extends JPanel {
         insidePanel.add(new JLabel("Step : "), gbc);
 
         // Ajout zone de texte pour entrer la description de la step
-        this.stepTextArea = new JTextArea(5,20);
+        this.stepTextArea = new JTextArea(5, 20);
         gbc.gridx = 1;
         gbc.gridy = 0;
         insidePanel.add(this.stepTextArea, gbc);
@@ -44,10 +40,10 @@ public class AddStepPanel extends JPanel {
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // create tool and add it to the model
-                String stepDescription = stepTextArea.getText();
+                Step step = new Step(stepTextArea.getText());
+                recipe.addStep(step);
 
-                // change recipe (add step)
+                stepTableModel.addStep(step);
             }
         });
 

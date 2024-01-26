@@ -36,7 +36,7 @@ public class ToolTableModel extends AbstractTableModel {
         };
     }
 
-    public void addTrip(Tool trip) {
+    public void addTool(Tool trip) {
         this.tools.add(trip);
 
         fireTableDataChanged();

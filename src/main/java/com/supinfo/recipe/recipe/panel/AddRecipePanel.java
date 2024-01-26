@@ -2,15 +2,12 @@ package com.supinfo.recipe.recipe.panel;
 
 import com.supinfo.recipe.recipe.Recipe;
 import com.supinfo.recipe.recipe.RecipeDifficulty;
-import com.supinfo.recipe.recipe.RecipeModel;
 import lombok.Getter;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Getter
 public class AddRecipePanel extends JPanel {
@@ -87,18 +84,6 @@ public class AddRecipePanel extends JPanel {
                 6, 6);       //xPad, yPad
     }
 
-    private AbstractAction getAbstractAction(Recipe recipe) {
-        AbstractAction action = new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // change recipe
-            }
-        };
-
-        action.putValue(AbstractAction.NAME, "Add Recipe");
-        return action;
-    }
-
     // From https://docs.oracle.com/javase/tutorial/uiswing/examples/layout/SpringGridProject/src/layout/SpringUtilities.java
     public static void makeCompactGrid(Container parent,
                                        int rows, int cols,
@@ -106,7 +91,7 @@ public class AddRecipePanel extends JPanel {
                                        int xPad, int yPad) {
         SpringLayout layout;
         try {
-            layout = (SpringLayout)parent.getLayout();
+            layout = (SpringLayout) parent.getLayout();
         } catch (ClassCastException exc) {
             System.err.println("The first argument to makeCompactGrid must use SpringLayout.");
             return;
@@ -161,5 +146,21 @@ public class AddRecipePanel extends JPanel {
         SpringLayout layout = (SpringLayout) parent.getLayout();
         Component c = parent.getComponent(row * cols + col);
         return layout.getConstraints(c);
+    }
+
+    private AbstractAction getAbstractAction(Recipe recipe) {
+        AbstractAction action = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                recipe.setName(nameField.getText());
+                recipe.setDuration((Integer) durationField.getValue());
+                recipe.setDifficulty((RecipeDifficulty) difficultyField.getSelectedItem());
+                recipe.setPersonNumber((Integer) personNumberField.getValue());
+                recipe.setDescription(descriptionField.getText());
+            }
+        };
+
+        action.putValue(AbstractAction.NAME, "Add Recipe");
+        return action;
     }
 }

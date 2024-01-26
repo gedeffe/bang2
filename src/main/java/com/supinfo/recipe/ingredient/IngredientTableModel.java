@@ -40,7 +40,7 @@ public class IngredientTableModel extends AbstractTableModel {
         };
     }
 
-    public void addTrip(Ingredient ingredient) {
+    public void addIngredient(Ingredient ingredient) {
         this.ingredients.add(ingredient);
 
         fireTableDataChanged();
