@@ -1,5 +1,6 @@
 package com.supinfo.recipe.recipe.event;
 
+import com.supinfo.recipe.EventProducer;
 import com.supinfo.recipe.ingredient.Ingredient;
 import com.supinfo.recipe.recipe.Recipe;
 import com.supinfo.recipe.step.Step;
@@ -8,9 +9,10 @@ import com.supinfo.recipe.tools.Tool;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecipeEventProducer implements RecipeEventListener {
+public class RecipeEventProducer implements RecipeEventListener, EventProducer<RecipeEventListener> {
     List<RecipeEventListener> listeners = new ArrayList<>();
 
+    @Override
     public void subscribe(RecipeEventListener listener) {
         if (listener == this || this.listeners.contains(listener)) {
             return;
