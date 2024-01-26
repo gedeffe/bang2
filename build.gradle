@@ -4,6 +4,7 @@ plugins {
     id 'org.javamodularity.moduleplugin' version '1.8.12'
     id 'org.openjfx.javafxplugin' version '0.1.0'
     id "io.freefair.lombok" version "8.4"
+    id "org.sonarqube" version "4.4.1.3373"
 }
 
 group 'com.supinfo'
@@ -21,7 +22,7 @@ application {
 
 javafx {
     version = "21"
-    modules = ['javafx.controls', 'javafx.fxml']
+    modules = ['javafx.controls', 'javafx.fxml', 'javafx.swing']
 }
 
 repositories {
@@ -41,4 +42,12 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+sonar {
+    properties {
+        property "sonar.projectKey", "com.supinfo_bang2"
+        property "sonar.organization", "bang2-si"
+        property "sonar.host.url", "https://sonarcloud.io"
+    }
 }

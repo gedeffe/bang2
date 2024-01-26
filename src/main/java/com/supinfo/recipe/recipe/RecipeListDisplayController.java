@@ -1,9 +1,11 @@
 package com.supinfo.recipe.recipe;
 
+import com.supinfo.recipe.recipe.panel.AddRecipeFrame;
+import javafx.embed.swing.SwingNode;
+import javafx.event.ActionEvent;
 import com.supinfo.recipe.recipe.event.RecipeEventListener;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.MenuBar;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 
 public class RecipeListDisplayController implements RecipeEventListener {
@@ -43,12 +45,27 @@ public class RecipeListDisplayController implements RecipeEventListener {
     public void setRecipeModel(RecipeModel recipeModel) {
         this.recipeModel = recipeModel;
         this.recipeModel.listRecipes(RecipeSortType.NAME).forEach(recipe -> recipeList.getChildren().add(new RecipeCard(recipe)));
-        this.recipeModel.subscribe(this);
     }
 
     @FXML
     protected void handleAddRecipeButtonAction() {
-        System.out.println("Add recipe button clicked");
+        Dialog<Recipe> dialog = new Dialog<>();
+
+        dialog.setTitle("Add Recipe");
+
+
+        ButtonType addButtonType = new ButtonType("Add Recipe", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().add(addButtonType);
+
+        final Button btOk = (Button) dialog.getDialogPane().lookupButton(addButtonType);
+
+
+        SwingNode swingNode = new SwingNode();
+        dialog.getDialogPane().setExpandableContent(swingNode);
+        // opening the add recipe frame
+        createSwingContent(swingNode, btOk);
+        dialog.showAndWait();
+
     }
 
     @Override
@@ -60,4 +77,16 @@ public class RecipeListDisplayController implements RecipeEventListener {
     public void onDeleted(Recipe recipe) {
         recipeList.getChildren().removeIf(node -> ((RecipeCard) node).getRecipe() == recipe);
     }
+
+    private void createSwingContent(final SwingNode swingNode, Button button) {
+        SwingUtilities.invokeLater(() -> {
+            AddRecipeFrame addRecipeFrame = new AddRecipeFrame();
+            swingNode.setContent(addRecipeFrame);
+            button.addEventFilter(ActionEvent.ACTION, event -> {
+                Recipe recipe = addRecipeFrame.getRecipe();
+                recipeModel.addRecipe(recipe);
+            });
+        });
+    }
+
 }

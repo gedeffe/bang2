@@ -52,9 +52,6 @@ public class AddToolPanel extends JPanel {
             }
         });
 
-        gbc.gridx = 1;
-        gbc.gridy = 4;
-        gbc.insets = new Insets(10, 10, 10, 10);
         this.add(addButton, BorderLayout.EAST);
 
         this.add(insidePanel, BorderLayout.CENTER);
